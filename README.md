@@ -7,10 +7,14 @@
 **A full-stack restaurant management web application built with Laravel 12**  
 100% Vegetarian · Preservative Free · Authentic Maharashtrian Street Food
 
-[![Laravel](https://img.shields.io/badge/Laravel-12.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)](https://laravel.com)
-[![PHP](https://img.shields.io/badge/PHP-8.3-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://php.net)
-[![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://mysql.com)
-[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
+![Full Stack](https://img.shields.io/badge/Full-Stack-333333?style=flat-square)
+![Laravel](https://img.shields.io/badge/Laravel-12.x-FF2D20?style=flat-square&logo=laravel&logoColor=white)
+![PHP](https://img.shields.io/badge/PHP-8.3+-777BB4?style=flat-square&logo=php&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-8.0+-4479A1?style=flat-square&logo=mysql&logoColor=white)
+![Blade](https://img.shields.io/badge/Blade-Templates-FF6B00?style=flat-square&logo=laravel&logoColor=white)
+![Admin Panel](https://img.shields.io/badge/Admin-Panel-1a1a2e?style=flat-square)
+![RESTful](https://img.shields.io/badge/RESTful-Routes-28a745?style=flat-square)
+![License](https://img.shields.io/badge/License-MIT-22c55e?style=flat-square)
 
 </div>
 
@@ -426,8 +430,8 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 ## 📬 Contact
 
 **MMV — Mumbaiya Misal Vadapav**  
-🌐 [mmvmumbaiya.com](https://ca.mmvmumbaiya.com)  
-📧 canada@mmvmumbaiya.com
+<!-- 🌐 [mmvmumbaiya.com](https://ca.mmvmumbaiya.com)   -->
+📧 devbhavsar.ds@gmail.com
 
 ---
 
