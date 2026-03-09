@@ -25,15 +25,15 @@
 - [About the Project](#-about-the-project)
 - [Live Demo](#-live-demo)
 - [Features](#-features)
-- [Tech Stack](#-tech-stack)
+- [Tech Stack](#️-tech-stack)
 - [Project Structure](#-project-structure)
-- [Database Schema](#-database-schema)
+- [Database Schema](#️-database-schema)
 - [Getting Started](#-getting-started)
-- [Environment Setup](#-environment-setup)
+- [Environment Setup](#️-environment-setup)
 - [Admin Panel](#-admin-panel)
 - [Default Credentials](#-default-credentials)
 - [Screenshots](#-screenshots)
-- [API Routes](#-api-routes)
+- [API Routes](#️-routes)
 - [Contributing](#-contributing)
 - [License](#-license)
 - [Contact](#-contact)
@@ -330,7 +330,7 @@ After seeding, use these to log in:
 
 ---
 
-## 🗺️ Route Map
+## 🗺️ Routes
 
 ### Public Routes
 ```
