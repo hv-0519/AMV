@@ -127,19 +127,17 @@
         font-size: 0.9rem;
     }
     .veg-dot {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        width: 20px; height: 20px;
+        width: 16px; height: 16px;
         border: 2px solid #2E7D32;
         border-radius: 4px;
         display: flex;
         align-items: center;
         justify-content: center;
+        flex-shrink: 0;
     }
     .veg-dot::after {
         content: '';
-        width: 10px; height: 10px;
+        width: 8px; height: 8px;
         background: #2E7D32;
         border-radius: 50%;
     }
@@ -156,6 +154,11 @@
     }
     .menu-card-body { padding: 1.2rem; }
     .menu-card-body h3 { font-size: 1rem; font-weight: 700; color: var(--dark); margin-bottom: 0.3rem; }
+    .dish-title {
+        display: flex;
+        align-items: center;
+        gap: 0.45rem;
+    }
     .menu-card-body p { font-size: 0.82rem; color: #888; margin-bottom: 0.8rem; line-height: 1.5; }
     .spice-row { display: flex; gap: 2px; margin-bottom: 0.8rem; }
     .chilli { font-size: 0.75rem; }
@@ -228,7 +231,6 @@
                     @else
                         {{ $icons[$item->category] ?? '🍽️' }}
                     @endif
-                    <div class="veg-dot"></div>
                     @if($item->is_bestseller)
                         <span class="bestseller-tag">⭐ Best Seller</span>
                     @endif
@@ -237,7 +239,7 @@
                     @endif
                 </div>
                 <div class="menu-card-body">
-                    <h3>{{ $item->name }}</h3>
+                    <h3 class="dish-title"><span class="veg-dot" title="Vegetarian"></span>{{ $item->name }}</h3>
                     <p>{{ $item->description }}</p>
                     @if($item->spice_level > 0)
                     <div class="spice-row">
