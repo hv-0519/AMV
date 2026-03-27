@@ -111,6 +111,13 @@ After seeding:
 |---|---|---|
 | Admin | `admin@AMV.com` | `admin@123` |
 
+## Deploy on Render
+1. Fork this repo
+2. Go to render.com → New → Blueprint
+3. Connect this repo — Render auto-reads render.yaml
+4. It will create the web service and MySQL DB automatically
+5. Hit Deploy
+
 ## Deploy
 
 ### One-click Railway deployment
