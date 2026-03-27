@@ -19,7 +19,7 @@ return new class extends Migration
 
         DB::table('site_images')->insert([
             ['key' => 'hero_dish',           'label' => 'Hero – Signature Dish',        'image' => null, 'created_at' => now(), 'updated_at' => now()],
-            ['key' => 'about_section',       'label' => 'About – Maharashtra Image',    'image' => null, 'created_at' => now(), 'updated_at' => now()],
+            ['key' => 'about_section',       'label' => 'About – Ahamdabad Image',    'image' => null, 'created_at' => now(), 'updated_at' => now()],
             ['key' => 'catering_section',    'label' => 'Catering – Why Choose Us',     'image' => null, 'created_at' => now(), 'updated_at' => now()],
         ]);
     }

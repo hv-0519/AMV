@@ -81,7 +81,7 @@ class AuthController extends Controller
         Auth::login($user);
 
         return redirect('/')
-            ->with('success', 'Welcome to MMV Family! 🎉 Dil Bole Wow!!')
+            ->with('success', 'Welcome to AMV Family! 🎉 Dil Bole Wow!!')
             ->with('auth_modal', 'welcome')
             ->with('flash_modal', 'welcome-family');
     }

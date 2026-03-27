@@ -1,6 +1,6 @@
 <div align="center">
 
-# MMV - Mumbaiya Misal Vadapav
+# AMV - Amdavadi Misal and Vadapav
 
 ### Dil Bole Wow!!
 
@@ -25,7 +25,7 @@ Laravel 12 full-stack restaurant web application for menu browsing, ordering, ad
 
 ## About
 
-MMV (Mumbaiya Misal Vadapav) is a restaurant management platform for an authentic Maharashtrian street food brand. Customers can browse the menu, place orders, and submit catering or franchise enquiries, while the admin panel handles menu management, orders, stock alerts, and operational workflows.
+AMV (Amdavadi Misal and Vadapav) is a restaurant management platform for an authentic street food brand. Customers can browse the menu, place orders, and submit catering or franchise enquiries, while the admin panel handles menu management, orders, stock alerts, and operational workflows.
 
 ## Features
 
@@ -58,8 +58,8 @@ MMV (Mumbaiya Misal Vadapav) is a restaurant management platform for an authenti
 ### Local setup
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/mmv-website.git
-cd mmv-website
+git clone https://github.com/YOUR_USERNAME/AMV-website.git
+cd AMV-website
 composer install
 npm install
 cp .env.example .env
@@ -109,7 +109,7 @@ After seeding:
 
 | Role | Email | Password |
 |---|---|---|
-| Admin | `admin@mmv.com` | `admin@123` |
+| Admin | `admin@AMV.com` | `admin@123` |
 
 ## Deploy
 

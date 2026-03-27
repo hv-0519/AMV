@@ -49,7 +49,7 @@
     <div class="auth-container">
         <div class="auth-left">
             <div class="auth-left-emoji">🌶️</div>
-            <h2>Join MMV Family</h2>
+            <h2>Join AMV Family</h2>
             <p>Create your account to enjoy the best of Maharashtrian street food!</p>
             <div class="perks">
                 <div class="perk-item">✅ Easy online ordering</div>
@@ -61,9 +61,9 @@
         </div>
         <div class="auth-right">
             <h1>Create Account</h1>
-            <p class="subtitle">Sign up to start your MMV journey 🚀</p>
+            <p class="subtitle">Sign up to start your AMV journey 🚀</p>
 
-            <form method="POST" action="{{ route('register') }}" data-public-submit data-loading-title="Creating your account..." data-loading-text="We are setting up your MMV profile and getting things ready.">
+            <form method="POST" action="{{ route('register') }}" data-public-submit data-loading-title="Creating your account..." data-loading-text="We are setting up your AMV profile and getting things ready.">
                 @csrf
                 <div class="form-row">
                     <div class="form-group">
@@ -105,7 +105,7 @@
                     </div>
                 </div>
                 <div style="font-size:0.82rem; color:#888; margin-bottom:1rem;">
-                    By registering, you agree to MMV's <a href="#" style="color:var(--saffron);">Terms & Conditions</a> and <a href="#" style="color:var(--saffron);">Privacy Policy</a>.
+                    By registering, you agree to AMV's <a href="#" style="color:var(--saffron);">Terms & Conditions</a> and <a href="#" style="color:var(--saffron);">Privacy Policy</a>.
                 </div>
                 <button type="submit" class="btn-submit">🎉 Create My Account</button>
             </form>

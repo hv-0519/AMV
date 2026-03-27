@@ -28,7 +28,7 @@ class AdminAuthTest extends TestCase
 
     public function test_admin_can_access_admin_dashboard(): void
     {
-        $admin = User::where('email', 'admin@mmv.com')->firstOrFail();
+        $admin = User::where('email', 'admin@AMV.com')->firstOrFail();
 
         $this->actingAs($admin)
             ->get('/admin')

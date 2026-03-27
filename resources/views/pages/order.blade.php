@@ -209,7 +209,7 @@
 
 <div class="order-hero">
     <h1>Order <span>Online</span> 🛵</h1>
-    <p>Fresh, hot & delivered fast — just the way MMV makes it</p>
+    <p>Fresh, hot & delivered fast — just the way AMV makes it</p>
 </div>
 
 <div class="order-page">
@@ -258,7 +258,7 @@
             <div class="summary-row total"><span>Total</span><span id="totalDisplay">₹0.00</span></div>
         </div>
 
-        <form class="cart-form" method="POST" action="{{ route('order.store') }}" id="orderForm" data-public-submit data-loading-title="Placing your order..." data-loading-text="We are sending your items to the MMV kitchen right now.">
+        <form class="cart-form" method="POST" action="{{ route('order.store') }}" id="orderForm" data-public-submit data-loading-title="Placing your order..." data-loading-text="We are sending your items to the AMV kitchen right now.">
             @csrf
             <div id="cartInputs"></div>
 

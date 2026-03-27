@@ -7,7 +7,7 @@ use Illuminate\Support\Collection;
 
 class Cart
 {
-    private const SESSION_KEY = 'mmv_cart';
+    private const SESSION_KEY = 'AMV_cart';
 
     // -------------------------------------------------------------------------
     // PUBLIC API

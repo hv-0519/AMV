@@ -34,7 +34,7 @@
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem;">
                 <div>
                     <label style="font-size:0.82rem; font-weight:600; color:#555; display:block; margin-bottom:0.3rem;">Dish Name *</label>
-                    <input type="text" name="name" required placeholder="e.g. Mumbaiya Misal Pav"
+                    <input type="text" name="name" required placeholder="e.g. Amdavadi Misal Pav"
                            style="width:100%; border:2px solid #ddd; border-radius:8px; padding:0.5rem 0.8rem; font-size:0.9rem;">
                 </div>
                 <div>

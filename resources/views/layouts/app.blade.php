@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>MMV - Mumbaiya Misal Vadapav | @yield('title', 'Home')</title>
+    <title>AMV - Amdavadi Misal and Vadapav | @yield('title', 'Home')</title>
     <link rel="icon" type="image/svg+xml" href="{{ asset('images/favicon.svg') }}">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -399,10 +399,10 @@
 
 <nav class="navbar">
     <div class="navbar-inner">
-        <a href="{{ url('/') }}" class="navbar-brand" aria-label="MMV Home">
-            <img src="{{ asset('images/mmv-logo.svg') }}" alt="MMV Logo" class="brand-logo-mark">
+        <a href="{{ url('/') }}" class="navbar-brand" aria-label="AMV Home">
+            <img src="{{ asset('images/mmv-logo.svg') }}" alt="AMV Logo" class="brand-logo-mark">
             <span class="brand-wordmark">
-                <strong>Mumbaiya Misal</strong>
+                <strong>Amdavadi Misal</strong>
                 <small>Vadapav</small>
             </span>
         </a>
@@ -495,13 +495,13 @@
     <div class="footer-inner">
         <div>
             <div class="footer-brand">
-                <img src="{{ asset('images/mmv-logo.svg') }}" alt="MMV Logo" class="brand-logo-mark">
+                <img src="{{ asset('images/mmv-logo.svg') }}" alt="AMV Logo" class="brand-logo-mark">
                 <span class="brand-wordmark">
-                    <strong>Mumbaiya Misal</strong>
+                    <strong>Amdavadi Misal</strong>
                     <small>Vadapav</small>
                 </span>
             </div>
-            <p style="font-size:0.9rem; line-height:1.7; color:#aaa;">Mumbaiya Misal Vadapav — bringing the bold & authentic flavors of Maharashtra's streets to your plate. 100% Vegetarian. 100% Love.</p>
+            <p style="font-size:0.9rem; line-height:1.7; color:#aaa;">Amdavadi Misal and Vadapav — bringing bold, authentic street-food flavor to your plate. 100% Vegetarian. 100% Love.</p>
             <div class="social-links">
                 <a href="#"><i class="fab fa-instagram"></i></a>
                 <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -531,12 +531,12 @@
         <div class="footer-contact">
             <h4>Contact Us</h4>
             <p><i class="fas fa-map-marker-alt"></i> Titanium City Centre, Anandnagar Road, Satelite, Ahmedabad, Gujarat 380015</p>
-            <p><i class="fas fa-envelope"></i> contact@themumbaiyamisalvadapav.com</p>
+            <p><i class="fas fa-envelope"></i> contact@theAmdavadimisalvadapav.com</p>
             <p><i class="fas fa-phone"></i> +1 (XXX) XXX-XXXX</p>
         </div>
     </div>
     <div class="footer-bottom">
-        <p>© {{ date('Y') }} MMV – Mumbaiya Misal Vadapav. All Rights Reserved. | Dil Bole Wow!!</p>
+        <p>© {{ date('Y') }} AMV – Amdavadi Misal and Vadapav. All Rights Reserved. | Dil Bole Wow!!</p>
     </div>
 </footer>
 
@@ -634,7 +634,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const flashModalMap = {
         'welcome-back':      { title: 'Welcome Back!',               icon: 'fa-hand-sparkles',      iconClass: '',           button: "Let's Go" },
-        'welcome-family':    { title: 'Welcome to MMV!',             icon: 'fa-party-horn',          iconClass: '',           button: 'Start Exploring' },
+        'welcome-family':    { title: 'Welcome to AMV!',             icon: 'fa-party-horn',          iconClass: '',           button: 'Start Exploring' },
         'logged-out':        { title: 'Logged Out',                  icon: 'fa-circle-check',        iconClass: 'is-success', button: 'See You Soon' },
         'contact-success':   { title: 'Message Sent',                icon: 'fa-paper-plane',         iconClass: 'is-success', button: 'Perfect' },
         'catering-success':  { title: 'Catering Request Sent',       icon: 'fa-champagne-glasses',   iconClass: 'is-success', button: 'Great' },

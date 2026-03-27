@@ -19,7 +19,7 @@ class MenuTest extends TestCase
         $response = $this->get('/menu');
 
         $response->assertOk();
-        $response->assertSeeText('Mumbaiya Misal Pav');
+        $response->assertSeeText('Amdavadi Misal Pav');
         $response->assertSeeText('Cheese Blast Vadapav');
         $response->assertSeeText('Mango Lassi');
     }

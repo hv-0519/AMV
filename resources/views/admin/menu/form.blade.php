@@ -16,7 +16,7 @@
             <div class="form-group">
                 <label>Item Name *</label>
                 <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
-                       value="{{ old('name', $menu_item->name ?? '') }}" placeholder="e.g., Mumbaiya Misal Pav" required>
+                       value="{{ old('name', $menu_item->name ?? '') }}" placeholder="e.g., Amdavadi Misal Pav" required>
                 @error('name')<div class="invalid-feedback">{{ $message }}</div>@enderror
             </div>
 

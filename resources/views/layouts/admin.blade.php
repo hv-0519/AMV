@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>MMV Admin | @yield('title', 'Dashboard')</title>
+    <title>AMV Admin | @yield('title', 'Dashboard')</title>
     <link rel="icon" type="image/svg+xml" href="{{ asset('images/favicon.svg') }}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -877,9 +877,9 @@
 
     <aside class="sidebar" id="adminSidebar">
         <div class="sidebar-brand">
-            <img src="{{ asset('images/mmv-logo.svg') }}" alt="MMV Logo" class="sidebar-brand-mark">
+            <img src="{{ asset('images/mmv-logo.svg') }}" alt="AMV Logo" class="sidebar-brand-mark">
             <div class="sidebar-brand-text">
-                <strong>Mumbaiya Misal</strong>
+                <strong>Amdavadi Misal</strong>
                 <small>Vadapav Admin</small>
             </div>
         </div>

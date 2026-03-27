@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Gallery - MMV Mumbaiya Misal & Vadapav')
+@section('title', 'Gallery - AMV Amdavadi Misal and Vadapav')
 
 @push('styles')
     <style>
@@ -387,13 +387,13 @@
              *   9      1         1       wide        (15×20)
              */
             $patterns = [
-                ['rs' => 2, 'label' => 'Mumbaiya Misal Pav'],
+                ['rs' => 2, 'label' => 'Amdavadi Misal Pav'],
                 ['rs' => 1, 'label' => 'Signature Dish'],
                 ['rs' => 1, 'label' => 'Fresh & Spicy'],
                 ['rs' => 2, 'label' => 'Vadapav Special'],
                 ['rs' => 1, 'label' => 'Street Food Vibes'],
                 ['rs' => 1, 'label' => 'Made with Love'],
-                ['rs' => 1, 'label' => 'MMV Experience'],
+                ['rs' => 1, 'label' => 'AMV Experience'],
                 ['rs' => 1, 'label' => 'Authentic Flavors'],
                 ['rs' => 1, 'label' => 'Dil Bole Wow'],
                 ['rs' => 1, 'label' => 'Our Kitchen'],
@@ -458,7 +458,7 @@
         {{-- CTA --}}
         <div class="gallery-cta">
             <h2>Craving <span>Already?</span> 😋</h2>
-            <p>Come experience the real taste of Maharashtra — fresh, spicy, and made with love.</p>
+            <p>Come experience the real taste of Ahamdabad — fresh, spicy, and made with love.</p>
             <a href="{{ route('menu') }}" class="btn-cta">🍽️ Explore Our Menu</a>
             &nbsp;&nbsp;
             <a href="{{ url('/order') }}" class="btn-cta"

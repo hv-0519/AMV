@@ -18,7 +18,7 @@ class StockAlertTest extends TestCase
 
     public function test_low_stock_alert_appears_on_dashboard_when_quantity_is_below_minimum(): void
     {
-        $admin = User::where('email', 'admin@mmv.com')->firstOrFail();
+        $admin = User::where('email', 'admin@AMV.com')->firstOrFail();
         $stock = Stock::where('name', 'Sprouted Moth Beans')->firstOrFail();
 
         $stock->update([

@@ -36,7 +36,7 @@
 
 <div class="about-hero">
     <h1>Join Our <span>Team</span></h1>
-    <p>Become a part of the MMV family and help us bring authentic flavors to the world.</p>
+    <p>Become a part of the AMV family and help us bring authentic flavors to the world.</p>
 </div>
 
 <section style="background:#fff;">
@@ -44,7 +44,7 @@
         <h2>We are always looking for passionate people!</h2>
         <p style="margin-top: 1rem; color: #555; font-size: 1.1rem; line-height: 1.6;">
             Currently, we do not have any specific open positions, but we'd love to hear from you.<br>
-            Please send your resume to <a href="mailto:careers@mmvmumbaiya.com" style="color: var(--saffron); text-decoration: none; font-weight: bold;">careers@mmvmumbaiya.com</a> and we will get in touch when an opportunity arises.
+            Please send your resume to <a href="mailto:careers@AMVAmdavadi.com" style="color: var(--saffron); text-decoration: none; font-weight: bold;">careers@AMVAmdavadi.com</a> and we will get in touch when an opportunity arises.
         </p>
     </div>
 </section>

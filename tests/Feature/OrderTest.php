@@ -17,7 +17,7 @@ class OrderTest extends TestCase
 
     public function test_guest_can_place_an_order_and_it_is_saved(): void
     {
-        $menuItem = MenuItem::where('name', 'Mumbaiya Misal Pav')->firstOrFail();
+        $menuItem = MenuItem::where('name', 'Amdavadi Misal Pav')->firstOrFail();
 
         $response = $this->postJson('/api/orders', [
             'guest_name' => 'Guest Customer',

@@ -16,9 +16,9 @@ class DatabaseSeeder extends Seeder
         // CREATE ADMIN USER
         // =============================================
         User::firstOrCreate(
-            ['email' => 'admin@mmv.com'],
+            ['email' => 'admin@AMV.com'],
             [
-                'name'     => 'MMV Admin',
+                'name'     => 'AMV Admin',
                 'phone'    => '+91 9876543210',
                 'password' => Hash::make('admin@123'),
                 'role'     => 'admin',
@@ -30,20 +30,20 @@ class DatabaseSeeder extends Seeder
         // =============================================
         $menu_items = [
             // Misal
-            ['name' => 'Mumbaiya Misal Pav', 'category' => 'Misal', 'description' => 'Fiery sprouted moth bean curry topped with farsan, onion & coriander, served with soft pav', 'price' => 120, 'spice_level' => 4, 'is_bestseller' => true, 'is_featured' => true, 'ingredients' => 'Sprouted moth beans, Farsan, Pav, Onions, Coriander, Lime'],
+            ['name' => 'Amdavadi Misal Pav', 'category' => 'Misal', 'description' => 'Fiery sprouted moth bean curry topped with farsan, onion & coriander, served with soft pav', 'price' => 120, 'spice_level' => 4, 'is_bestseller' => true, 'is_featured' => true, 'ingredients' => 'Sprouted moth beans, Farsan, Pav, Onions, Coriander, Lime'],
             ['name' => 'Ulta Misal', 'category' => 'Misal', 'description' => 'Misal with pav dipped in the spicy gravy — a unique Maharashtrian twist', 'price' => 130, 'spice_level' => 5, 'is_bestseller' => false, 'is_featured' => true, 'ingredients' => 'Sprouted beans, Spice gravy, Pav'],
             ['name' => 'Farali Misal', 'category' => 'Misal', 'description' => 'Festival-friendly misal with sabudana and potato, no onion-garlic', 'price' => 140, 'spice_level' => 2, 'is_bestseller' => false, 'is_featured' => false, 'ingredients' => 'Sabudana, Potato, Farsan'],
             ['name' => 'Jain Misal Pav', 'category' => 'Misal', 'description' => 'Jain-friendly misal with no underground vegetables', 'price' => 130, 'spice_level' => 3, 'is_bestseller' => false, 'is_featured' => false, 'ingredients' => 'Sprouted beans, Jain spices, Pav'],
-            ['name' => 'MMV Spl Misal Thali', 'category' => 'Thali', 'description' => 'Complete thali with misal, poha, sabudana kheer, and chaas', 'price' => 220, 'spice_level' => 3, 'is_bestseller' => true, 'is_featured' => true, 'ingredients' => 'Misal, Poha, Kheer, Chaas, Pav'],
+            ['name' => 'AMV Spl Misal Thali', 'category' => 'Thali', 'description' => 'Complete thali with misal, poha, sabudana kheer, and chaas', 'price' => 220, 'spice_level' => 3, 'is_bestseller' => true, 'is_featured' => true, 'ingredients' => 'Misal, Poha, Kheer, Chaas, Pav'],
 
             // Vadapav
-            ['name' => 'Mumbaiya Vadapav', 'category' => 'Vadapav', 'description' => 'Classic Mumbai-style crispy potato fritter in soft pav with chutney', 'price' => 60, 'spice_level' => 3, 'is_bestseller' => true, 'is_featured' => true, 'ingredients' => 'Potato vada, Pav, Green chutney, Dry garlic chutney'],
+            ['name' => 'Amdavadi Vadapav', 'category' => 'Vadapav', 'description' => 'Classic Mumbai-style crispy potato fritter in soft pav with chutney', 'price' => 60, 'spice_level' => 3, 'is_bestseller' => true, 'is_featured' => true, 'ingredients' => 'Potato vada, Pav, Green chutney, Dry garlic chutney'],
             ['name' => 'Cheese Blast Vadapav', 'category' => 'Vadapav', 'description' => 'Vada pav loaded with molten cheese — the ultimate indulgence', 'price' => 90, 'spice_level' => 3, 'is_bestseller' => true, 'is_featured' => true, 'ingredients' => 'Potato vada, Cheese, Pav, Chutneys'],
             ['name' => 'Ulta Pav', 'category' => 'Vadapav', 'description' => 'Pav stuffed inside the vada — a fun twist on the classic', 'price' => 70, 'spice_level' => 3, 'is_bestseller' => false, 'is_featured' => false, 'ingredients' => 'Potato vada, Pav, Chutneys'],
 
             // Poha
             ['name' => 'Regular Poha', 'category' => 'Poha', 'description' => 'Classic flattened rice with mustard seeds, curry leaves & fresh coriander', 'price' => 80, 'spice_level' => 1, 'is_bestseller' => true, 'is_featured' => true, 'ingredients' => 'Poha, Mustard, Onion, Curry leaves, Peanuts'],
-            ['name' => 'MMV Special Poha', 'category' => 'Poha', 'description' => 'Upgraded poha with extra toppings, sev, and our special masala', 'price' => 110, 'spice_level' => 2, 'is_bestseller' => false, 'is_featured' => false, 'ingredients' => 'Poha, Sev, Special masala, Coriander'],
+            ['name' => 'AMV Special Poha', 'category' => 'Poha', 'description' => 'Upgraded poha with extra toppings, sev, and our special masala', 'price' => 110, 'spice_level' => 2, 'is_bestseller' => false, 'is_featured' => false, 'ingredients' => 'Poha, Sev, Special masala, Coriander'],
             ['name' => 'Dadpe Poha', 'category' => 'Poha', 'description' => 'Raw crushed poha with fresh coconut and spices — no cooking needed!', 'price' => 90, 'spice_level' => 2, 'is_bestseller' => false, 'is_featured' => false, 'ingredients' => 'Poha, Coconut, Green chilli, Lime'],
             ['name' => 'Tari Poha', 'category' => 'Poha', 'description' => 'Poha served with spicy gravy (tari) on the side', 'price' => 100, 'spice_level' => 3, 'is_bestseller' => false, 'is_featured' => false, 'ingredients' => 'Poha, Spicy tari gravy'],
 
@@ -56,7 +56,7 @@ class DatabaseSeeder extends Seeder
             // Snacks
             ['name' => 'Bhaji Pav', 'category' => 'Snacks', 'description' => 'Mixed vegetable bhaji cooked on iron griddle with buttered pav', 'price' => 110, 'spice_level' => 2, 'is_bestseller' => false, 'is_featured' => true, 'ingredients' => 'Mixed vegetables, Butter, Pav, Onion'],
             ['name' => 'Kathol Bhel', 'category' => 'Snacks', 'description' => 'Tangy bhel with cooked lentils/beans — a protein-packed snack', 'price' => 90, 'spice_level' => 2, 'is_bestseller' => false, 'is_featured' => false, 'ingredients' => 'Cooked kathol, Tamarind, Chutney, Sev'],
-            ['name' => 'Mumbaiya Sev Usal', 'category' => 'Snacks', 'description' => 'Spicy white peas curry topped with sev, onion & chutneys', 'price' => 100, 'spice_level' => 3, 'is_bestseller' => false, 'is_featured' => false, 'ingredients' => 'White peas, Sev, Onion, Lime, Chutneys'],
+            ['name' => 'Amdavadi Sev Usal', 'category' => 'Snacks', 'description' => 'Spicy white peas curry topped with sev, onion & chutneys', 'price' => 100, 'spice_level' => 3, 'is_bestseller' => false, 'is_featured' => false, 'ingredients' => 'White peas, Sev, Onion, Lime, Chutneys'],
             ['name' => 'Tava Pulav', 'category' => 'Snacks', 'description' => 'Spiced rice cooked on a flat iron tava with veggies and Mumbai masala', 'price' => 140, 'spice_level' => 2, 'is_bestseller' => false, 'is_featured' => false, 'ingredients' => 'Rice, Mixed vegetables, Mumbai masala'],
 
             // Desserts
@@ -101,7 +101,7 @@ class DatabaseSeeder extends Seeder
             Stock::firstOrCreate(['name' => $stock['name']], $stock);
         }
 
-        $this->command->info('✅ MMV Database seeded successfully!');
-        $this->command->info('👤 Admin Login: admin@mmv.com | Password: admin@123');
+        $this->command->info('✅ AMV Database seeded successfully!');
+        $this->command->info('👤 Admin Login: admin@AMV.com | Password: admin@123');
     }
 }

@@ -80,15 +80,15 @@
 @section('content')
 
 <div class="franchise-hero">
-    <h1>🏪 Own an <span>MMV</span> Franchise</h1>
-    <p>Be your own boss. Bring the taste of Maharashtra to your community. Join a proven brand that's growing globally.</p>
+    <h1>🏪 Own an <span>AMV</span> Franchise</h1>
+    <p>Be your own boss. Bring the taste of Ahamdabad to your community. Join a proven brand that's growing globally.</p>
 </div>
 
 <!-- Benefits -->
 <section style="background:#fff8ef;">
     <div class="section-inner" style="text-align:center;">
-        <span class="section-tag">Why Partner With MMV</span>
-        <h2 class="section-title">The MMV <span>Advantage</span></h2>
+        <span class="section-tag">Why Partner With AMV</span>
+        <h2 class="section-title">The AMV <span>Advantage</span></h2>
         <div class="benefits-grid">
             <div class="benefit-card"><div class="benefit-icon">🏆</div><h3>Trusted Brand</h3><p>A recognized and growing brand with a loyal customer base and strong reputation.</p></div>
             <div class="benefit-card"><div class="benefit-icon">📚</div><h3>Full Training</h3><p>Comprehensive training program for you and your staff — recipes, operations, and more.</p></div>
@@ -110,7 +110,7 @@
             <div class="step-card"><div class="step-number">2</div><h3>Discovery Call</h3><p>Our franchise team will call you for an initial consultation.</p></div>
             <div class="step-card"><div class="step-number">3</div><h3>Site Evaluation</h3><p>We evaluate your proposed location for feasibility.</p></div>
             <div class="step-card"><div class="step-number">4</div><h3>Agreement & Training</h3><p>Sign the franchise agreement and complete full training.</p></div>
-            <div class="step-card"><div class="step-number">5</div><h3>Launch! 🎉</h3><p>Open your MMV outlet and start serving customers!</p></div>
+            <div class="step-card"><div class="step-number">5</div><h3>Launch! 🎉</h3><p>Open your AMV outlet and start serving customers!</p></div>
         </div>
     </div>
 </section>
@@ -134,7 +134,7 @@
             <div class="inv-card">
                 <h3>🏪 Full Restaurant</h3>
                 <div class="inv-amount">₹20L – ₹40L</div>
-                <p>A premium sit-down MMV experience with the complete menu, ambiance and catering capability.</p>
+                <p>A premium sit-down AMV experience with the complete menu, ambiance and catering capability.</p>
             </div>
         </div>
     </div>
@@ -146,7 +146,7 @@
         <div class="form-grid">
             <div class="form-info">
                 <h3>Apply for Franchise</h3>
-                <p>Ready to bring MMV to your city? Submit your enquiry and we'll get back to you within 48 hours.</p>
+                <p>Ready to bring AMV to your city? Submit your enquiry and we'll get back to you within 48 hours.</p>
                 <ul class="checklist">
                     <li>No prior food business experience needed</li>
                     <li>Full training & onboarding provided</li>
@@ -158,7 +158,7 @@
             </div>
 
             <div class="franchise-form-box">
-                <form method="POST" action="{{ route('franchise.submit') }}" data-public-submit data-loading-title="Submitting your franchise enquiry..." data-loading-text="We are sending your details to the MMV expansion team.">
+                <form method="POST" action="{{ route('franchise.submit') }}" data-public-submit data-loading-title="Submitting your franchise enquiry..." data-loading-text="We are sending your details to the AMV expansion team.">
                     @csrf
                     <div class="form-row">
                         <div class="form-group">
@@ -190,7 +190,7 @@
                         <div class="form-group">
                             <label>State *</label>
                             <input type="text" name="state" class="form-control @error('state') is-invalid @enderror"
-                                   placeholder="e.g. Maharashtra" value="{{ old('state') }}" required>
+                                   placeholder="e.g. Ahamdabad" value="{{ old('state') }}" required>
                             @error('state')<div class="invalid-feedback">{{ $message }}</div>@enderror
                         </div>
                     </div>
@@ -207,7 +207,7 @@
                     <div class="form-group">
                         <label>Tell Us About Yourself</label>
                         <textarea name="message" class="form-control" rows="3"
-                                  placeholder="Brief background, why you want to partner with MMV, any relevant experience...">{{ old('message') }}</textarea>
+                                  placeholder="Brief background, why you want to partner with AMV, any relevant experience...">{{ old('message') }}</textarea>
                     </div>
                     <button type="submit" class="btn-submit">🚀 Submit Franchise Enquiry</button>
                 </form>

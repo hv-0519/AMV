@@ -180,7 +180,7 @@
 
 <div class="about-hero">
     <h1>Our <span>Story</span></h1>
-    <p>From a single stall on Mumbai's streets to a growing global food movement — this is MMV.</p>
+    <p>From a single food idea to a growing street-food movement — this is AMV.</p>
 </div>
 
 <!-- Story Section -->
@@ -188,17 +188,17 @@
     <div class="section-inner">
         <div class="story-grid">
             <div class="story-img">
-                <div class="big-text">MMV</div>
-                <p>Mumbaiya Misal Vadapav<br>🌶️ Est. with love & spice</p>
+                <div class="big-text">AMV</div>
+                <p>Amdavadi Misal and Vadapav<br>🌶️ Est. with love & spice</p>
             </div>
             <div class="story-text">
                 <span class="section-tag">Our Story</span>
                 <h2 class="section-title">More Than Just <span>Food</span></h2>
                 <p>Rooted in the bold and comforting flavors of <strong>authentic Maharashtrian Street food</strong>, our menu is 100% vegetarian, preservative-free, and crafted fresh with care.</p>
                 <p>Every plate reflects our belief that great food does more than satisfy hunger — it sparks nostalgia, builds connections, and tells a story.</p>
-                <p>Our journey began with a simple dream: <strong>to bring the real taste of Mumbai's streets to the world</strong>. Today, MMV is growing into a global movement — expanding with every new outlet, fueled by the love of people who connect with our flavors.</p>
+                <p>Our journey began with a simple dream: <strong>to bring bold, memorable street-food flavor to more people</strong>. Today, AMV is growing into a wider movement — expanding with every new outlet, fueled by the love of people who connect with our flavors.</p>
                 <p>We're committed to offering more than just a meal — we deliver a <strong>vibrant, hygienic, and soul-satisfying experience</strong> that honors the legacy of Indian street food.</p>
-                <p style="font-style:italic; color:var(--saffron); font-weight:600;">Welcome to MMV — where flavor meets purpose, and every bite feels like home. 🙏</p>
+                <p style="font-style:italic; color:var(--saffron); font-weight:600;">Welcome to AMV — where flavor meets purpose, and every bite feels like home. 🙏</p>
             </div>
         </div>
     </div>
@@ -233,7 +233,7 @@
             <div class="value-card">
                 <div class="value-icon">🌍</div>
                 <h3>Global Vision</h3>
-                <p>We're building a global movement to take the flavors of Maharashtra to every corner of the world.</p>
+                <p>We're building a global movement to take the flavors of Ahamdabad to every corner of the world.</p>
             </div>
             <div class="value-card">
                 <div class="value-icon">❤️</div>
@@ -248,13 +248,13 @@
 <section style="background:#fff;">
     <div class="section-inner" style="text-align:center;">
         <span class="section-tag">Our Journey</span>
-        <h2 class="section-title">MMV <span>Milestones</span></h2>
+        <h2 class="section-title">AMV <span>Milestones</span></h2>
         <div class="timeline">
             <div class="timeline-item">
                 <div class="timeline-content">
                     <div class="timeline-year">The Beginning</div>
                     <h3>The Dream Takes Shape</h3>
-                    <p>MMV was founded with a mission to bring authentic Maharashtrian street food to a wider audience.</p>
+                    <p>AMV was founded with a mission to bring unforgettable street food to a wider audience.</p>
                 </div>
                 <div class="timeline-dot"></div>
             </div>
@@ -262,7 +262,7 @@
                 <div class="timeline-content">
                     <div class="timeline-year">Growing Fast</div>
                     <h3>First Multiple Outlets</h3>
-                    <p>Rapid expansion across cities, bringing the MMV experience to thousands of new customers.</p>
+                    <p>Rapid expansion across cities, bringing the AMV experience to thousands of new customers.</p>
                 </div>
                 <div class="timeline-dot"></div>
             </div>
@@ -270,7 +270,7 @@
                 <div class="timeline-content">
                     <div class="timeline-year">Going Global</div>
                     <h3>International Expansion</h3>
-                    <p>MMV crosses borders — taking the flavors of Maharashtra to Canada and beyond.</p>
+                    <p>AMV crosses borders — taking its signature flavors to new communities and beyond.</p>
                 </div>
                 <div class="timeline-dot"></div>
             </div>
@@ -278,7 +278,7 @@
                 <div class="timeline-content">
                     <div class="timeline-year">Today & Beyond</div>
                     <h3>A Global Movement</h3>
-                    <p>MMV continues to grow — franchise partners, catering services, and a community that says "Dil Bole Wow!!"</p>
+                    <p>AMV continues to grow — franchise partners, catering services, and a community that says "Dil Bole Wow!!"</p>
                 </div>
                 <div class="timeline-dot"></div>
             </div>
@@ -289,7 +289,7 @@
 <!-- CTA -->
 <section class="team-cta">
     <div class="section-inner">
-        <h2>Be Part of the <span>MMV Family</span></h2>
+        <h2>Be Part of the <span>AMV Family</span></h2>
         <p>Whether you want to franchise, join our team, or just enjoy a great meal — we'd love to have you!</p>
         <a href="{{ url('/franchise') }}" class="btn-cta">🏪 Franchise with Us</a>
         <a href="{{ url('/careers') }}" class="btn-cta-outline">💼 Join Our Team</a>

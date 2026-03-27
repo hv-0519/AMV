@@ -72,7 +72,7 @@
 
 <div class="catering-hero">
     <h1>🎉 <span>Catering</span> Services</h1>
-    <p>Bring the authentic flavors of Maharashtra to your next celebration. Whether it's a corporate event, wedding, or festival — MMV has you covered.</p>
+    <p>Bring bold street-food flavor to your next celebration. Whether it's a corporate event, wedding, or festival — AMV has you covered.</p>
 </div>
 
 <!-- What We Cater -->
@@ -84,7 +84,7 @@
             <div class="offer-card"><div class="offer-icon">💍</div><h3>Weddings</h3><p>Make your special day even more memorable with authentic Maharashtrian flavors.</p></div>
             <div class="offer-card"><div class="offer-icon">🏢</div><h3>Corporate Events</h3><p>Impress your team and clients with a unique street food catering experience.</p></div>
             <div class="offer-card"><div class="offer-icon">🎊</div><h3>Birthday Parties</h3><p>Celebrate in style with live counters and unlimited servings of your favourites.</p></div>
-            <div class="offer-card"><div class="offer-icon">🎆</div><h3>Festivals</h3><p>Make every festival more vibrant with the taste and aroma of MMV's dishes.</p></div>
+            <div class="offer-card"><div class="offer-icon">🎆</div><h3>Festivals</h3><p>Make every festival more vibrant with the taste and aroma of AMV's dishes.</p></div>
             <div class="offer-card"><div class="offer-icon">🎓</div><h3>College Events</h3><p>Food that gets the crowd buzzing — ideal for fests, fairs and alumni gatherings.</p></div>
             <div class="offer-card"><div class="offer-icon">🤝</div><h3>Private Gatherings</h3><p>Intimate family get-togethers made special with home-style Maharashtrian cooking.</p></div>
         </div>
@@ -96,7 +96,7 @@
     <div class="section-inner">
         <div class="why-grid">
             <div>
-                <span class="section-tag">Why MMV Catering</span>
+                <span class="section-tag">Why AMV Catering</span>
                 <h2 class="section-title">Why Choose <span>Us?</span></h2>
                 <ul class="why-list">
                     <li><div class="why-icon">👨‍🍳</div><div><h4>Expert Culinary Team</h4><p>Our trained chefs bring authentic flavors to your event with precision and passion.</p></div></li>
@@ -137,7 +137,7 @@
             </div>
 
             <div class="catering-form-box">
-                <form method="POST" action="{{ route('catering.submit') }}" data-public-submit data-loading-title="Submitting your catering request..." data-loading-text="We are sharing your event details with the MMV catering team.">
+                <form method="POST" action="{{ route('catering.submit') }}" data-public-submit data-loading-title="Submitting your catering request..." data-loading-text="We are sharing your event details with the AMV catering team.">
                     @csrf
                     <div class="form-row">
                         <div class="form-group">

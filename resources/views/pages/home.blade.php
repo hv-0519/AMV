@@ -363,7 +363,7 @@
             <div class="hero-tag">🌶️ 100% Vegetarian • Preservative Free</div>
             <h1>Dil Bole <span>Wow!!</span></h1>
             <div class="hero-sub">With Every Bite of Misal Pav</div>
-            <p>From the streets of Maharashtra to your plate — authentic, bold, and crafted with love. Experience the real taste of Mumbai's iconic street food.</p>
+            <p>From the streets of Ahamdabad to your plate — authentic, bold, and crafted with love. Experience the real taste of Mumbai's iconic street food.</p>
             <div class="hero-btns">
                 <a href="{{ url('/menu') }}" class="btn-hero-primary">🍽️ Explore Menu</a>
                 <a href="{{ url('/order') }}" class="btn-hero-outline">Order Online →</a>
@@ -408,11 +408,11 @@
                     <div class="hero-badge bottom-left">🔥 Best Seller</div>
                     @php $heroDishUrl = \App\Models\SiteImage::getImage('hero_dish'); @endphp
                     @if($heroDishUrl)
-                        <img src="{{ $heroDishUrl }}" alt="Mumbaiya Misal Pav" class="hero-food-emoji" style="width:160px; height:160px; margin:0 auto; object-fit:contain; filter:drop-shadow(0 10px 15px rgba(0,0,0,0.5));">
+                        <img src="{{ $heroDishUrl }}" alt="Amdavadi Misal Pav" class="hero-food-emoji" style="width:160px; height:160px; margin:0 auto; object-fit:contain; filter:drop-shadow(0 10px 15px rgba(0,0,0,0.5));">
                     @else
                         <span class="hero-food-emoji">🍛</span>
                     @endif
-                    <p style="color:#fff; font-family:'Playfair Display',serif; font-size:1.3rem; margin-top:1rem;">Mumbaiya Misal Pav</p>
+                    <p style="color:#fff; font-family:'Playfair Display',serif; font-size:1.3rem; margin-top:1rem;">Amdavadi Misal Pav</p>
                     <p style="color:#aaa; font-size:0.85rem;">The Signature Dish</p>
                 </div>
             @endif
@@ -454,8 +454,8 @@
 <!-- MARQUEE -->
 <div class="marquee-strip">
     <span class="marquee-inner">
-        🌶️ MUMBAIYA MISAL PAV &nbsp;|&nbsp; 🥙 VADAPAV &nbsp;|&nbsp; 🍲 POHA &nbsp;|&nbsp; 🥛 THANDI LASSI &nbsp;|&nbsp; 🍱 MISAL THALI &nbsp;|&nbsp; 🌮 BHAJI PAV &nbsp;|&nbsp; 🍚 TAVA PULAV &nbsp;|&nbsp; 🍮 SABUDANA KHEER &nbsp;|&nbsp;
-        🌶️ MUMBAIYA MISAL PAV &nbsp;|&nbsp; 🥙 VADAPAV &nbsp;|&nbsp; 🍲 POHA &nbsp;|&nbsp; 🥛 THANDI LASSI &nbsp;|&nbsp; 🍱 MISAL THALI &nbsp;|&nbsp; 🌮 BHAJI PAV &nbsp;|&nbsp; 🍚 TAVA PULAV &nbsp;|&nbsp; 🍮 SABUDANA KHEER &nbsp;|&nbsp;
+        🌶️ Amdavadi MISAL PAV &nbsp;|&nbsp; 🥙 VADAPAV &nbsp;|&nbsp; 🍲 POHA &nbsp;|&nbsp; 🥛 THANDI LASSI &nbsp;|&nbsp; 🍱 MISAL THALI &nbsp;|&nbsp; 🌮 BHAJI PAV &nbsp;|&nbsp; 🍚 TAVA PULAV &nbsp;|&nbsp; 🍮 SABUDANA KHEER &nbsp;|&nbsp;
+        🌶️ Amdavadi MISAL PAV &nbsp;|&nbsp; 🥙 VADAPAV &nbsp;|&nbsp; 🍲 POHA &nbsp;|&nbsp; 🥛 THANDI LASSI &nbsp;|&nbsp; 🍱 MISAL THALI &nbsp;|&nbsp; 🌮 BHAJI PAV &nbsp;|&nbsp; 🍚 TAVA PULAV &nbsp;|&nbsp; 🍮 SABUDANA KHEER &nbsp;|&nbsp;
     </span>
 </div>
 
@@ -505,17 +505,17 @@
             <div class="about-img-box">
                 @php $aboutImgUrl = \App\Models\SiteImage::getImage('about_section'); @endphp
                 @if($aboutImgUrl)
-                    <img src="{{ $aboutImgUrl }}" alt="From the Streets of Maharashtra" style="max-height:220px; max-width:100%; object-fit:contain; filter:drop-shadow(0 8px 16px rgba(0,0,0,0.5)); display:block; margin:0 auto 1rem;">
+                    <img src="{{ $aboutImgUrl }}" alt="From the Streets of Ahamdabad" style="max-height:220px; max-width:100%; object-fit:contain; filter:drop-shadow(0 8px 16px rgba(0,0,0,0.5)); display:block; margin:0 auto 1rem;">
                 @else
                     <span class="big-emoji">🏙️</span>
                 @endif
-                <p style="color:#fff; font-family:'Playfair Display',serif; font-size:1.5rem; margin-top:1rem;">From the Streets of<br><span style="color:var(--saffron);">Maharashtra</span><br>to the World</p>
+                <p style="color:#fff; font-family:'Playfair Display',serif; font-size:1.5rem; margin-top:1rem;">From the Streets of<br><span style="color:var(--saffron);">Ahamdabad</span><br>to the World</p>
             </div>
             <div>
-                <div class="section-tag">About MMV</div>
+                <div class="section-tag">About AMV</div>
                 <div class="section-title">More Than Just <span>Food</span></div>
                 <p class="section-desc" style="margin-bottom:1.5rem;">Rooted in the bold and comforting flavors of authentic Maharashtrian Street food, our menu is 100% vegetarian, preservative-free, and crafted fresh with care. Every plate reflects our belief that great food does more than satisfy hunger — it sparks nostalgia, builds connections, and tells a story.</p>
-                <p class="section-desc">Our journey began with a simple dream: to bring the real taste of Mumbai's streets to the world. Today, MMV is growing into a global movement.</p>
+                <p class="section-desc">Our journey began with a simple dream: to bring bold street-food flavor to more people. Today, AMV is growing into a vibrant food movement.</p>
                 <div class="about-features">
                     <div class="feature-item">
                         <span class="feature-icon">🌿</span>
@@ -557,13 +557,13 @@
             <div class="service-card">
                 <div class="service-icon">🏪</div>
                 <h3>Franchise Opportunity</h3>
-                <p>Partner with MMV and bring our proven brand to your community. Benefit from training, support & a trusted name.</p>
+                <p>Partner with AMV and bring our proven brand to your community. Benefit from training, support & a trusted name.</p>
                 <a href="{{ url('/franchise') }}" class="btn-service">Know More →</a>
             </div>
             <div class="service-card">
                 <div class="service-icon">📱</div>
                 <h3>Online Ordering</h3>
-                <p>Order your favourite MMV dishes online for pickup or delivery. Fresh food delivered to your doorstep.</p>
+                <p>Order your favourite AMV dishes online for pickup or delivery. Fresh food delivered to your doorstep.</p>
                 <a href="{{ url('/order') }}" class="btn-service">Order Now →</a>
             </div>
         </div>
@@ -574,7 +574,7 @@
 <section class="cta-section">
     <div class="section-inner">
         <h2>🌶️ Ready for a Wow Experience?</h2>
-        <p>Order now and taste the authentic flavors of Maharashtra's most beloved street food</p>
+        <p>Order now and taste the authentic flavors of Ahamdabad's most beloved street food</p>
         <a href="{{ url('/order') }}" class="btn-hero-primary" style="color:#fff;">Order Online Now</a>
         &nbsp;&nbsp;
         <a href="{{ url('/contact') }}" class="btn-hero-outline">Get in Touch</a>

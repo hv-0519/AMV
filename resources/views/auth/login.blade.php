@@ -119,9 +119,9 @@
         </div>
         <div class="auth-right">
             <h1>Sign In</h1>
-            <p class="subtitle">Enter your credentials to access MMV</p>
+            <p class="subtitle">Enter your credentials to access AMV</p>
 
-            <form method="POST" action="{{ route('login') }}" data-public-submit data-loading-title="Signing you in..." data-loading-text="We are securely verifying your MMV account.">
+            <form method="POST" action="{{ route('login') }}" data-public-submit data-loading-title="Signing you in..." data-loading-text="We are securely verifying your AMV account.">
                 @csrf
                 <div class="form-group">
                     <label>Email Address</label>
@@ -143,7 +143,7 @@
                         <a href="{{ route('password.request') }}" style="color:var(--saffron); font-size:0.82rem; text-decoration:none;">Forgot Password?</a>
                     @endif
                 </div>
-                <button type="submit" class="btn-submit">🔐 Sign In to MMV</button>
+                <button type="submit" class="btn-submit">🔐 Sign In to AMV</button>
             </form>
             <div class="auth-footer">
                 Don't have an account? <a href="{{ route('register') }}">Create one →</a>

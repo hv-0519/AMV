@@ -80,7 +80,7 @@
             <div class="info-icon">✉️</div>
             <div>
                 <h4>Email Us</h4>
-                <p><a href="mailto:canada@mmvmumbaiya.com">canada@mmvmumbaiya.com</a></p>
+                <p><a href="mailto:canada@AMVAmdavadi.com">canada@AMVAmdavadi.com</a></p>
                 <p style="margin-top:0.3rem; font-size:0.8rem; color:#aaa;">We reply within 24 hours</p>
             </div>
         </div>
@@ -119,7 +119,7 @@
         <h2>Send a Message</h2>
         <p>Fill in the form and we'll get back to you soon.</p>
 
-        <form method="POST" action="{{ route('contact.send') }}" data-public-submit data-loading-title="Sending your message..." data-loading-text="We are delivering your enquiry to the MMV team.">
+        <form method="POST" action="{{ route('contact.send') }}" data-public-submit data-loading-title="Sending your message..." data-loading-text="We are delivering your enquiry to the AMV team.">
             @csrf
             <div class="form-row">
                 <div class="form-group">
