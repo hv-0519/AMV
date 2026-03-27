@@ -80,3 +80,9 @@ desktop.ini
 
 .phpunit.result.cache
 /coverage/
+.agents/
+.gemini/
+.mcp.json
+mmv-core.zip
+GEMINI.md
+boost.json
