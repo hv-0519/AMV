@@ -63,7 +63,7 @@
             <h1>Create Account</h1>
             <p class="subtitle">Sign up to start your MMV journey 🚀</p>
 
-            <form method="POST" action="{{ route('register') }}">
+            <form method="POST" action="{{ route('register') }}" data-public-submit data-loading-title="Creating your account..." data-loading-text="We are setting up your MMV profile and getting things ready.">
                 @csrf
                 <div class="form-row">
                     <div class="form-group">

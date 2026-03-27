@@ -8,7 +8,7 @@
         <a href="{{ route('admin.menu.index') }}" class="btn btn-outline btn-sm">← Back to Menu</a>
     </div>
 
-    <form method="POST" action="{{ isset($menu_item) ? route('admin.menu.update', $menu_item->id) : route('admin.menu.store') }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ isset($menu_item) ? route('admin.menu.update', $menu_item->id) : route('admin.menu.store') }}" enctype="multipart/form-data" class="js-crud-ajax" data-loading="{{ isset($menu_item) ? 'Updating menu item...' : 'Adding menu item...' }}" data-success="{{ isset($menu_item) ? 'Menu item updated.' : 'Menu item added.' }}">
         @csrf
         @if(isset($menu_item)) @method('PUT') @endif
 

@@ -8,14 +8,7 @@
             <h3>✏️ Edit User — {{ $user->name }}</h3>
             <a href="{{ route('admin.users.show', $user->id) }}" class="btn btn-outline btn-sm">← Back</a>
         </div>
-
-        @if(session('success'))
-            <div style="background:#e8f5e9; border-left:4px solid #2E7D32; padding:1rem; border-radius:8px; margin-bottom:1.5rem; color:#1b5e20;">
-                ✅ {{ session('success') }}
-            </div>
-        @endif
-
-        <form method="POST" action="{{ route('admin.users.update', $user->id) }}">
+        <form method="POST" action="{{ route('admin.users.update', $user->id) }}" class="js-crud-ajax" data-loading="Updating user profile..." data-success="User updated successfully.">
             @csrf @method('PUT')
 
             <div class="form-group">

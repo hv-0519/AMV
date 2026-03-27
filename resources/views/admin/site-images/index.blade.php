@@ -29,7 +29,7 @@
         </div>
 
         <!-- Upload form -->
-        <form method="POST" action="{{ route('admin.site-images.update', $img->id) }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('admin.site-images.update', $img->id) }}" enctype="multipart/form-data" class="js-crud-ajax" data-loading="Updating website image..." data-success="Image updated successfully.">
             @csrf
             <div style="display:flex; gap:0.5rem; flex-wrap:wrap; align-items:center;">
                 <label style="flex:1; min-width:0;">
@@ -46,10 +46,10 @@
 
         @if($img->image)
         <!-- Remove button -->
-        <form method="POST" action="{{ route('admin.site-images.destroy', $img->id) }}" style="margin-top:0.6rem;">
+        <form method="POST" action="{{ route('admin.site-images.destroy', $img->id) }}" style="margin-top:0.6rem;" class="js-crud-delete" data-confirm="Remove this image?" data-success="Image removed successfully.">
             @csrf @method('DELETE')
             <button type="submit" class="btn btn-sm" style="background:transparent; border:1.5px solid #ddd; color:#aaa; width:100%;"
-                    onclick="return confirm('Remove this image?')">
+                    >
                 <i class="fas fa-trash"></i> Remove Image
             </button>
         </form>
@@ -65,7 +65,7 @@
         <h2 style="font-size:1.3rem; font-weight:700; color:var(--dark);">📸 Gallery Images</h2>
         <p style="color:#888; font-size:0.88rem; margin-top:0.3rem;">Upload multiple images at once to display on the Gallery page. Images will be displayed in a varied masonry grid layout.</p>
     </div>
-    <form method="POST" action="{{ route('admin.site-images.gallery.upload') }}" enctype="multipart/form-data" style="display:flex; gap:0.5rem; align-items:center;">
+    <form method="POST" action="{{ route('admin.site-images.gallery.upload') }}" enctype="multipart/form-data" style="display:flex; gap:0.5rem; align-items:center;" class="js-crud-ajax" data-loading="Uploading gallery images..." data-success="Gallery images uploaded.">
         @csrf
         <input type="file" name="images[]" accept="image/*" multiple required
                style="font-size:0.8rem; border:1.5px solid #ddd; border-radius:8px; padding:0.4rem 0.6rem; cursor:pointer;"
@@ -84,10 +84,10 @@
             <img src="{{ asset('storage/' . $gImg->image) }}" alt="Gallery Image {{ $gImg->id }}"
                  style="max-height:140px; max-width:100%; object-fit:contain; border-radius:8px;">
         </div>
-        <form method="POST" action="{{ route('admin.site-images.gallery.destroy', $gImg->id) }}">
+        <form method="POST" action="{{ route('admin.site-images.gallery.destroy', $gImg->id) }}" class="js-crud-delete" data-confirm="Remove this gallery image?" data-success="Gallery image removed.">
             @csrf @method('DELETE')
             <button type="submit" class="btn btn-sm" style="background:transparent; border:1.5px solid #ddd; color:#aaa; width:100%;"
-                    onclick="return confirm('Remove this gallery image?')">
+                    >
                 <i class="fas fa-trash"></i> Remove
             </button>
         </form>

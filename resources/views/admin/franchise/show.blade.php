@@ -2,7 +2,7 @@
 @section('title', 'Franchise Enquiry #' . $franchise->id)
 
 @section('content')
-<div style="display:grid; grid-template-columns:2fr 1fr; gap:1.5rem; align-items:start;">
+<div class="stack-grid">
 
     <!-- Details -->
     <div class="data-card">
@@ -10,7 +10,7 @@
             <h3>🏪 Franchise Enquiry #{{ $franchise->id }}</h3>
             <a href="{{ route('admin.franchise.index') }}" class="btn btn-outline btn-sm">← Back</a>
         </div>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem;">
+        <div class="form-grid">
             <div>
                 <p style="font-size:0.75rem; color:#aaa; text-transform:uppercase; font-weight:700; margin-bottom:0.3rem;">Name</p>
                 <p style="font-weight:600;">{{ $franchise->name }}</p>
@@ -51,7 +51,7 @@
     <!-- Right Panel: Update Status -->
     <div class="data-card">
         <h3 style="font-size:1rem; margin-bottom:1.2rem;">🔄 Update Status</h3>
-        <form method="POST" action="{{ route('admin.franchise.updateStatus', $franchise->id) }}">
+        <form method="POST" action="{{ route('admin.franchise.updateStatus', $franchise->id) }}" class="js-crud-ajax" data-loading="Updating franchise enquiry..." data-success="Franchise enquiry status updated.">
             @csrf @method('PATCH')
             <div class="form-group" style="margin-bottom:1rem;">
                 <label style="font-size:0.85rem; font-weight:600; color:#444; display:block; margin-bottom:0.4rem;">Enquiry Status</label>

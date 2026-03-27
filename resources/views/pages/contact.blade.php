@@ -119,7 +119,7 @@
         <h2>Send a Message</h2>
         <p>Fill in the form and we'll get back to you soon.</p>
 
-        <form method="POST" action="{{ route('contact.send') }}">
+        <form method="POST" action="{{ route('contact.send') }}" data-public-submit data-loading-title="Sending your message..." data-loading-text="We are delivering your enquiry to the MMV team.">
             @csrf
             <div class="form-row">
                 <div class="form-group">

@@ -337,6 +337,9 @@
         }
 
         @media (max-width: 600px) {
+            .gallery-page {
+                padding: 2rem 1rem 3rem;
+            }
             .collage-grid {
                 grid-template-columns: repeat(2, 1fr);
                 grid-auto-rows: 130px;
@@ -345,6 +348,14 @@
 
             .lb-nav {
                 display: none;
+            }
+            .gallery-cta {
+                padding: 2rem 1rem;
+            }
+            .btn-cta {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 0.75rem;
             }
         }
     </style>

@@ -2,7 +2,7 @@
 @section('title', 'Restock — ' . $stock->name)
 
 @section('content')
-<div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; max-width:900px; align-items:start;">
+<div class="form-grid" style="max-width:900px; align-items:start;">
 
     <!-- Current Stock Info -->
     <div class="data-card">
@@ -28,7 +28,7 @@
                 @endif
             </div>
 
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.8rem;">
+            <div class="form-grid" style="gap:0.8rem;">
                 <div style="background:#fff; border:1px solid #f0ebe3; border-radius:10px; padding:1rem; text-align:center;">
                     <p style="font-size:0.7rem; color:#aaa; text-transform:uppercase; font-weight:700; margin-bottom:0.2rem;">Min Level</p>
                     <p style="font-size:1.2rem; font-weight:800; color:var(--dark);">{{ $stock->min_quantity }} <small style="font-size:0.75rem;">{{ $stock->unit }}</small></p>
@@ -79,7 +79,7 @@
             <h3>➕ Add Stock</h3>
         </div>
 
-        <form method="POST" action="{{ route('admin.stocks.processRestock', $stock->id) }}">
+        <form method="POST" action="{{ route('admin.stocks.processRestock', $stock->id) }}" class="js-crud-ajax" data-loading="Processing restock..." data-success="Stock restocked successfully.">
             @csrf
 
             <div class="form-group" style="margin-bottom:1.5rem;">

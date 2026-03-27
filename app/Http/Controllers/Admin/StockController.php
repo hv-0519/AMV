@@ -17,7 +17,7 @@ class StockController extends Controller
             $query->where('category', $request->category);
         }
 
-        $stocks = $query->latest()->paginate(20);
+        $stocks = $query->latest()->paginate(20)->withQueryString();
 
         $summary = [
             'total'         => Stock::count(),

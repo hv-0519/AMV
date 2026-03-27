@@ -137,7 +137,7 @@
             </div>
 
             <div class="catering-form-box">
-                <form method="POST" action="{{ route('catering.submit') }}">
+                <form method="POST" action="{{ route('catering.submit') }}" data-public-submit data-loading-title="Submitting your catering request..." data-loading-text="We are sharing your event details with the MMV catering team.">
                     @csrf
                     <div class="form-row">
                         <div class="form-group">

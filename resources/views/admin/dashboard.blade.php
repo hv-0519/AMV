@@ -47,7 +47,7 @@
     </div>
 </div>
 
-<div style="display:grid; grid-template-columns:2fr 1fr; gap:1.5rem;">
+<div class="stack-grid">
     <!-- Recent Orders -->
     <div class="data-card">
         <div class="data-card-header">

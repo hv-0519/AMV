@@ -2,7 +2,7 @@
 @section('title', 'Order #' . str_pad($order->id, 4, '0', STR_PAD_LEFT))
 
 @section('content')
-<div style="display:grid; grid-template-columns:2fr 1fr; gap:1.5rem; align-items:start;">
+<div class="stack-grid">
 
     <!-- Order Items -->
     <div>
@@ -61,7 +61,7 @@
         <!-- Customer Details -->
         <div class="data-card">
             <div class="data-card-header"><h3>👤 Customer Details</h3></div>
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem;">
+            <div class="form-grid">
                 <div>
                     <p style="font-size:0.75rem; color:#aaa; text-transform:uppercase; font-weight:700; margin-bottom:0.3rem;">Name</p>
                     <p style="font-weight:600;">{{ $order->user->name ?? $order->guest_name ?? 'Guest' }}</p>
@@ -135,7 +135,7 @@
         <!-- Update Status -->
         <div class="data-card">
             <h3 style="font-size:1rem; margin-bottom:1.2rem;">🔄 Update Status</h3>
-            <form method="POST" action="{{ route('admin.orders.updateStatus', $order->id) }}">
+            <form method="POST" action="{{ route('admin.orders.updateStatus', $order->id) }}" class="js-crud-ajax" data-loading="Updating order status..." data-success="Order status updated.">
                 @csrf @method('PATCH')
                 <div class="form-group" style="margin-bottom:1rem;">
                     <label style="font-size:0.85rem; font-weight:600; color:#444; display:block; margin-bottom:0.4rem;">Order Status</label>

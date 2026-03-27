@@ -21,10 +21,30 @@ class MenuItem extends Model
         'price'         => 'decimal:2',
     ];
 
+    // -------------------------------------------------------------------------
+    // RELATIONSHIPS
+    // -------------------------------------------------------------------------
+
     public function orderItems()
     {
         return $this->hasMany(OrderItem::class);
     }
+
+    /** Manual pairings where this item is the source */
+    public function pairings()
+    {
+        return $this->hasMany(MenuItemPairing::class, 'menu_item_id');
+    }
+
+    /** Manual pairings where this item is the recommendation target */
+    public function pairedFrom()
+    {
+        return $this->hasMany(MenuItemPairing::class, 'paired_item_id');
+    }
+
+    // -------------------------------------------------------------------------
+    // SCOPES
+    // -------------------------------------------------------------------------
 
     public function scopeAvailable($query)
     {

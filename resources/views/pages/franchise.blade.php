@@ -158,7 +158,7 @@
             </div>
 
             <div class="franchise-form-box">
-                <form method="POST" action="{{ route('franchise.submit') }}">
+                <form method="POST" action="{{ route('franchise.submit') }}" data-public-submit data-loading-title="Submitting your franchise enquiry..." data-loading-text="We are sending your details to the MMV expansion team.">
                     @csrf
                     <div class="form-row">
                         <div class="form-group">

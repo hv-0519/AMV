@@ -167,8 +167,40 @@
     .btn-place-order:disabled { background: #ccc; cursor: not-allowed; }
 
     @media (max-width: 900px) {
-        .order-page { grid-template-columns: 1fr; }
+        .order-page { grid-template-columns: 1fr; padding: 2rem 1rem; }
         .cart-box { position: static; }
+    }
+    @media (max-width: 640px) {
+        .order-hero {
+            padding: 2rem 1rem;
+        }
+        .order-page {
+            gap: 1.25rem;
+        }
+        .order-item-card {
+            align-items: flex-start;
+            flex-wrap: wrap;
+            padding: 0.9rem;
+        }
+        .item-info {
+            min-width: 0;
+            width: calc(100% - 3.4rem);
+        }
+        .item-price {
+            margin-right: 0;
+            width: 100%;
+            order: 3;
+        }
+        .qty-control {
+            margin-left: auto;
+        }
+        .cart-header,
+        .cart-items,
+        .cart-summary,
+        .cart-form {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
     }
 </style>
 @endpush
@@ -226,7 +258,7 @@
             <div class="summary-row total"><span>Total</span><span id="totalDisplay">₹0.00</span></div>
         </div>
 
-        <form class="cart-form" method="POST" action="{{ route('order.store') }}" id="orderForm">
+        <form class="cart-form" method="POST" action="{{ route('order.store') }}" id="orderForm" data-public-submit data-loading-title="Placing your order..." data-loading-text="We are sending your items to the MMV kitchen right now.">
             @csrf
             <div id="cartInputs"></div>
 

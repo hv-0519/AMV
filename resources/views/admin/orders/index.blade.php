@@ -3,7 +3,7 @@
 
 @section('content')
 <!-- Status Summary -->
-<div class="stats-grid" style="grid-template-columns:repeat(5,1fr); margin-bottom:1.5rem;">
+<div class="stats-grid" style="margin-bottom:1.5rem;">
     @php
     $statuses = [
         'all' => ['label' => 'All Orders', 'icon' => 'fas fa-list', 'color' => ''],
@@ -29,7 +29,7 @@
 <div class="data-card">
     <div class="data-card-header">
         <h3>📦 Orders</h3>
-        <div style="display:flex; gap:0.5rem;">
+        <div class="inline-tools">
             <input type="text" placeholder="Search order # or customer..." class="form-control" style="width:250px;" id="searchInput">
         </div>
     </div>
@@ -66,7 +66,7 @@
                     @endif
                 </td>
                 <td>
-                    <form method="POST" action="{{ route('admin.orders.updateStatus', $order->id) }}" style="display:inline;">
+                    <form method="POST" action="{{ route('admin.orders.updateStatus', $order->id) }}" style="display:inline;" class="js-crud-ajax" data-loading="Updating order status..." data-success="Order status updated.">
                         @csrf @method('PATCH')
                         <select name="status" onchange="this.form.submit()" class="form-control" style="padding:0.3rem; font-size:0.8rem; width:130px; border-radius:6px;">
                             @foreach(['pending','processing','ready','completed','cancelled'] as $status)
@@ -79,9 +79,9 @@
                 </td>
                 <td style="font-size:0.82rem; color:#888;">{{ \Carbon\Carbon::parse($order->created_at)->format('d M, h:i A') }}</td>
                 <td>
-                    <a href="{{ route('admin.orders.show', $order->id) }}" class="btn btn-outline btn-sm"><i class="fas fa-eye"></i></a>
+                    <a href="{{ route('admin.orders.show', $order->id) }}" class="btn btn-outline btn-sm js-crud-modal" data-modal-title="Order Details"><i class="fas fa-eye"></i></a>
                     @if($order->status === 'pending')
-                    <form method="POST" action="{{ route('admin.orders.destroy', $order->id) }}" style="display:inline;" onsubmit="return confirm('Cancel this order?')">
+                    <form method="POST" action="{{ route('admin.orders.destroy', $order->id) }}" style="display:inline;" class="js-crud-delete" data-confirm="Cancel this order?" data-success="Order cancelled successfully.">
                         @csrf @method('DELETE')
                         <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-times"></i></button>
                     </form>

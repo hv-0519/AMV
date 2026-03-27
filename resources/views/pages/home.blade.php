@@ -303,9 +303,53 @@
     .btn-service:hover { text-decoration: underline; }
 
     @media (max-width: 768px) {
-        .hero-content, .about-grid, .bestsellers-grid, .services-grid { grid-template-columns: 1fr; }
+        .hero {
+            min-height: auto;
+            padding: 3rem 1rem;
+        }
+        .hero-content, .about-grid, .bestsellers-grid, .services-grid { grid-template-columns: 1fr; gap: 2rem; }
+        .hero-btns {
+            flex-direction: column;
+            align-items: stretch;
+        }
+        .btn-hero-primary,
+        .btn-hero-outline {
+            width: 100%;
+            text-align: center;
+            padding-inline: 1.25rem;
+        }
+        .stats-row {
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            gap: 0.75rem;
+        }
+        .stat-item {
+            flex: 1 1 0;
+            min-width: 0;
+        }
         .hero-image-area { display: none; }
         .about-features { grid-template-columns: 1fr; }
+        section { padding: 3.5rem 1rem; }
+    }
+    @media (max-width: 480px) {
+        .hero-tag {
+            width: 100%;
+            text-align: center;
+            letter-spacing: 1px;
+            padding-inline: 0.8rem;
+        }
+        .stat-item {
+            text-align: left;
+        }
+        .stat-item .num {
+            font-size: 1.5rem;
+        }
+        .stat-item .lbl {
+            font-size: 0.72rem;
+        }
+        .menu-grid {
+            grid-template-columns: 1fr;
+        }
     }
 </style>
 @endpush

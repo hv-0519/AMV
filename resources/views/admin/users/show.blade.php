@@ -2,7 +2,7 @@
 @section('title', 'User — ' . $user->name)
 
 @section('content')
-<div style="display:grid; grid-template-columns:2fr 1fr; gap:1.5rem; align-items:start;">
+<div class="stack-grid">
 
     <!-- User Details & Orders -->
     <div>
@@ -10,11 +10,11 @@
             <div class="data-card-header">
                 <h3>👤 {{ $user->name }}</h3>
                 <div style="display:flex; gap:0.5rem;">
-                    <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-outline btn-sm"><i class="fas fa-edit"></i> Edit</a>
+                    <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-outline btn-sm js-crud-modal" data-modal-title="Edit User"><i class="fas fa-edit"></i> Edit</a>
                     <a href="{{ route('admin.users.index') }}" class="btn btn-outline btn-sm">← Back</a>
                 </div>
             </div>
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem;">
+            <div class="form-grid">
                 <div>
                     <p style="font-size:0.75rem; color:#aaa; text-transform:uppercase; font-weight:700; margin-bottom:0.3rem;">Email</p>
                     <p>{{ $user->email }}</p>
@@ -81,10 +81,10 @@
     <!-- Quick Actions -->
     <div class="data-card">
         <h3 style="font-size:1rem; margin-bottom:1.2rem;">⚡ Quick Actions</h3>
-        <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-primary" style="width:100%; margin-bottom:0.7rem; display:block; text-align:center;">
+        <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-primary js-crud-modal" data-modal-title="Edit User" style="width:100%; margin-bottom:0.7rem; display:block; text-align:center;">
             <i class="fas fa-edit"></i> Edit User
         </a>
-        <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" onsubmit="return confirm('Delete this user permanently?')">
+        <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" class="js-crud-delete" data-confirm="Delete this user permanently?" data-success="User deleted successfully.">
             @csrf @method('DELETE')
             <button type="submit" class="btn btn-danger" style="width:100%;">
                 <i class="fas fa-trash"></i> Delete User

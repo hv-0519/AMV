@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Services\RecommendationService;
 
 class OrderController extends Controller
 {
@@ -78,17 +79,31 @@ class OrderController extends Controller
             DB::commit();
 
             return redirect()->route('order.confirmation', $order->id)
-                ->with('success', 'Order placed successfully! 🎉 Dil Bole Wow!!');
+                ->with('success', 'Order placed successfully! 🎉 Dil Bole Wow!!')
+                ->with('flash_modal', 'order-success');
 
         } catch (\Exception $e) {
             DB::rollBack();
-            return back()->with('error', 'Something went wrong. Please try again.')->withInput();
+            return back()
+                ->with('error', 'Something went wrong. Please try again.')
+                ->with('flash_modal', 'order-error')
+                ->withInput();
         }
     }
 
-    public function confirmation(Order $order)
-    {
-        $order->load('orderItems.menuItem');
-        return view('pages.order-confirmation', compact('order'));
-    }
+    public function confirmation(Order $order, RecommendationService $recommendations)
+{
+    $order->load('orderItems.menuItem');
+
+    $orderedItemIds = $order->orderItems
+        ->pluck('menu_item_id')
+        ->filter()
+        ->unique()
+        ->values()
+        ->toArray();
+
+    $recommended = $recommendations->forOrder($orderedItemIds);
+
+    return view('pages.order-confirmation', compact('order', 'recommended'));
+}
 }

@@ -8,7 +8,7 @@
         <a href="{{ route('admin.stocks.index') }}" class="btn btn-outline btn-sm">← Back to Stocks</a>
     </div>
 
-    <form method="POST" action="{{ isset($stock) ? route('admin.stocks.update', $stock->id) : route('admin.stocks.store') }}">
+    <form method="POST" action="{{ isset($stock) ? route('admin.stocks.update', $stock->id) : route('admin.stocks.store') }}" class="js-crud-ajax" data-loading="{{ isset($stock) ? 'Updating stock item...' : 'Adding stock item...' }}" data-success="{{ isset($stock) ? 'Stock item updated.' : 'Stock item created.' }}">
         @csrf
         @if(isset($stock)) @method('PUT') @endif
 

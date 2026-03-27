@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\MenuItem;
+use App\Services\RecommendationService;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -11,11 +12,11 @@ class HomeController extends Controller
     public function index()
     {
         $featured_items = MenuItem::available()->featured()->take(8)->get();
-        $bestsellers = MenuItem::available()->bestsellers()->take(4)->get();
+        $bestsellers    = MenuItem::available()->bestsellers()->take(4)->get();
         return view('pages.home', compact('featured_items', 'bestsellers'));
     }
 
-    public function menu(Request $request)
+    public function menu(Request $request, RecommendationService $recommendations)
     {
         $query = MenuItem::available();
 
@@ -30,7 +31,11 @@ class HomeController extends Controller
         $menu_items = $query->get()->groupBy('category');
         $categories = MenuItem::available()->distinct()->pluck('category');
 
-        return view('pages.menu', compact('menu_items', 'categories'));
+        // Bulk-load top-1 pairing per item — only 2 queries, regardless of menu size
+        $allIds  = $menu_items->flatten()->pluck('id')->toArray();
+        $pairMap = $recommendations->forMany($allIds);   // [ item_id => MenuItem|null ]
+
+        return view('pages.menu', compact('menu_items', 'categories', 'pairMap'));
     }
 
     public function about()
@@ -52,9 +57,9 @@ class HomeController extends Controller
             'message' => 'required|string|max:1000',
         ]);
 
-        // In production: Mail::to('canada@mmvmumbaiya.com')->send(new ContactMail($request->all()));
-
-        return back()->with('success', 'Thank you for reaching out! We\'ll get back to you soon. 🌶️');
+        return back()
+            ->with('success', 'Thank you for reaching out! We\'ll get back to you soon. 🌶️')
+            ->with('flash_modal', 'contact-success');
     }
 
     public function catering()
@@ -77,7 +82,9 @@ class HomeController extends Controller
 
         \App\Models\CateringRequest::create($validated);
 
-        return back()->with('success', 'Catering request submitted! Our team will contact you within 24 hours. 🎉');
+        return back()
+            ->with('success', 'Catering request submitted! Our team will contact you within 24 hours. 🎉')
+            ->with('flash_modal', 'catering-success');
     }
 
     public function franchise()
@@ -99,7 +106,9 @@ class HomeController extends Controller
 
         \App\Models\FranchiseEnquiry::create($validated);
 
-        return back()->with('success', 'Franchise enquiry received! We\'ll connect with you shortly. 🏪');
+        return back()
+            ->with('success', 'Franchise enquiry received! We\'ll connect with you shortly. 🏪')
+            ->with('flash_modal', 'franchise-success');
     }
 
     public function gallery()

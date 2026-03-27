@@ -29,14 +29,23 @@ class AuthController extends Controller
             $request->session()->regenerate();
 
             if (Auth::user()->role === 'admin') {
-                return redirect()->route('admin.dashboard')->with('success', 'Welcome back, ' . Auth::user()->name . '!');
+                return redirect()->route('admin.dashboard')
+                    ->with('success', 'Welcome back, ' . Auth::user()->name . '!')
+                    ->with('auth_modal', 'welcome')
+                    ->with('flash_modal', 'welcome-back');
             }
 
             if (Auth::user()->role === 'staff') {
-                return redirect()->route('admin.orders.index')->with('success', 'Welcome back, ' . Auth::user()->name . '! 🌶️');
+                return redirect()->route('admin.orders.index')
+                    ->with('success', 'Welcome back, ' . Auth::user()->name . '! 🌶️')
+                    ->with('auth_modal', 'welcome')
+                    ->with('flash_modal', 'welcome-back');
             }
 
-            return redirect()->intended('/')->with('success', 'Welcome back! Dil Bole Wow!! 🌶️');
+            return redirect()->intended('/')
+                ->with('success', 'Welcome back! Dil Bole Wow!! 🌶️')
+                ->with('auth_modal', 'welcome')
+                ->with('flash_modal', 'welcome-back');
         }
 
         return back()->withErrors([
@@ -71,7 +80,10 @@ class AuthController extends Controller
 
         Auth::login($user);
 
-        return redirect('/')->with('success', 'Welcome to MMV Family! 🎉 Dil Bole Wow!!');
+        return redirect('/')
+            ->with('success', 'Welcome to MMV Family! 🎉 Dil Bole Wow!!')
+            ->with('auth_modal', 'welcome')
+            ->with('flash_modal', 'welcome-family');
     }
 
     // Logout
@@ -80,6 +92,8 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/')->with('success', 'You have been logged out. See you soon! 🌶️');
+        return redirect('/')
+            ->with('success', 'You have been logged out. See you soon! 🌶️')
+            ->with('flash_modal', 'logged-out');
     }
 }

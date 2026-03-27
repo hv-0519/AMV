@@ -14,7 +14,7 @@
     {{-- ── Carousel Speed ── --}}
     <div class="data-card" style="padding:1.5rem; margin-bottom:1.5rem;">
         <h3 style="font-size:1rem; font-weight:700; color:var(--dark); margin-bottom:1rem;">⏱️ Carousel Speed</h3>
-        <form method="POST" action="{{ route('admin.best-sellers.interval') }}" style="display:flex; gap:1rem; align-items:center; flex-wrap:wrap;">
+        <form method="POST" action="{{ route('admin.best-sellers.interval') }}" style="display:flex; gap:1rem; align-items:center; flex-wrap:wrap;" class="js-crud-ajax" data-loading="Updating carousel speed..." data-success="Carousel speed updated.">
             @csrf
             <div style="display:flex; align-items:center; gap:0.8rem;">
                 <label style="font-size:0.88rem; font-weight:600; color:#555;">Auto-scroll every</label>
@@ -29,7 +29,7 @@
     {{-- ── Add New Item ── --}}
     <div class="data-card" style="padding:1.5rem; margin-bottom:1.5rem;">
         <h3 style="font-size:1rem; font-weight:700; color:var(--dark); margin-bottom:1rem;">➕ Add New Item</h3>
-        <form method="POST" action="{{ route('admin.best-sellers.store') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('admin.best-sellers.store') }}" enctype="multipart/form-data" class="js-crud-ajax" data-loading="Adding showcase item..." data-success="Showcase item added.">
             @csrf
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem;">
                 <div>
@@ -73,7 +73,7 @@
             </div>
 
             {{-- Info + edit form --}}
-            <form method="POST" action="{{ route('admin.best-sellers.update', $item->id) }}" enctype="multipart/form-data" style="flex:1; min-width:260px;">
+            <form method="POST" action="{{ route('admin.best-sellers.update', $item->id) }}" enctype="multipart/form-data" style="flex:1; min-width:260px;" class="js-crud-ajax" data-loading="Updating showcase item..." data-success="Showcase item updated.">
                 @csrf
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.5rem; margin-bottom:0.5rem;">
                     <input type="text" name="name" value="{{ $item->name }}" required placeholder="Dish Name"
@@ -92,14 +92,14 @@
 
             {{-- Actions --}}
             <div style="display:flex; flex-direction:column; gap:0.4rem;">
-                <form method="POST" action="{{ route('admin.best-sellers.toggle', $item->id) }}">
+                <form method="POST" action="{{ route('admin.best-sellers.toggle', $item->id) }}" class="js-crud-ajax" data-loading="Updating visibility..." data-success="Visibility updated.">
                     @csrf
                     <button type="submit" class="btn btn-sm"
                             style="background:{{ $item->is_active ? '#e8f5e9' : '#fff3e0' }}; color:{{ $item->is_active ? '#2e7d32' : '#e65100' }}; border:1.5px solid {{ $item->is_active ? '#a5d6a7' : '#ffcc80' }}; width:90px;">
                         {{ $item->is_active ? '✅ Active' : '⏸ Hidden' }}
                     </button>
                 </form>
-                <form method="POST" action="{{ route('admin.best-sellers.destroy', $item->id) }}" onsubmit="return confirm('Remove this item?')">
+                <form method="POST" action="{{ route('admin.best-sellers.destroy', $item->id) }}" class="js-crud-delete" data-confirm="Remove this item?" data-success="Item removed.">
                     @csrf @method('DELETE')
                     <button type="submit" class="btn btn-sm" style="background:#ffebee; color:#c62828; border:1.5px solid #ef9a9a; width:90px;">
                         <i class="fas fa-trash"></i> Remove

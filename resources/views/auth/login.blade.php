@@ -121,7 +121,7 @@
             <h1>Sign In</h1>
             <p class="subtitle">Enter your credentials to access MMV</p>
 
-            <form method="POST" action="{{ route('login') }}">
+            <form method="POST" action="{{ route('login') }}" data-public-submit data-loading-title="Signing you in..." data-loading-text="We are securely verifying your MMV account.">
                 @csrf
                 <div class="form-group">
                     <label>Email Address</label>

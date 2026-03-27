@@ -3,7 +3,7 @@
 
 @section('content')
 <!-- Status Summary -->
-<div class="stats-grid" style="grid-template-columns:repeat(6,1fr); margin-bottom:1.5rem;">
+<div class="stats-grid" style="margin-bottom:1.5rem;">
     @php
     $statuses = [
         'all'         => ['label' => 'All',         'icon' => 'fas fa-list',        'color' => ''],
@@ -30,7 +30,7 @@
 <div class="data-card">
     <div class="data-card-header">
         <h3>🏪 Franchise Enquiries</h3>
-        <form method="GET" action="{{ route('admin.franchise.index') }}" style="display:flex; gap:0.5rem;">
+        <form method="GET" action="{{ route('admin.franchise.index') }}" class="inline-tools">
             <input type="hidden" name="status" value="{{ request('status') }}">
             <input type="text" name="search" value="{{ request('search') }}" placeholder="Search name, email, city..." class="form-control" style="width:260px;">
             <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-search"></i></button>

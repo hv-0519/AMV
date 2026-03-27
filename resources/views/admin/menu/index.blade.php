@@ -1,11 +1,33 @@
 @extends('layouts.admin')
 @section('title', 'Manage Menu')
 
+@push('styles')
+<style>
+    .spice-indicator {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.28rem;
+    }
+    .spice-emoji {
+        font-size: 0.98rem;
+        line-height: 1;
+        transition: opacity 0.2s ease;
+    }
+    .spice-value {
+        margin-left: 0.45rem;
+        font-size: 0.78rem;
+        font-weight: 700;
+        color: #7a6250;
+        white-space: nowrap;
+    }
+</style>
+@endpush
+
 @section('content')
 <div class="data-card">
     <div class="data-card-header">
         <h3>🍽️ All Menu Items</h3>
-        <a href="{{ route('admin.menu.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Add New Item</a>
+        <a href="{{ route('admin.menu.create') }}" class="btn btn-primary js-crud-modal" data-modal-title="Add Menu Item"><i class="fas fa-plus"></i> Add New Item</a>
     </div>
 
     <!-- Filter Tabs -->
@@ -42,9 +64,12 @@
                 <td><span class="badge badge-info">{{ $item->category }}</span></td>
                 <td><strong style="color:var(--saffron);">₹{{ $item->price }}</strong></td>
                 <td>
-                    @for($i = 1; $i <= 5; $i++)
-                        <span style="color: {{ $i <= $item->spice_level ? '#FF6B00' : '#ddd' }}">🌶️</span>
-                    @endfor
+                    <div class="spice-indicator" aria-label="Spice level {{ (int) $item->spice_level }} out of 5">
+                        @for($i = 1; $i <= 5; $i++)
+                            <span class="spice-emoji" style="opacity: {{ $i <= (int) $item->spice_level ? '1' : '0.2' }};">🌶️</span>
+                        @endfor
+                        <span class="spice-value">{{ (int) $item->spice_level }}/5</span>
+                    </div>
                 </td>
                 <td>
                     @if($item->is_available)
@@ -54,18 +79,17 @@
                     @endif
                 </td>
                 <td>
-                    <a href="{{ route('admin.menu.edit', $item->id) }}" class="btn btn-outline btn-sm"><i class="fas fa-edit"></i></a>
-                    <form action="{{ route('admin.menu.destroy', $item->id) }}" method="POST" style="display:inline" onsubmit="return confirm('Delete this item?')">
+                    <a href="{{ route('admin.menu.edit', $item->id) }}" class="btn btn-outline btn-sm js-crud-modal" data-modal-title="Edit Menu Item"><i class="fas fa-edit"></i></a>
+                    <form action="{{ route('admin.menu.destroy', $item->id) }}" method="POST" style="display:inline" class="js-crud-delete" data-confirm="Delete this menu item?" data-success="Menu item deleted.">
                         @csrf @method('DELETE')
                         <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
                     </form>
                 </td>
             </tr>
             @empty
-            <tr><td colspan="7" style="text-align:center; color:#aaa; padding:2rem;">No menu items found. <a href="{{ route('admin.menu.create') }}">Add one now →</a></td></tr>
+            <tr><td colspan="7" style="text-align:center; color:#aaa; padding:2rem;">No menu items found. <a href="{{ route('admin.menu.create') }}" class="js-crud-modal" data-modal-title="Add Menu Item">Add one now →</a></td></tr>
             @endforelse
         </tbody>
     </table>
-    </div>
 </div>
 @endsection

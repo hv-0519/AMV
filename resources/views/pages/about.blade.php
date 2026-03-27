@@ -145,6 +145,8 @@
 
     @media (max-width: 768px) {
         .story-grid { grid-template-columns: 1fr; }
+        section { padding: 3.5rem 1rem; }
+        .values-grid { grid-template-columns: 1fr; display: grid; }
         .timeline::before { left: 20px; }
         .timeline-item, .timeline-item:nth-child(even) { 
             flex-direction: column; 
@@ -156,6 +158,20 @@
         }
         .timeline-dot { left: 20px; transform: translateX(-50%); top: 1.5rem; }
         .timeline-item .timeline-content { text-align: left; }
+    }
+    @media (max-width: 480px) {
+        .story-img {
+            padding: 2rem 1.25rem;
+        }
+        .story-img .big-text {
+            font-size: 3.75rem;
+        }
+        .btn-cta,
+        .btn-cta-outline {
+            width: 100%;
+            text-align: center;
+            padding-inline: 1rem;
+        }
     }
 </style>
 @endpush
