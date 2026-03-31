@@ -10,7 +10,7 @@ WORKDIR /var/www
 COPY . .
 
 RUN composer install --no-dev --optimize-autoloader
-RUN npm install && npm run build
+RUN npm install --no-package-lock && npm run build
 
 RUN php artisan config:cache \
     && php artisan route:cache \
