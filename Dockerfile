@@ -18,4 +18,6 @@ RUN php artisan config:cache \
 
 EXPOSE 8080
 
-CMD php artisan migrate --seed --force && php artisan storage:link && php -S 0.0.0.0:8080 -t public
+ENV APP_DEBUG=true
+
+CMD php artisan migrate --seed --force && php artisan storage:link && php -S 0.0.0.0:8080 -t public 2>&1
