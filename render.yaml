@@ -10,34 +10,24 @@ services:
       - key: APP_ENV
         value: production
       - key: APP_DEBUG
-        value: false
+        value: true
       - key: APP_KEY
         generateValue: true
       - key: DB_CONNECTION
         value: mysql
       - key: DB_HOST
-        fromDatabase:
-          name: mmv-db
-          property: host
+        value: btg55vpzbpf24qdui2y1-mysql.services.clever-cloud.com
       - key: DB_PORT
-        fromDatabase:
-          name: mmv-db
-          property: port
+        value: 3306
       - key: DB_DATABASE
-        fromDatabase:
-          name: mmv-db
-          property: database
+        value: btg55vpzbpf24qdui2y1
       - key: DB_USERNAME
-        fromDatabase:
-          name: mmv-db
-          property: user
+        value: ua3vcj0hrnyoylwv
       - key: DB_PASSWORD
-        fromDatabase:
-          name: mmv-db
-          property: password
-
-databases:
-  - name: mmv-db
-    plan: free
-    databaseName: mmv_db
-    user: mmv_user
+        value: 5ZL5zvJW3mOwEKNils3G
+      - key: LOG_CHANNEL
+        value: stderr
+      - key: SESSION_DRIVER
+        value: database
+      - key: CACHE_DRIVER
+        value: database
