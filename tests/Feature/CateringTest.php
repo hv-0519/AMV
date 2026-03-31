@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use Database\Seeders\DatabaseSeeder;
+use Illuminate\Foundation\Http\Middleware\ValidateCsrfToken;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -16,6 +17,8 @@ class CateringTest extends TestCase
 
     public function test_catering_form_submission_saves_a_request_record(): void
     {
+        $this->withoutMiddleware(ValidateCsrfToken::class);
+
         $response = $this->post('/catering', [
             'name' => 'Event Planner',
             'email' => 'planner@example.com',
