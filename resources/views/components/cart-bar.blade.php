@@ -1,8 +1,6 @@
 {{-- resources/views/components/cart-bar.blade.php --}}
 {{-- Include this in layouts/app.blade.php just before </body> --}}
-{{-- Only show for logged-in users --}}
 
-@auth
 @php $cart = app(\App\Services\Cart::class); @endphp
 <style>
     /* ── Cart Bar ── */
@@ -302,6 +300,64 @@
 
 <script>
 const CSRF = document.querySelector('meta[name="csrf-token"]')?.content;
+const CART_CATEGORY_ICONS = {
+    Misal: '🍲',
+    Vadapav: '🥙',
+    Poha: '🌾',
+    Beverages: '🥛',
+    Thali: '🍱',
+    Snacks: '🌮',
+    Desserts: '🍮',
+    Combos: '🎁',
+};
+
+function escapeHtml(value) {
+    return String(value ?? '')
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
+}
+
+function renderCartItems(items) {
+    const cartItemsList = document.getElementById('cartItemsList');
+
+    if (!cartItemsList) {
+        return;
+    }
+
+    if (!items.length) {
+        cartItemsList.innerHTML = '<div class="cart-item-row"><div class="cart-item-info"><div class="cart-item-name">Your cart is empty.</div><div class="cart-item-price">Add something delicious to get started.</div></div></div>';
+        return;
+    }
+
+    cartItemsList.innerHTML = items.map((item) => {
+        const imageHtml = item.image
+            ? `<img src="/storage/${encodeURI(item.image)}" alt="${escapeHtml(item.name)}">`
+            : escapeHtml(CART_CATEGORY_ICONS[item.category] ?? '🍽️');
+
+        return `
+            <div class="cart-item-row" id="cart-item-${item.id}">
+                <div class="cart-item-img">
+                    ${imageHtml}
+                </div>
+                <div class="cart-item-info">
+                    <div class="cart-item-name">${escapeHtml(item.name)}</div>
+                    <div class="cart-item-price">₹${Number(item.price).toFixed(2)}</div>
+                </div>
+                <div class="qty-control">
+                    <button class="qty-btn" onclick="updateQty(${item.id}, -1, event)">−</button>
+                    <span class="qty-num" id="qty-${item.id}">${item.quantity}</span>
+                    <button class="qty-btn" onclick="updateQty(${item.id}, 1, event)">+</button>
+                </div>
+                <div class="cart-item-subtotal" id="subtotal-${item.id}">
+                    ₹${Number(item.subtotal).toFixed(2)}
+                </div>
+            </div>
+        `;
+    }).join('');
+}
 
 // ── Toggle drawer ─────────────────────────────────────────────
 function toggleCartDrawer() {
@@ -318,11 +374,21 @@ async function updateQty(itemId, delta, e) {
     try {
         const res = await fetch('/cart/update', {
             method: 'PATCH',
-            headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': CSRF },
+            credentials: 'same-origin',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': CSRF,
+                'X-Requested-With': 'XMLHttpRequest',
+            },
             body: JSON.stringify({ menu_item_id: itemId, quantity: newQty }),
         });
         const data = await res.json();
-        if (!res.ok) return;
+        if (!res.ok) {
+            console.error('Cart update failed', data);
+            return;
+        }
+
         refreshCartUI(data.cart, itemId, newQty);
     } catch (err) {
         console.error(err);
@@ -331,10 +397,6 @@ async function updateQty(itemId, delta, e) {
 
 // ── Add to cart (called from menu page) ──────────────────────
 async function addToCart(itemId, btn) {
-    if (!{{ auth()->check() ? 'true' : 'false' }}) {
-        window.location.href = '/login';
-        return;
-    }
     const original = btn.textContent;
     btn.disabled = true;
     btn.textContent = '✓ Added';
@@ -342,11 +404,22 @@ async function addToCart(itemId, btn) {
     try {
         const res = await fetch('/cart/add', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': CSRF },
+            credentials: 'same-origin',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': CSRF,
+                'X-Requested-With': 'XMLHttpRequest',
+            },
             body: JSON.stringify({ menu_item_id: itemId, quantity: 1 }),
         });
         const data = await res.json();
-        if (!res.ok) { btn.textContent = original; btn.disabled = false; return; }
+        if (!res.ok) {
+            console.error('Add to cart failed', data);
+            btn.textContent = original;
+            btn.disabled = false;
+            return;
+        }
 
         refreshCartUI(data.cart, null, null);
         refreshCartItem(data.cart, itemId);
@@ -356,6 +429,7 @@ async function addToCart(itemId, btn) {
 
         setTimeout(() => { btn.textContent = original; btn.disabled = false; }, 1200);
     } catch (err) {
+        console.error('Add to cart request failed', err);
         btn.textContent = original;
         btn.disabled = false;
     }
@@ -368,6 +442,7 @@ function refreshCartUI(cart, changedItemId, newQty) {
     document.getElementById('cartItemLabel').textContent   = cart.count + (cart.count === 1 ? ' item' : ' items');
     document.getElementById('cartBarTotal').textContent    = '₹' + cart.total.toFixed(2);
     document.getElementById('cartDrawerTotal').textContent = '₹' + cart.total.toFixed(2);
+    renderCartItems(cart.items);
 
     // Update navbar badge
     const badge = document.getElementById('cartNavBadge');
@@ -379,18 +454,8 @@ function refreshCartUI(cart, changedItemId, newQty) {
     // Hide bar if empty
     document.getElementById('cartBar').classList.toggle('has-items', cart.count > 0);
 
-    // Update specific item row
-    if (changedItemId !== null) {
-        if (newQty <= 0) {
-            document.getElementById('cart-item-' + changedItemId)?.remove();
-        } else {
-            const qtyEl      = document.getElementById('qty-' + changedItemId);
-            const subtotalEl = document.getElementById('subtotal-' + changedItemId);
-            if (qtyEl) qtyEl.textContent = newQty;
-            // Find updated subtotal from cart items
-            const item = cart.items.find(i => i.id === changedItemId);
-            if (subtotalEl && item) subtotalEl.textContent = '₹' + item.subtotal.toFixed(2);
-        }
+    if (changedItemId !== null && newQty <= 0 && !cart.count) {
+        document.getElementById('cartBar').classList.remove('drawer-open');
     }
 }
 
@@ -401,4 +466,3 @@ function refreshCartItem(cart, itemId) {
     if (qtyDisplay) qtyDisplay.textContent = item ? item.quantity : 0;
 }
 </script>
-@endauth

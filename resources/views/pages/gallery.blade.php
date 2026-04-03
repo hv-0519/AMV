@@ -366,7 +366,7 @@
     {{-- HERO --}}
     <div class="gallery-hero">
         <h1>Our <span>Gallery</span> 📸</h1>
-        <p>A visual feast of authentic Maharashtrian street food — warning: severe cravings ahead! 🌶️</p>
+        <p>A visual feast of authentic Ahamdabadi street food — warning: severe cravings ahead! 🌶️</p>
     </div>
 
     <div class="gallery-page">

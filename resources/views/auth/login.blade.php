@@ -115,7 +115,7 @@
         <div class="auth-left">
             <div class="auth-left-emoji">🍲</div>
             <h2>Welcome Back!</h2>
-            <p>Sign in to order your favourite Maharashtrian street food. Dil Bole Wow!</p>
+            <p>Sign in to order your favourite Ahamdabadi street food. Dil Bole Wow!</p>
         </div>
         <div class="auth-right">
             <h1>Sign In</h1>

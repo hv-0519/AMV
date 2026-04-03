@@ -81,12 +81,12 @@
         <span class="section-tag">Events We Cover</span>
         <h2 class="section-title">Perfect for Every <span>Occasion</span></h2>
         <div class="offers-grid">
-            <div class="offer-card"><div class="offer-icon">💍</div><h3>Weddings</h3><p>Make your special day even more memorable with authentic Maharashtrian flavors.</p></div>
+            <div class="offer-card"><div class="offer-icon">💍</div><h3>Weddings</h3><p>Make your special day even more memorable with authentic Ahamdabadi flavors.</p></div>
             <div class="offer-card"><div class="offer-icon">🏢</div><h3>Corporate Events</h3><p>Impress your team and clients with a unique street food catering experience.</p></div>
             <div class="offer-card"><div class="offer-icon">🎊</div><h3>Birthday Parties</h3><p>Celebrate in style with live counters and unlimited servings of your favourites.</p></div>
             <div class="offer-card"><div class="offer-icon">🎆</div><h3>Festivals</h3><p>Make every festival more vibrant with the taste and aroma of AMV's dishes.</p></div>
             <div class="offer-card"><div class="offer-icon">🎓</div><h3>College Events</h3><p>Food that gets the crowd buzzing — ideal for fests, fairs and alumni gatherings.</p></div>
-            <div class="offer-card"><div class="offer-icon">🤝</div><h3>Private Gatherings</h3><p>Intimate family get-togethers made special with home-style Maharashtrian cooking.</p></div>
+            <div class="offer-card"><div class="offer-icon">🤝</div><h3>Private Gatherings</h3><p>Intimate family get-togethers made special with home-style Ahamdabadi cooking.</p></div>
         </div>
     </div>
 </section>

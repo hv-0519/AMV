@@ -97,6 +97,134 @@
     }
     .conf-card-body { padding: 1.25rem 1.4rem; }
 
+    .status-live-card {
+        background: linear-gradient(145deg, #fffaf5, #ffffff);
+        border: 1px solid #f1dfd0;
+        box-shadow: 0 14px 34px rgba(42, 16, 0, 0.07);
+    }
+
+    .status-live-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.4fr) auto;
+        gap: 1rem;
+        align-items: center;
+    }
+
+    .status-live-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #a97753;
+        margin-bottom: 0.6rem;
+    }
+
+    .status-live-main {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        align-items: center;
+        margin-bottom: 0.65rem;
+    }
+
+    .status-live-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        padding: 0.58rem 0.95rem;
+        border-radius: 999px;
+        font-size: 0.86rem;
+        font-weight: 700;
+        border: 1px solid transparent;
+    }
+
+    .status-live-badge.badge-pending {
+        background: #fff4db;
+        color: #c87500;
+        border-color: #ffe2a4;
+    }
+
+    .status-live-badge.badge-processing {
+        background: #e8f2ff;
+        color: #1559c0;
+        border-color: #c9dcff;
+    }
+
+    .status-live-badge.badge-ready {
+        background: #eaf8ea;
+        color: #237b37;
+        border-color: #cfead1;
+    }
+
+    .status-live-badge.badge-completed {
+        background: #e9f8ef;
+        color: #16683a;
+        border-color: #c6e8d3;
+    }
+
+    .status-live-badge.badge-cancelled {
+        background: #fdecec;
+        color: #bb2f2f;
+        border-color: #f7cccc;
+    }
+
+    .status-live-copy {
+        font-size: 0.9rem;
+        color: #7a6250;
+        line-height: 1.7;
+        margin: 0;
+    }
+
+    .status-live-tools {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        align-items: stretch;
+        min-width: 210px;
+    }
+
+    .status-refresh-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.55rem;
+        border: none;
+        border-radius: 14px;
+        background: linear-gradient(135deg, #ff7a1a, #ff5e00);
+        color: #fff;
+        padding: 0.82rem 1rem;
+        font-size: 0.88rem;
+        font-weight: 700;
+        font-family: 'Poppins', sans-serif;
+        cursor: pointer;
+        transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+        box-shadow: 0 14px 24px rgba(255, 107, 0, 0.18);
+    }
+
+    .status-refresh-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 16px 28px rgba(255, 107, 0, 0.24);
+    }
+
+    .status-refresh-btn:disabled {
+        opacity: 0.7;
+        cursor: wait;
+        transform: none;
+    }
+
+    .status-live-meta {
+        font-size: 0.78rem;
+        color: #a48770;
+        text-align: center;
+    }
+
+    .status-live-meta strong {
+        color: #7b583d;
+    }
+
     /* ── Order meta row ── */
     .order-meta-grid {
         display: grid;
@@ -124,6 +252,10 @@
         border-radius: 20px;
     }
     .badge-pending  { background: #FFF8E1; color: #F57F17; }
+    .badge-processing { background: #E3F2FD; color: #1565C0; }
+    .badge-ready { background: #E8F5E9; color: #2E7D32; }
+    .badge-completed { background: #E8F5E9; color: #1B5E20; }
+    .badge-cancelled { background: #FDECEC; color: #C62828; }
     .badge-paid     { background: #E8F5E9; color: #2E7D32; }
     .badge-cash     { background: #E3F2FD; color: #1565C0; }
     .badge-upi      { background: #F3E5F5; color: #6A1B9A; }
@@ -192,124 +324,6 @@
     }
     .totals-row.grand span:last-child { color: var(--saffron); }
 
-    /* ── Recommendation widget ── */
-    .rec-section {
-        margin-top: 2rem;
-    }
-    .rec-header {
-        display: flex;
-        align-items: center;
-        gap: 0.6rem;
-        margin-bottom: 1.25rem;
-    }
-    .rec-header h2 {
-        font-family: 'Playfair Display', serif;
-        font-size: 1.4rem;
-        font-weight: 900;
-        color: var(--dark);
-    }
-    .rec-header h2 span { color: var(--saffron); }
-    .rec-header p {
-        font-size: 0.82rem;
-        color: #aaa;
-        margin-top: 0.15rem;
-    }
-
-    .rec-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-        gap: 1rem;
-    }
-    .rec-card {
-        background: #fff;
-        border-radius: 16px;
-        border: 1px solid #f0ebe3;
-        box-shadow: 0 2px 14px rgba(0,0,0,0.06);
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        transition: transform 0.25s, box-shadow 0.25s;
-    }
-    .rec-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 10px 28px rgba(255,107,0,0.13);
-    }
-    .rec-card-img {
-        height: 150px;
-        background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 3.5rem;
-        position: relative;
-        overflow: hidden;
-        flex-shrink: 0;
-    }
-    .rec-card-img img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-    .rec-tag {
-        position: absolute;
-        top: 8px;
-        left: 8px;
-        background: rgba(26,10,0,0.75);
-        color: rgba(255,255,255,0.9);
-        font-size: 0.65rem;
-        font-weight: 700;
-        padding: 0.18rem 0.55rem;
-        border-radius: 6px;
-        letter-spacing: 0.04em;
-        backdrop-filter: blur(4px);
-    }
-    .rec-card-body {
-        padding: 0.9rem 1rem 1rem;
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-    }
-    .rec-card-name {
-        font-weight: 700;
-        font-size: 0.9rem;
-        color: var(--dark);
-        margin-bottom: 0.2rem;
-    }
-    .rec-card-desc {
-        font-size: 0.77rem;
-        color: #aaa;
-        line-height: 1.5;
-        flex: 1;
-        margin-bottom: 0.75rem;
-    }
-    .rec-card-footer {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 0.5rem;
-        margin-top: auto;
-    }
-    .rec-price {
-        font-size: 1rem;
-        font-weight: 800;
-        color: var(--saffron);
-    }
-    .btn-rec-order {
-        background: var(--saffron);
-        color: #fff;
-        border: none;
-        padding: 0.4rem 0.9rem;
-        border-radius: 20px;
-        font-size: 0.78rem;
-        font-weight: 700;
-        text-decoration: none;
-        font-family: 'Poppins', sans-serif;
-        white-space: nowrap;
-        transition: background 0.2s, transform 0.15s;
-        display: inline-block;
-    }
-    .btn-rec-order:hover { background: var(--deep-red); transform: translateY(-1px); }
-
     /* ── CTA row ── */
     .cta-row {
         display: flex;
@@ -348,16 +362,16 @@
         .confirmation-wrap { padding: 1.5rem 1rem 2.5rem; }
         .success-banner { padding: 2rem 1.25rem; border-radius: 16px; }
         .order-meta-grid { grid-template-columns: 1fr 1fr; }
-        .rec-grid { grid-template-columns: 1fr; }
         .cta-row { flex-direction: column; }
         .btn-cta { justify-content: center; }
+        .status-live-grid { grid-template-columns: 1fr; }
+        .status-live-tools { min-width: 0; }
     }
 </style>
 @endpush
 
 @section('content')
 @php
-    $icons = ['Misal'=>'🍲','Vadapav'=>'🥙','Poha'=>'🌾','Beverages'=>'🥛','Thali'=>'🍱','Snacks'=>'🌮','Desserts'=>'🍮','Combos'=>'🎁'];
     $subtotal = $order->total_amount - $order->tax_amount;
 @endphp
 
@@ -366,9 +380,42 @@
     {{-- Success Banner --}}
     <div class="success-banner">
         <div class="success-checkmark">✅</div>
-        <h1>Order <span>Confirmed!</span></h1>
-        <p>Your food is being prepared with love 🧡 We'll have it ready soon.</p>
+        <h1 id="orderStatusHeadline">Order <span>Confirmed!</span></h1>
+        <p id="orderStatusMessage">Your food is being prepared with love 🧡 We'll have it ready soon.</p>
         <span class="order-id-pill">Order #{{ $order->id }}</span>
+    </div>
+
+    <div class="conf-card status-live-card">
+        <div class="conf-card-header">
+            <span class="header-icon">📡</span> Live Order Status
+        </div>
+        <div class="conf-card-body">
+            <div class="status-live-grid">
+                <div>
+                    <div class="status-live-kicker">
+                        <span id="statusPulseDot">●</span>
+                        Real-time tracking
+                    </div>
+                    <div class="status-live-main">
+                        <span class="status-live-badge badge-{{ $order->status }}" id="orderStatusBadge">
+                            <span>Current Status</span>
+                            <strong id="orderStatusLabel">{{ ucfirst($order->status) }}</strong>
+                        </span>
+                    </div>
+                    <p class="status-live-copy" id="orderStatusSummary">We are watching for updates from the AMV team so you can track progress without refreshing the page.</p>
+                </div>
+                <div class="status-live-tools">
+                    <button type="button" class="status-refresh-btn" id="refreshOrderStatusBtn">
+                        <i class="fas fa-rotate-right"></i>
+                        Check Latest Status
+                    </button>
+                    <div class="status-live-meta">
+                        Auto-refresh every <strong>5 seconds</strong><br>
+                        Last checked: <strong id="orderStatusCheckedAt">just now</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     {{-- Order Meta --}}
@@ -397,7 +444,7 @@
                 <div class="meta-item">
                     <div class="meta-label">Status</div>
                     <div class="meta-value">
-                        <span class="badge badge-{{ $order->payment_status }}">{{ ucfirst($order->payment_status) }}</span>
+                        <span class="badge badge-{{ $order->status }}" id="orderStatusMetaBadge">{{ ucfirst($order->status) }}</span>
                     </div>
                 </div>
                 @if($order->delivery_address)
@@ -457,44 +504,6 @@
             </div>
         </div>
     </div>
-
-    {{-- Recommendation Widget --}}
-    @if($recommended->isNotEmpty())
-    <div class="rec-section">
-        <div class="rec-header">
-            <div>
-                <h2>People Also <span>Love</span> 🤤</h2>
-                <p>Others who ordered this also enjoyed these dishes</p>
-            </div>
-        </div>
-
-        <div class="rec-grid">
-            @foreach($recommended as $item)
-            <div class="rec-card">
-                <div class="rec-card-img">
-                    @if($item->image)
-                        <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}">
-                    @else
-                        {{ $icons[$item->category] ?? '🍽️' }}
-                    @endif
-                    <span class="rec-tag">{{ $item->category }}</span>
-                </div>
-                <div class="rec-card-body">
-                    <div class="rec-card-name">{{ $item->name }}</div>
-                    <p class="rec-card-desc">{{ Str::limit($item->description, 70) }}</p>
-                    <div class="rec-card-footer">
-                        <span class="rec-price">₹{{ number_format($item->price, 2) }}</span>
-                        <a href="{{ url('/order') }}?item={{ $item->id }}" class="btn-rec-order">
-                            Order Now
-                        </a>
-                    </div>
-                </div>
-            </div>
-            @endforeach
-        </div>
-    </div>
-    @endif
-
     {{-- CTA row --}}
     <div class="cta-row">
         <a href="{{ url('/order') }}" class="btn-cta btn-cta-primary">
@@ -510,3 +519,116 @@
 
 </div>
 @endsection
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const statusUrl = @json(route('order.status', $order));
+    const statusBadge = document.getElementById('orderStatusBadge');
+    const statusMetaBadge = document.getElementById('orderStatusMetaBadge');
+    const statusLabel = document.getElementById('orderStatusLabel');
+    const statusHeadline = document.getElementById('orderStatusHeadline');
+    const statusMessage = document.getElementById('orderStatusMessage');
+    const statusSummary = document.getElementById('orderStatusSummary');
+    const refreshButton = document.getElementById('refreshOrderStatusBtn');
+    const checkedAt = document.getElementById('orderStatusCheckedAt');
+    const knownStatusClasses = ['badge-pending', 'badge-processing', 'badge-ready', 'badge-completed', 'badge-cancelled'];
+
+    const statusContentMap = {
+        pending: {
+            title: 'Order <span>Confirmed!</span>',
+            message: 'Your order is waiting in our queue. We will start preparing it shortly.',
+            summary: 'Your order is placed successfully and is waiting for the AMV team to begin preparation.',
+        },
+        processing: {
+            title: 'Order <span>Processing</span>',
+            message: 'Our kitchen is preparing your order right now.',
+            summary: 'Your food is currently being prepared in the AMV kitchen.',
+        },
+        ready: {
+            title: 'Order Is <span>Ready!</span>',
+            message: 'Great news! Your order is ready for pickup or serving.',
+            summary: 'Your order is ready. Please head to the counter or wait for final handoff.',
+        },
+        completed: {
+            title: 'Order <span>Completed</span>',
+            message: 'Your order has been completed. Thank you for ordering from AMV.',
+            summary: 'This order has been completed successfully. Thank you for choosing AMV.',
+        },
+        cancelled: {
+            title: 'Order <span>Cancelled</span>',
+            message: 'This order has been cancelled. Please contact AMV if you need any help.',
+            summary: 'This order is marked as cancelled. Contact AMV if you need support.',
+        },
+    };
+
+    function markChecked() {
+        if (!checkedAt) {
+            return;
+        }
+
+        checkedAt.textContent = new Date().toLocaleTimeString([], {
+            hour: 'numeric',
+            minute: '2-digit',
+            second: '2-digit',
+        }).toLowerCase();
+    }
+
+    function applyStatus(status) {
+        if (!statusBadge || !statusMetaBadge || !statusLabel || !statusHeadline || !statusMessage || !statusSummary || !statusContentMap[status]) {
+            return;
+        }
+
+        statusBadge.classList.remove(...knownStatusClasses);
+        statusMetaBadge.classList.remove(...knownStatusClasses);
+        statusBadge.classList.add('badge-' + status);
+        statusMetaBadge.classList.add('badge-' + status);
+        statusLabel.textContent = status.charAt(0).toUpperCase() + status.slice(1);
+        statusMetaBadge.textContent = status.charAt(0).toUpperCase() + status.slice(1);
+        statusHeadline.innerHTML = statusContentMap[status].title;
+        statusMessage.textContent = statusContentMap[status].message;
+        statusSummary.textContent = statusContentMap[status].summary;
+    }
+
+    async function refreshOrderStatus(triggeredByButton = false) {
+        try {
+            if (refreshButton && triggeredByButton) {
+                refreshButton.disabled = true;
+                refreshButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Checking...';
+            }
+
+            const response = await fetch(statusUrl, {
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest',
+                },
+                credentials: 'same-origin',
+                cache: 'no-store',
+            });
+
+            if (!response.ok) {
+                return;
+            }
+
+            const payload = await response.json();
+            applyStatus(payload.data?.status);
+            markChecked();
+        } catch (error) {
+            console.error('Order status refresh failed', error);
+        } finally {
+            if (refreshButton) {
+                refreshButton.disabled = false;
+                refreshButton.innerHTML = '<i class="fas fa-rotate-right"></i> Check Latest Status';
+            }
+        }
+    }
+
+    refreshButton?.addEventListener('click', function () {
+        refreshOrderStatus(true);
+    });
+
+    refreshOrderStatus();
+    window.setInterval(refreshOrderStatus, 5000);
+});
+</script>
+@endpush

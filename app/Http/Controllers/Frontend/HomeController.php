@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\MenuItem;
-use App\Services\RecommendationService;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -12,11 +11,12 @@ class HomeController extends Controller
     public function index()
     {
         $featured_items = MenuItem::available()->featured()->take(8)->get();
-        $bestsellers    = MenuItem::available()->bestsellers()->take(4)->get();
+        $bestsellers = MenuItem::available()->bestsellers()->take(4)->get();
+
         return view('pages.home', compact('featured_items', 'bestsellers'));
     }
 
-    public function menu(Request $request, RecommendationService $recommendations)
+    public function menu(Request $request)
     {
         $query = MenuItem::available();
 
@@ -25,17 +25,13 @@ class HomeController extends Controller
         }
 
         if ($request->filled('search')) {
-            $query->where('name', 'like', '%' . $request->search . '%');
+            $query->where('name', 'like', '%'.$request->search.'%');
         }
 
         $menu_items = $query->get()->groupBy('category');
         $categories = MenuItem::available()->distinct()->pluck('category');
 
-        // Bulk-load top-1 pairing per item — only 2 queries, regardless of menu size
-        $allIds  = $menu_items->flatten()->pluck('id')->toArray();
-        $pairMap = $recommendations->forMany($allIds);   // [ item_id => MenuItem|null ]
-
-        return view('pages.menu', compact('menu_items', 'categories', 'pairMap'));
+        return view('pages.menu', compact('menu_items', 'categories'));
     }
 
     public function about()
@@ -51,9 +47,9 @@ class HomeController extends Controller
     public function sendContact(Request $request)
     {
         $request->validate([
-            'name'    => 'required|string|max:100',
-            'email'   => 'required|email',
-            'phone'   => 'nullable|string|max:20',
+            'name' => 'required|string|max:100',
+            'email' => 'required|email',
+            'phone' => 'nullable|string|max:20',
             'message' => 'required|string|max:1000',
         ]);
 
@@ -70,14 +66,14 @@ class HomeController extends Controller
     public function submitCatering(Request $request)
     {
         $validated = $request->validate([
-            'name'         => 'required|string|max:100',
-            'email'        => 'required|email',
-            'phone'        => 'required|string|max:20',
-            'event_date'   => 'required|date|after:today',
-            'event_type'   => 'required|string',
+            'name' => 'required|string|max:100',
+            'email' => 'required|email',
+            'phone' => 'required|string|max:20',
+            'event_date' => 'required|date|after:today',
+            'event_type' => 'required|string',
             'guests_count' => 'required|integer|min:10',
-            'location'     => 'required|string|max:300',
-            'message'      => 'nullable|string',
+            'location' => 'required|string|max:300',
+            'message' => 'nullable|string',
         ]);
 
         \App\Models\CateringRequest::create($validated);
@@ -95,13 +91,13 @@ class HomeController extends Controller
     public function submitFranchise(Request $request)
     {
         $validated = $request->validate([
-            'name'                => 'required|string|max:100',
-            'email'               => 'required|email',
-            'phone'               => 'required|string|max:20',
-            'city'                => 'required|string|max:100',
-            'state'               => 'required|string|max:100',
+            'name' => 'required|string|max:100',
+            'email' => 'required|email',
+            'phone' => 'required|string|max:20',
+            'city' => 'required|string|max:100',
+            'state' => 'required|string|max:100',
             'investment_capacity' => 'required|string',
-            'message'             => 'nullable|string',
+            'message' => 'nullable|string',
         ]);
 
         \App\Models\FranchiseEnquiry::create($validated);
@@ -114,6 +110,7 @@ class HomeController extends Controller
     public function gallery()
     {
         $galleryImages = \App\Models\GalleryImage::orderBy('sort_order')->orderBy('id', 'desc')->get();
+
         return view('pages.gallery', compact('galleryImages'));
     }
 

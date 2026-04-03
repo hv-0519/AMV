@@ -396,6 +396,10 @@
     @stack('styles')
 </head>
 <body>
+@php
+    $showTrackOrderLink = (auth()->check() && auth()->user()->role === 'customer')
+        || session()->has('last_tracked_order_id');
+@endphp
 
 <nav class="navbar">
     <div class="navbar-inner">
@@ -416,6 +420,9 @@
             <li><a href="{{ url('/catering') }}"  class="{{ request()->is('catering')  ? 'active' : '' }}">Catering</a></li>
             <li><a href="{{ url('/franchise') }}" class="{{ request()->is('franchise') ? 'active' : '' }}">Franchise</a></li>
             <li><a href="{{ url('/contact') }}"   class="{{ request()->is('contact')   ? 'active' : '' }}">Contact</a></li>
+            @if($showTrackOrderLink)
+                <li><a href="{{ route('order.latest') }}" class="{{ request()->routeIs('order.confirmation') || request()->routeIs('order.latest') ? 'active' : '' }}">Track Order</a></li>
+            @endif
             @auth
                 @if(auth()->user()->role === 'admin')
                     <li><a href="{{ route('admin.dashboard') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
@@ -432,15 +439,12 @@
             <li><a href="{{ route('checkout') }}" class="btn-nav-order"><i class="fas fa-shopping-bag"></i>&nbsp;Order Now</a></li>
         </ul>
 
-        {{-- Cart icon (logged in users only) --}}
-        @auth
         <a href="{{ route('checkout') }}" class="cart-nav-link" aria-label="Your cart" title="View Cart">
             <i class="fas fa-shopping-cart" style="font-size:0.95rem;"></i>
             <span id="cartNavBadge" class="cart-nav-badge {{ app(\App\Services\Cart::class)->count() > 0 ? 'visible' : '' }}">
                 {{ app(\App\Services\Cart::class)->count() ?: '' }}
             </span>
         </a>
-        @endauth
 
         @auth
             <form id="navbar-logout-form" method="POST" action="{{ route('logout') }}" style="display:none">@csrf</form>
@@ -631,6 +635,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const publicLoaderModal = document.getElementById('publicLoaderModal');
     const publicLoaderTitle = document.getElementById('publicLoaderTitle');
     const publicLoaderText  = document.getElementById('publicLoaderText');
+    const orderTrackingUrl  = @json(route('order.latest'));
 
     const flashModalMap = {
         'welcome-back':      { title: 'Welcome Back!',               icon: 'fa-hand-sparkles',      iconClass: '',           button: "Let's Go" },
@@ -641,6 +646,7 @@ document.addEventListener('DOMContentLoaded', function () {
         'franchise-success': { title: 'Enquiry Received',            icon: 'fa-store',               iconClass: 'is-success', button: 'Continue' },
         'order-success':     { title: 'Order Confirmed',             icon: 'fa-bag-shopping',        iconClass: 'is-success', button: 'Track Order' },
         'order-error':       { title: 'Order Could Not Be Placed',   icon: 'fa-circle-exclamation',  iconClass: 'is-error',   button: 'Try Again' },
+        'empty-cart':        { title: 'Oops!!!',                     icon: 'fa-cart-shopping',       iconClass: 'is-warning', button: 'Continue' },
         'error':             { title: 'Something Went Wrong',        icon: 'fa-circle-exclamation',  iconClass: 'is-error',   button: 'Close' },
         'success':           { title: 'Success',                     icon: 'fa-circle-check',        iconClass: 'is-success', button: 'Continue' },
     };
@@ -663,7 +669,16 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     if (flashPayload) { configureFlashModal(flashPayload); openAuthModal('flashMessageModal'); }
-    if (flashModalClose) flashModalClose.addEventListener('click', function () { closeAuthModal('flashMessageModal'); });
+    if (flashModalClose) {
+        flashModalClose.addEventListener('click', function () {
+            if (flashPayload?.kind === 'order-success') {
+                window.location.href = orderTrackingUrl;
+                return;
+            }
+
+            closeAuthModal('flashMessageModal');
+        });
+    }
 
     const logoutTrigger    = document.getElementById('logoutTrigger');
     const logoutConfirmBtn = document.getElementById('logoutConfirmBtn');

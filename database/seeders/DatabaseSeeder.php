@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
-use App\Models\User;
 use App\Models\MenuItem;
 use App\Models\Stock;
+use App\Models\User;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,10 +18,10 @@ class DatabaseSeeder extends Seeder
         User::firstOrCreate(
             ['email' => 'admin@AMV.com'],
             [
-                'name'     => 'AMV Admin',
-                'phone'    => '+91 9876543210',
+                'name' => 'AMV Admin',
+                'phone' => '+91 9876543210',
                 'password' => Hash::make('admin@123'),
-                'role'     => 'admin',
+                'role' => 'admin',
             ]
         );
 
@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
         $menu_items = [
             // Misal
             ['name' => 'Amdavadi Misal Pav', 'category' => 'Misal', 'description' => 'Fiery sprouted moth bean curry topped with farsan, onion & coriander, served with soft pav', 'price' => 120, 'spice_level' => 4, 'is_bestseller' => true, 'is_featured' => true, 'ingredients' => 'Sprouted moth beans, Farsan, Pav, Onions, Coriander, Lime'],
-            ['name' => 'Ulta Misal', 'category' => 'Misal', 'description' => 'Misal with pav dipped in the spicy gravy — a unique Maharashtrian twist', 'price' => 130, 'spice_level' => 5, 'is_bestseller' => false, 'is_featured' => true, 'ingredients' => 'Sprouted beans, Spice gravy, Pav'],
+            ['name' => 'Ulta Misal', 'category' => 'Misal', 'description' => 'Misal with pav dipped in the spicy gravy — a unique Ahamdabadi twist', 'price' => 130, 'spice_level' => 5, 'is_bestseller' => false, 'is_featured' => true, 'ingredients' => 'Sprouted beans, Spice gravy, Pav'],
             ['name' => 'Farali Misal', 'category' => 'Misal', 'description' => 'Festival-friendly misal with sabudana and potato, no onion-garlic', 'price' => 140, 'spice_level' => 2, 'is_bestseller' => false, 'is_featured' => false, 'ingredients' => 'Sabudana, Potato, Farsan'],
             ['name' => 'Jain Misal Pav', 'category' => 'Misal', 'description' => 'Jain-friendly misal with no underground vegetables', 'price' => 130, 'spice_level' => 3, 'is_bestseller' => false, 'is_featured' => false, 'ingredients' => 'Sprouted beans, Jain spices, Pav'],
             ['name' => 'AMV Spl Misal Thali', 'category' => 'Thali', 'description' => 'Complete thali with misal, poha, sabudana kheer, and chaas', 'price' => 220, 'spice_level' => 3, 'is_bestseller' => true, 'is_featured' => true, 'ingredients' => 'Misal, Poha, Kheer, Chaas, Pav'],

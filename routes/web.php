@@ -6,11 +6,12 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FranchiseController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\OrderController;
-use App\Http\Controllers\Admin\PairingsController;
 use App\Http\Controllers\Admin\SiteImageController;
 use App\Http\Controllers\Admin\StockController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\NewPasswordController;
+use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\HomeController;
@@ -34,11 +35,13 @@ Route::get('/gallery', [HomeController::class, 'gallery'])->name('gallery');
 Route::get('/careers', [HomeController::class, 'careers'])->name('careers');
 Route::get('/order', [FrontOrderController::class, 'index'])->name('order.index');
 Route::post('/order', [FrontOrderController::class, 'store'])->name('order.store');
+Route::get('/order/track', [FrontOrderController::class, 'latest'])->name('order.latest');
 
 // Order confirmation (kept for backwards compatibility)
 Route::get('/order/confirmation/{order}', [FrontOrderController::class, 'confirmation'])->name('order.confirmation');
+Route::get('/order/confirmation/{order}/status', [FrontOrderController::class, 'status'])->name('order.status');
 
-// Cart (auth required — handled inside controller)
+// Cart
 Route::prefix('cart')->name('cart.')->group(function () {
     Route::get('/', [CartController::class, 'index'])->name('index');
     Route::post('/add', [CartController::class, 'add'])->name('add');
@@ -47,7 +50,7 @@ Route::prefix('cart')->name('cart.')->group(function () {
     Route::delete('/clear', [CartController::class, 'clear'])->name('clear');
 });
 
-// Checkout (auth required — handled inside controller)
+// Checkout
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 
@@ -60,6 +63,17 @@ Route::middleware('guest')->group(function () {
     Route::post('/login', [AuthController::class, 'login']);
     Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
     Route::post('/register', [AuthController::class, 'register']);
+    Route::get('/forgot-password', [PasswordResetLinkController::class, 'create'])
+        ->name('password.request');
+
+    Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])
+        ->name('password.email');
+
+    Route::get('/reset-password/{token}', [NewPasswordController::class, 'create'])
+        ->name('password.reset');
+
+    Route::post('/reset-password', [NewPasswordController::class, 'store'])
+        ->name('password.store');
 });
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
@@ -69,15 +83,6 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middl
 // =============================================
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
-
-    // Pairings (admin only)
-    Route::middleware('admin_only')->group(function () {
-        Route::get('pairings', [PairingsController::class, 'index'])->name('pairings.index');
-        Route::post('pairings', [PairingsController::class, 'store'])->name('pairings.store');
-        Route::patch('pairings/{pairing}/toggle', [PairingsController::class, 'toggle'])->name('pairings.toggle');
-        Route::delete('pairings/{pairing}', [PairingsController::class, 'destroy'])->name('pairings.destroy');
-        Route::post('pairings/reorder', [PairingsController::class, 'reorder'])->name('pairings.reorder');
-    });
 
     // Dashboard (admin only)
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard')->middleware('admin_only');

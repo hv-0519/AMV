@@ -929,9 +929,6 @@
             <a href="{{ url('/') }}">
                 <i class="fas fa-globe"></i> View Website
             </a>
-            <a href="{{ route('admin.pairings.index') }}" class="{{ request()->routeIs('admin.pairings.*') ? 'active' : '' }}">
-                <i class="fas fa-link"></i> Recommendations
-            </a>
             <a href="{{ route('logout') }}" id="adminLogoutTrigger">
                 <i class="fas fa-sign-out-alt"></i> Logout
             </a>

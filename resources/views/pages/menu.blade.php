@@ -392,36 +392,6 @@
         flex: 1;
     }
 
-    /* ── Pairing tag ── */
-    .pairing-tag {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.35rem;
-        font-size: 0.72rem;
-        font-weight: 600;
-        color: #7a6250;
-        background: #FFF3E0;
-        border: 1px solid rgba(255, 107, 0, 0.18);
-        border-radius: 20px;
-        padding: 0.22rem 0.65rem;
-        margin-bottom: 0.75rem;
-        width: fit-content;
-        max-width: 100%;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-    .pairing-tag .pair-emoji {
-        font-size: 0.8rem;
-        flex-shrink: 0;
-    }
-
-    .pairing-tag .pair-label {
-        color: #b08060;
-        font-weight: 500;
-    }
-
     .spice-row {
         display: flex;
         gap: 2px;
@@ -597,7 +567,6 @@ $selectedCat = request('category');
 $triggerLabel = $selectedCat
 ? (($icons[$selectedCat] ?? '🍽️') . ' ' . $selectedCat)
 : '🍽️ All Dishes';
-$pairMap = $pairMap ?? [];
 @endphp
 
 <div class="menu-hero">
@@ -692,15 +661,6 @@ $pairMap = $pairMap ?? [];
                     </div>
 
                     <p class="menu-card-desc">{{ $item->description }}</p>
-
-                    @if(!empty($pairMap[$item->id]))
-                    <span class="pairing-tag" title="Pairs well with {{ $pairMap[$item->id]->name }}">
-                        <span class="pair-emoji">{{ $icons[$pairMap[$item->id]->category] ?? '🍽️' }}</span>
-                        <span class="pair-label">Pairs with</span>
-                        {{ Str::limit($pairMap[$item->id]->name, 22) }}
-                    </span>
-                    @endif
-
                     @if($item->spice_level > 0)
                     <div class="spice-row" aria-label="Spice level {{ $item->spice_level }} of 5">
                         @for($i = 1; $i <= 5; $i++)
@@ -712,16 +672,12 @@ $pairMap = $pairMap ?? [];
                     <div class="menu-card-footer">
                         <span class="price">₹{{ number_format($item->price, 2) }}</span>
                         @if($item->is_available)
-                        @auth
                         <button
                             type="button"
                             class="btn-order"
                             onclick="addToCart({{ $item->id }}, this)">
                             Add to Cart
                         </button>
-                        @else
-                        <a href="{{ route('login') }}" class="btn-order">Login to Order</a>
-                        @endauth
                         @else
                         <button class="btn-order" disabled aria-disabled="true">Unavailable</button>
                         @endif

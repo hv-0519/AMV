@@ -50,7 +50,7 @@
         <div class="auth-left">
             <div class="auth-left-emoji">🌶️</div>
             <h2>Join AMV Family</h2>
-            <p>Create your account to enjoy the best of Maharashtrian street food!</p>
+            <p>Create your account to enjoy the best of Ahamdabadi street food!</p>
             <div class="perks">
                 <div class="perk-item">✅ Easy online ordering</div>
                 <div class="perk-item">✅ Track your orders</div>

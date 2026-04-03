@@ -68,7 +68,7 @@
             <label>Item Image</label>
             <input type="file" name="image" class="form-control" accept="image/*">
             @if(isset($menu_item) && $menu_item->image)
-                <small style="color:#888; margin-top:0.3rem; display:block;">Current: {{ $menu_item->image }} (upload to replace)</small>
+                
             @endif
         </div>
 

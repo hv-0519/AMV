@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Services\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class CartController extends Controller
 {
@@ -25,7 +26,13 @@ class CartController extends Controller
     {
         $request->validate([
             'menu_item_id' => 'required|integer|exists:menu_items,id',
-            'quantity'     => 'sometimes|integer|min:1|max:20',
+            'quantity' => 'sometimes|integer|min:1|max:20',
+        ]);
+
+        Log::info('Cart add request received.', [
+            'session_id' => $request->session()->getId(),
+            'user_id' => $request->user()?->id,
+            'payload' => $request->only(['menu_item_id', 'quantity']),
         ]);
 
         $cart->add(
@@ -33,11 +40,19 @@ class CartController extends Controller
             $request->input('quantity', 1)
         );
 
-        return response()->json([
-            'message'  => 'Added to cart!',
-            'cart'     => $cart->summary(),
+        $response = [
+            'message' => 'Added to cart!',
+            'cart' => $cart->summary(),
             'quantity' => $cart->quantityOf($request->menu_item_id),
+        ];
+
+        Log::info('Cart add response sent.', [
+            'session_id' => $request->session()->getId(),
+            'user_id' => $request->user()?->id,
+            'response' => $response,
         ]);
+
+        return response()->json($response);
     }
 
     /**
@@ -48,14 +63,14 @@ class CartController extends Controller
     {
         $request->validate([
             'menu_item_id' => 'required|integer|exists:menu_items,id',
-            'quantity'     => 'required|integer|min:0|max:20',
+            'quantity' => 'required|integer|min:0|max:20',
         ]);
 
         $cart->update($request->menu_item_id, $request->quantity);
 
         return response()->json([
             'message' => 'Cart updated.',
-            'cart'    => $cart->summary(),
+            'cart' => $cart->summary(),
         ]);
     }
 
@@ -73,7 +88,7 @@ class CartController extends Controller
 
         return response()->json([
             'message' => 'Item removed.',
-            'cart'    => $cart->summary(),
+            'cart' => $cart->summary(),
         ]);
     }
 
@@ -87,7 +102,7 @@ class CartController extends Controller
 
         return response()->json([
             'message' => 'Cart cleared.',
-            'cart'    => $cart->summary(),
+            'cart' => $cart->summary(),
         ]);
     }
 }

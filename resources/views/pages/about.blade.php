@@ -194,7 +194,7 @@
             <div class="story-text">
                 <span class="section-tag">Our Story</span>
                 <h2 class="section-title">More Than Just <span>Food</span></h2>
-                <p>Rooted in the bold and comforting flavors of <strong>authentic Maharashtrian Street food</strong>, our menu is 100% vegetarian, preservative-free, and crafted fresh with care.</p>
+                <p>Rooted in the bold and comforting flavors of <strong>authentic Ahamdabadi Street food</strong>, our menu is 100% vegetarian, preservative-free, and crafted fresh with care.</p>
                 <p>Every plate reflects our belief that great food does more than satisfy hunger — it sparks nostalgia, builds connections, and tells a story.</p>
                 <p>Our journey began with a simple dream: <strong>to bring bold, memorable street-food flavor to more people</strong>. Today, AMV is growing into a wider movement — expanding with every new outlet, fueled by the love of people who connect with our flavors.</p>
                 <p>We're committed to offering more than just a meal — we deliver a <strong>vibrant, hygienic, and soul-satisfying experience</strong> that honors the legacy of Indian street food.</p>
@@ -223,7 +223,7 @@
             <div class="value-card">
                 <div class="value-icon">🧑‍🍳</div>
                 <h3>Authentic Recipes</h3>
-                <p>Every recipe is rooted in traditional Maharashtrian cooking techniques passed down through generations.</p>
+                <p>Every recipe is rooted in traditional Ahamdabadi cooking techniques passed down through generations.</p>
             </div>
             <div class="value-card">
                 <div class="value-icon">🧼</div>

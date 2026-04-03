@@ -466,7 +466,7 @@
             <div>
                 <div class="section-tag">Our Menu</div>
                 <div class="section-title">Popular <span>Dishes</span></div>
-                <p class="section-desc">Every dish is a story of tradition, love, and authentic Maharashtrian flavors.</p>
+                <p class="section-desc">Every dish is a story of tradition, love, and authentic Ahamdabadi flavors.</p>
             </div>
             <a href="{{ url('/menu') }}" style="color:var(--saffron); font-weight:700; text-decoration:none;">View Full Menu →</a>
         </div>
@@ -514,7 +514,7 @@
             <div>
                 <div class="section-tag">About AMV</div>
                 <div class="section-title">More Than Just <span>Food</span></div>
-                <p class="section-desc" style="margin-bottom:1.5rem;">Rooted in the bold and comforting flavors of authentic Maharashtrian Street food, our menu is 100% vegetarian, preservative-free, and crafted fresh with care. Every plate reflects our belief that great food does more than satisfy hunger — it sparks nostalgia, builds connections, and tells a story.</p>
+                <p class="section-desc" style="margin-bottom:1.5rem;">Rooted in the bold and comforting flavors of authentic Ahamdabadi Street food, our menu is 100% vegetarian, preservative-free, and crafted fresh with care. Every plate reflects our belief that great food does more than satisfy hunger — it sparks nostalgia, builds connections, and tells a story.</p>
                 <p class="section-desc">Our journey began with a simple dream: to bring bold street-food flavor to more people. Today, AMV is growing into a vibrant food movement.</p>
                 <div class="about-features">
                     <div class="feature-item">
@@ -551,7 +551,7 @@
             <div class="service-card">
                 <div class="service-icon">🎉</div>
                 <h3>Catering Services</h3>
-                <p>Bring authentic Maharashtrian flavors to your celebration. Corporate events, parties, festivals — we've got you covered.</p>
+                <p>Bring authentic Ahamdabadi flavors to your celebration. Corporate events, parties, festivals — we've got you covered.</p>
                 <a href="{{ url('/catering') }}" class="btn-service">Book Catering →</a>
             </div>
             <div class="service-card">

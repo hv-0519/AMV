@@ -15,10 +15,10 @@ class MenuItem extends Model
     ];
 
     protected $casts = [
-        'is_available'  => 'boolean',
+        'is_available' => 'boolean',
         'is_bestseller' => 'boolean',
-        'is_featured'   => 'boolean',
-        'price'         => 'decimal:2',
+        'is_featured' => 'boolean',
+        'price' => 'decimal:2',
     ];
 
     // -------------------------------------------------------------------------
@@ -28,18 +28,6 @@ class MenuItem extends Model
     public function orderItems()
     {
         return $this->hasMany(OrderItem::class);
-    }
-
-    /** Manual pairings where this item is the source */
-    public function pairings()
-    {
-        return $this->hasMany(MenuItemPairing::class, 'menu_item_id');
-    }
-
-    /** Manual pairings where this item is the recommendation target */
-    public function pairedFrom()
-    {
-        return $this->hasMany(MenuItemPairing::class, 'paired_item_id');
     }
 
     // -------------------------------------------------------------------------
