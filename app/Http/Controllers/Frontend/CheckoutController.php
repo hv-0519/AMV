@@ -6,11 +6,19 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Services\Cart;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class CheckoutController extends Controller
 {
+    protected function redirectAfterOrderCreation(Order $order): RedirectResponse
+    {
+        return $order->shouldRedirectToPaymentAfterCheckout()
+            ? redirect()->route('payment.show', $order->id)
+            : redirect()->route('order.confirmation', $order);
+    }
+
     /**
      * GET /checkout
      * Show the checkout form with current cart contents.
@@ -77,14 +85,14 @@ class CheckoutController extends Controller
 
             DB::commit();
             $request->session()->put('last_tracked_order_id', $order->id);
+            $request->session()->put('last_order_payment_method', $order->payment_method);
 
             // Clear cart after successful order
             $cart->clear();
 
-            return redirect()->route('order.confirmation', $order->id)
+            return $this->redirectAfterOrderCreation($order)
                 ->with('success', 'Order placed successfully! 🎉 Dil Bole Wow!!')
                 ->with('flash_modal', 'order-success');
-
         } catch (\Exception $e) {
             DB::rollBack();
 

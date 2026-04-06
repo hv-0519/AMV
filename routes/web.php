@@ -16,6 +16,7 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\OrderController as FrontOrderController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 
 // =============================================
@@ -36,6 +37,11 @@ Route::get('/careers', [HomeController::class, 'careers'])->name('careers');
 Route::get('/order', [FrontOrderController::class, 'index'])->name('order.index');
 Route::post('/order', [FrontOrderController::class, 'store'])->name('order.store');
 Route::get('/order/track', [FrontOrderController::class, 'latest'])->name('order.latest');
+Route::get('/payment/{orderId}', [PaymentController::class, 'show'])->name('payment.show');
+Route::post('/payment/{orderId}/process', [PaymentController::class, 'process'])->name('payment.process');
+Route::get('/payment/{orderId}/success', [PaymentController::class, 'success'])->name('payment.success');
+Route::get('/payment/{orderId}/failed', [PaymentController::class, 'failed'])->name('payment.failed');
+Route::get('/payment/{orderId}/retry', [PaymentController::class, 'retry'])->name('payment.retry');
 
 // Order confirmation (kept for backwards compatibility)
 Route::get('/order/confirmation/{order}', [FrontOrderController::class, 'confirmation'])->name('order.confirmation');

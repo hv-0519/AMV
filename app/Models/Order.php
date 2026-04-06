@@ -13,12 +13,24 @@ class Order extends Model
         'user_id', 'guest_name', 'guest_email', 'guest_phone',
         'order_type', 'status', 'total_amount', 'tax_amount',
         'delivery_address', 'notes', 'payment_method', 'payment_status',
+        'transaction_id', 'upi_id',
     ];
 
     protected $casts = [
         'total_amount' => 'decimal:2',
-        'tax_amount'   => 'decimal:2',
+        'tax_amount' => 'decimal:2',
     ];
+
+    public function shouldRedirectToPaymentAfterCheckout(): bool
+    {
+        return in_array($this->payment_method, ['upi', 'card', 'online'], true)
+            && $this->payment_status !== 'paid';
+    }
+
+    public function canProceedToPayment(): bool
+    {
+        return $this->payment_status !== 'paid';
+    }
 
     public function user()
     {

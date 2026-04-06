@@ -460,6 +460,7 @@
         <h2 id="flashModalTitle" class="auth-modal-title">Success</h2>
         <p id="flashModalText" class="auth-modal-text"></p>
         <div class="auth-modal-actions">
+            <a href="#" class="auth-btn auth-btn-secondary" id="flashModalSecondaryAction" style="display: none;">Track Order</a>
             <button type="button" class="auth-btn auth-btn-primary" id="flashModalClose">Continue</button>
         </div>
     </div>
@@ -632,10 +633,16 @@ document.addEventListener('DOMContentLoaded', function () {
     const flashModalTitle   = document.getElementById('flashModalTitle');
     const flashModalText    = document.getElementById('flashModalText');
     const flashModalClose   = document.getElementById('flashModalClose');
+    const flashModalSecondaryAction = document.getElementById('flashModalSecondaryAction');
     const publicLoaderModal = document.getElementById('publicLoaderModal');
     const publicLoaderTitle = document.getElementById('publicLoaderTitle');
     const publicLoaderText  = document.getElementById('publicLoaderText');
     const orderTrackingUrl  = @json(route('order.latest'));
+    const paymentGatewayUrl = @json(session('last_tracked_order_id') ? route('payment.show', session('last_tracked_order_id')) : null);
+    const orderSuccessPrimaryUrl = @json(session('last_tracked_order_id') && session('last_order_payment_method') !== 'cash'
+        ? route('payment.show', session('last_tracked_order_id'))
+        : route('order.latest'));
+    const shouldShowTrackShortcut = @json(session('last_order_payment_method') !== 'cash');
 
     const flashModalMap = {
         'welcome-back':      { title: 'Welcome Back!',               icon: 'fa-hand-sparkles',      iconClass: '',           button: "Let's Go" },
@@ -659,6 +666,20 @@ document.addEventListener('DOMContentLoaded', function () {
         flashModalClose.textContent   = config.button || 'Continue';
         flashModalIcon.className      = 'auth-modal-icon ' + (config.iconClass || '');
         flashModalIcon.innerHTML      = '<i class="fas ' + config.icon + '"></i>';
+
+        if (flashModalSecondaryAction) {
+            flashModalSecondaryAction.style.display = 'none';
+            flashModalSecondaryAction.href = '#';
+        }
+
+        if (payload.kind === 'order-success') {
+            flashModalClose.textContent = shouldShowTrackShortcut ? 'Proceed to Payment' : 'Track Order';
+
+            if (flashModalSecondaryAction && shouldShowTrackShortcut) {
+                flashModalSecondaryAction.style.display = 'inline-flex';
+                flashModalSecondaryAction.href = orderTrackingUrl;
+            }
+        }
     }
 
     function showPublicLoader(title, text) {
@@ -672,7 +693,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (flashModalClose) {
         flashModalClose.addEventListener('click', function () {
             if (flashPayload?.kind === 'order-success') {
-                window.location.href = orderTrackingUrl;
+                window.location.href = orderSuccessPrimaryUrl;
                 return;
             }
 

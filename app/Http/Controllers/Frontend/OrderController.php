@@ -13,9 +13,17 @@ use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
+    protected function redirectAfterOrderCreation(Order $order): RedirectResponse
+    {
+        return $order->shouldRedirectToPaymentAfterCheckout()
+            ? redirect()->route('payment.show', $order->id)
+            : redirect()->route('order.confirmation', $order);
+    }
+
     protected function rememberTrackedOrder(Request $request, Order $order): void
     {
         $request->session()->put('last_tracked_order_id', $order->id);
+        $request->session()->put('last_order_payment_method', $order->payment_method);
     }
 
     protected function authorizeTrackedOrder(Request $request, Order $order): void
@@ -103,10 +111,9 @@ class OrderController extends Controller
             DB::commit();
             $this->rememberTrackedOrder($request, $order);
 
-            return redirect()->route('order.confirmation', $order->id)
+            return $this->redirectAfterOrderCreation($order)
                 ->with('success', 'Order placed successfully! 🎉 Dil Bole Wow!!')
                 ->with('flash_modal', 'order-success');
-
         } catch (\Exception $e) {
             DB::rollBack();
 

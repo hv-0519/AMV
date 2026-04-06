@@ -225,6 +225,29 @@
         color: #7b583d;
     }
 
+    .status-live-pay {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.55rem;
+        border-radius: 14px;
+        padding: 0.82rem 1rem;
+        text-decoration: none;
+        font-size: 0.88rem;
+        font-weight: 700;
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #1d8f5b, #24b36b);
+        color: #fff;
+        box-shadow: 0 12px 22px rgba(31, 146, 92, 0.18);
+        transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+    }
+
+    .status-live-pay:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 14px 26px rgba(31, 146, 92, 0.22);
+        color: #fff;
+    }
+
     /* ── Order meta row ── */
     .order-meta-grid {
         display: grid;
@@ -257,6 +280,8 @@
     .badge-completed { background: #E8F5E9; color: #1B5E20; }
     .badge-cancelled { background: #FDECEC; color: #C62828; }
     .badge-paid     { background: #E8F5E9; color: #2E7D32; }
+    .badge-pending-payment { background: #fff4db; color: #c87500; }
+    .badge-failed { background: #fdecec; color: #bb2f2f; }
     .badge-cash     { background: #E3F2FD; color: #1565C0; }
     .badge-upi      { background: #F3E5F5; color: #6A1B9A; }
     .badge-card     { background: #E8EAF6; color: #283593; }
@@ -405,6 +430,12 @@
                     <p class="status-live-copy" id="orderStatusSummary">We are watching for updates from the AMV team so you can track progress without refreshing the page.</p>
                 </div>
                 <div class="status-live-tools">
+                    @if($order->canProceedToPayment())
+                        <a href="{{ route('payment.show', $order->id) }}" class="status-live-pay">
+                            <i class="fas fa-indian-rupee-sign"></i>
+                            Pay Now
+                        </a>
+                    @endif
                     <button type="button" class="status-refresh-btn" id="refreshOrderStatusBtn">
                         <i class="fas fa-rotate-right"></i>
                         Check Latest Status
@@ -439,6 +470,12 @@
                     <div class="meta-label">Payment</div>
                     <div class="meta-value">
                         <span class="badge badge-{{ $order->payment_method }}">{{ strtoupper($order->payment_method) }}</span>
+                    </div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Payment Status</div>
+                    <div class="meta-value">
+                        <span class="badge badge-{{ $order->payment_status }}">{{ ucfirst($order->payment_status) }}</span>
                     </div>
                 </div>
                 <div class="meta-item">
@@ -506,14 +543,19 @@
     </div>
     {{-- CTA row --}}
     <div class="cta-row">
-        <a href="{{ url('/order') }}" class="btn-cta btn-cta-primary">
+        @if($order->canProceedToPayment())
+            <a href="{{ route('payment.show', $order->id) }}" class="btn-cta btn-cta-primary">
+                <i class="fas fa-credit-card"></i> Proceed to Payment
+            </a>
+        @endif
+        <a href="{{ route('order.latest') }}" class="btn-cta btn-cta-outline">
+            <i class="fas fa-location-dot"></i> Track Order
+        </a>
+        <a href="{{ url('/order') }}" class="btn-cta btn-cta-outline">
             🛍️ Order Again
         </a>
         <a href="{{ url('/menu') }}" class="btn-cta btn-cta-outline">
             🍽️ Browse Menu
-        </a>
-        <a href="{{ url('/') }}" class="btn-cta btn-cta-outline">
-            🏠 Back to Home
         </a>
     </div>
 
