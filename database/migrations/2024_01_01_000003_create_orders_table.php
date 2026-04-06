@@ -21,7 +21,9 @@ return new class extends Migration
             $table->text('delivery_address')->nullable();
             $table->text('notes')->nullable();
             $table->enum('payment_method', ['cash', 'card', 'upi', 'online'])->default('cash');
-            $table->enum('payment_status', ['pending', 'paid', 'refunded'])->default('pending');
+            $table->enum('payment_status', ['pending', 'paid', 'failed', 'refunded'])->default('pending');
+            $table->string('transaction_id')->nullable();
+            $table->string('upi_id')->nullable();
             $table->timestamps();
         });
     }
