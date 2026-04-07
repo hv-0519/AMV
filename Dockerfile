@@ -18,4 +18,4 @@ RUN npm install --no-package-lock && npm run build
 ENV APP_DEBUG=true
 ENV LOG_CHANNEL=stderr
 
-CMD php artisan migrate --seed --force && php artisan storage:link && php -S 0.0.0.0:$PORT -t public
+CMD php artisan migrate --force && php artisan storage:link && php -S 0.0.0.0:$PORT -t public
