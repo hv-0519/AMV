@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\BestSellerShowcase;
 use App\Models\SiteSetting;
+use App\Services\CloudinaryHelper;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -13,33 +14,31 @@ class BestSellerShowcaseController extends Controller
 {
     public function index(): View
     {
-        $items = BestSellerShowcase::orderBy('sort_order')->orderBy('id')->get();
+        $items    = BestSellerShowcase::orderBy('sort_order')->orderBy('id')->get();
         $interval = SiteSetting::get('carousel_interval', 4);
-
         return view('admin.best-sellers.index', compact('items', 'interval'));
     }
 
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => 'required|string|max:100',
-            'tag' => 'nullable|string|max:60',
+            'name'   => 'required|string|max:100',
+            'tag'    => 'nullable|string|max:60',
             'rating' => 'required|numeric|min:1|max:5',
-            'image' => 'required|image|mimes:jpg,jpeg,png,webp|max:4096',
+            'image'  => 'required|image|mimes:jpg,jpeg,png,webp|max:4096',
         ]);
 
-        $imageUrl = cloudinary()->upload(
-            $request->file('image')->getRealPath(),
-            ['folder' => 'amv/best-sellers']
-        )->getSecurePath();
+        $imageUrl = (new CloudinaryHelper)->upload(
+            $request->file('image')->getRealPath(), 'amv/best-sellers'
+        );
 
         BestSellerShowcase::create([
-            'name' => $request->name,
-            'tag' => $request->tag,
-            'rating' => $request->rating,
-            'image' => $imageUrl,
+            'name'       => $request->name,
+            'tag'        => $request->tag,
+            'rating'     => $request->rating,
+            'image'      => $imageUrl,
             'sort_order' => BestSellerShowcase::max('sort_order') + 1,
-            'is_active' => true,
+            'is_active'  => true,
         ]);
 
         return back()->with('success', "'{$request->name}' added to the showcase! ✅");
@@ -48,48 +47,40 @@ class BestSellerShowcaseController extends Controller
     public function update(Request $request, BestSellerShowcase $bestSeller): RedirectResponse
     {
         $request->validate([
-            'name' => 'required|string|max:100',
-            'tag' => 'nullable|string|max:60',
+            'name'   => 'required|string|max:100',
+            'tag'    => 'nullable|string|max:60',
             'rating' => 'required|numeric|min:1|max:5',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
+            'image'  => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
         ]);
 
         $data = $request->only('name', 'tag', 'rating');
 
         if ($request->hasFile('image')) {
-            $data['image'] = cloudinary()->upload(
-                $request->file('image')->getRealPath(),
-                ['folder' => 'amv/best-sellers']
-            )->getSecurePath();
+            $data['image'] = (new CloudinaryHelper)->upload(
+                $request->file('image')->getRealPath(), 'amv/best-sellers'
+            );
         }
 
         $bestSeller->update($data);
-
         return back()->with('success', "'{$bestSeller->name}' updated! ✅");
     }
 
     public function toggleActive(BestSellerShowcase $bestSeller): RedirectResponse
     {
-        $bestSeller->update(['is_active' => ! $bestSeller->is_active]);
-
-        return back()->with('success', 'Visibility updated.');
+        $bestSeller->update(['is_active' => !$bestSeller->is_active]);
+        return back()->with('success', "Visibility updated.");
     }
 
     public function destroy(BestSellerShowcase $bestSeller): RedirectResponse
     {
         $bestSeller->delete();
-
-        return back()->with('success', 'Item removed.');
+        return back()->with('success', "Item removed.");
     }
 
     public function updateInterval(Request $request): RedirectResponse
     {
-        $request->validate([
-            'carousel_interval' => 'required|integer|min:1|max:30',
-        ]);
-
+        $request->validate(['carousel_interval' => 'required|integer|min:1|max:30']);
         SiteSetting::set('carousel_interval', $request->carousel_interval);
-
         return back()->with('success', "Carousel speed updated to {$request->carousel_interval} seconds! ✅");
     }
 }
