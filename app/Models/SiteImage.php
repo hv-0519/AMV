@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
 
 class SiteImage extends Model
 {
@@ -14,7 +13,17 @@ class SiteImage extends Model
      */
     public function getUrlAttribute(): ?string
     {
-        return $this->image ? asset('storage/' . $this->image) : null;
+        if (! $this->image) {
+            return null;
+        }
+
+        // Cloudinary (and any other CDN) images are stored as full URLs.
+        if (str_starts_with($this->image, 'http')) {
+            return $this->image;
+        }
+
+        // Legacy: bare filename stored before Cloudinary migration.
+        return asset('storage/'.$this->image);
     }
 
     /**

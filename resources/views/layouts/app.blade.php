@@ -141,6 +141,7 @@
             cursor: pointer;
             align-items: center;
             justify-content: center;
+            padding-left: 150px;
         }
         .nav-backdrop {
             position: fixed;

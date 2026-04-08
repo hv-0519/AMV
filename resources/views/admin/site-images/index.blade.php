@@ -18,7 +18,7 @@
         <!-- Current image preview -->
         <div style="background:#f5f0ea; border-radius:12px; height:160px; display:flex; align-items:center; justify-content:center; margin-bottom:1rem; overflow:hidden;">
             @if($img->image)
-                <img src="{{ asset('storage/' . $img->image) }}" alt="{{ $img->label }}"
+                <img src="{{ ->image }}" alt="{{ $img->label }}"
                      style="max-height:160px; max-width:100%; object-fit:contain; border-radius:8px;">
             @else
                 <div style="text-align:center; color:#bbb;">
@@ -81,7 +81,7 @@
     @forelse($galleryImages as $gImg)
     <div class="data-card" style="padding:1rem; text-align:center;">
         <div style="background:#f5f0ea; border-radius:12px; height:140px; display:flex; align-items:center; justify-content:center; margin-bottom:1rem; overflow:hidden;">
-            <img src="{{ asset('storage/' . $gImg->image) }}" alt="Gallery Image {{ $gImg->id }}"
+            <img src="{{ ->image }}" alt="Gallery Image {{ $gImg->id }}"
                  style="max-height:140px; max-width:100%; object-fit:contain; border-radius:8px;">
         </div>
         <form method="POST" action="{{ route('admin.site-images.gallery.destroy', $gImg->id) }}" class="js-crud-delete" data-confirm="Remove this gallery image?" data-success="Gallery image removed.">

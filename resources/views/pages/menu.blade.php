@@ -642,7 +642,7 @@ $triggerLabel = $selectedCat
             <div class="menu-card">
                 <div class="menu-card-img">
                     @if($item->image)
-                    <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}">
+                    <img src="{{ $item->image }}" alt="{{ $item->name }}">
                     @else
                     {{ $icons[$item->category] ?? '🍽️' }}
                     @endif

@@ -363,7 +363,7 @@
                         <div class="summary-item-row">
                             <div class="summary-item-img">
                                 @if($item['image'])
-                                    <img src="{{ asset('storage/' . $item['image']) }}" alt="{{ $item['name'] }}">
+                                    <img src="{{ ['image'] }}" alt="{{ $item['name'] }}">
                                 @else
                                     {{ $icons[$item['category']] ?? '🍽️' }}
                                 @endif

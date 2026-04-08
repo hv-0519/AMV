@@ -66,7 +66,10 @@
             {{-- Image preview --}}
             <div style="width:80px; height:80px; background:#f5f0ea; border-radius:10px; flex-shrink:0; display:flex; align-items:center; justify-content:center; overflow:hidden;">
                 @if($item->image)
-                    <img src="{{ asset('storage/' . $item->image) }}" style="max-height:80px; max-width:80px; object-fit:contain;">
+                    @php
+                        $previewSrc = str_starts_with($item->image, 'http') ? $item->image : asset('storage/' . $item->image);
+                    @endphp
+                    <img src="{{ $previewSrc }}" style="max-height:80px; max-width:80px; object-fit:contain;">
                 @else
                     <i class="fas fa-image" style="color:#ccc; font-size:1.5rem;"></i>
                 @endif

@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 @section('title', 'Home - Dil Bole Wow!!')
 
 @push('styles')
@@ -389,7 +389,7 @@
                     @foreach($showcaseItems as $i => $showcase)
                     <div class="hero-showcase-slide" id="hss-{{ $i }}" style="display:{{ $i === 0 ? 'block' : 'none' }};" data-rating="{{ number_format($showcase->rating, 1) }}">
                         @if($showcase->image)
-                            <img src="{{ asset('storage/' . $showcase->image) }}"
+                            <img src="{{ $showcase->image }}"
                                  alt="{{ $showcase->name }}"
                                  class="hero-food-emoji"
                                  style="width:200px; height:200px; margin:0 auto; object-fit:contain; filter:drop-shadow(0 10px 15px rgba(0,0,0,0.5));">
@@ -478,7 +478,7 @@
             <div class="menu-card">
                 <div class="menu-card-img">
                     @if($item->image)
-                        <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}" style="width:100%; height:100%; object-fit:cover;">
+                        <img src="{{ $item->image }}" alt="{{ $item->name }}" style="width:100%; height:100%; object-fit:cover;">
                     @else
                         {{ $icons[$item->category] ?? '🍽️' }}
                     @endif

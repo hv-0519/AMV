@@ -262,7 +262,7 @@
                     <div class="cart-item-row" id="cart-item-{{ $item['id'] }}">
                         <div class="cart-item-img">
                             @if($item['image'])
-                                <img src="{{ asset('storage/' . $item['image']) }}" alt="{{ $item['name'] }}">
+                                <img src="{{ ['image'] }}" alt="{{ $item['name'] }}">
                             @else
                                 {{ $icons[$item['category']] ?? '🍽️' }}
                             @endif
@@ -334,7 +334,7 @@ function renderCartItems(items) {
 
     cartItemsList.innerHTML = items.map((item) => {
         const imageHtml = item.image
-            ? `<img src="/storage/${encodeURI(item.image)}" alt="${escapeHtml(item.name)}">`
+            ? `<img src="${item.image}" alt="${escapeHtml(item.name)}">`
             : escapeHtml(CART_CATEGORY_ICONS[item.category] ?? '🍽️');
 
         return `

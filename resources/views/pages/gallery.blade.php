@@ -425,7 +425,7 @@
 
             // Use real images if available, else demo
             $images = isset($galleryImages) && $galleryImages->count() > 0
-                ? $galleryImages->map(fn($img) => asset('storage/' . $img->image))->toArray()
+                ? $galleryImages->map(fn($img) => $img->image)->toArray()
                 : $demoImages;
 
             $total = count($images);

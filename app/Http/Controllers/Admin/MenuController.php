@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\MenuItem;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class MenuController extends Controller
 {
@@ -40,7 +39,10 @@ class MenuController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')->store('menu', 'public');
+            $validated['image'] = cloudinary()->upload(
+                $request->file('image')->getRealPath(),
+                ['folder' => 'amv/menu']
+            )->getSecurePath();
         }
 
         $validated['is_available'] = $request->boolean('is_available');
@@ -70,10 +72,10 @@ class MenuController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            if ($menu_item->image) {
-                Storage::disk('public')->delete($menu_item->image);
-            }
-            $validated['image'] = $request->file('image')->store('menu', 'public');
+            $validated['image'] = cloudinary()->upload(
+                $request->file('image')->getRealPath(),
+                ['folder' => 'amv/menu']
+            )->getSecurePath();
         }
 
         $validated['is_available'] = $request->boolean('is_available');
@@ -87,9 +89,6 @@ class MenuController extends Controller
 
     public function destroy(MenuItem $menu_item)
     {
-        if ($menu_item->image) {
-            Storage::disk('public')->delete($menu_item->image);
-        }
         $menu_item->delete();
 
         return redirect()->route('admin.menu.index')->with('success', 'Menu item deleted.');
