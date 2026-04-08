@@ -47,6 +47,12 @@
             color: #fff;
             text-decoration: none;
         }
+        .navbar-actions {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-shrink: 0;
+        }
         .brand-logo-mark {
             width: 44px;
             height: 44px;
@@ -132,16 +138,32 @@
         .hamburger {
             display: none;
             background: rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,255,255,0.14);
+            border: 1px solid rgba(255,255,255,0.12);
             color: white;
-            font-size: 1.1rem;
-            width: 42px;
-            height: 42px;
-            border-radius: 12px;
+            font-size: 1rem;
+            width: 38px;
+            height: 38px;
+            min-width: 38px;
+            border-radius: 10px;
             cursor: pointer;
             align-items: center;
             justify-content: center;
-            padding-left: 150px;
+            padding: 0;
+            line-height: 1;
+            flex-shrink: 0;
+            transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+        }
+        .hamburger:hover {
+            background: rgba(255,107,0,0.2);
+            border-color: rgba(255,107,0,0.4);
+        }
+        .hamburger:focus-visible {
+            outline: 2px solid rgba(255,107,0,0.55);
+            outline-offset: 2px;
+        }
+        .hamburger i {
+            display: block;
+            line-height: 1;
         }
         .nav-backdrop {
             position: fixed;
@@ -354,6 +376,7 @@
             .navbar { padding: 0 1rem; }
             .navbar-inner { height: 70px; gap: 0.75rem; }
             .navbar-brand { gap: 0.55rem; }
+            .navbar-actions { gap: 0.35rem; margin-left: auto; }
             .brand-logo-mark { width: 40px; height: 40px; }
             .brand-wordmark strong { font-size: 0.98rem; }
             .brand-wordmark small { letter-spacing: 0.85px; }
@@ -411,9 +434,6 @@
                 <small>Vadapav</small>
             </span>
         </a>
-        <button class="hamburger" type="button" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Toggle navigation">
-            <i class="fas fa-bars"></i>
-        </button>
         <ul class="navbar-nav" id="navMenu">
             <li><a href="{{ url('/') }}"         class="{{ request()->is('/')         ? 'active' : '' }}">Home</a></li>
             <li><a href="{{ url('/menu') }}"      class="{{ request()->is('menu')      ? 'active' : '' }}">Menu</a></li>
@@ -440,12 +460,18 @@
             <li><a href="{{ route('checkout') }}" class="btn-nav-order"><i class="fas fa-shopping-bag"></i>&nbsp;Order Now</a></li>
         </ul>
 
-        <a href="{{ route('checkout') }}" class="cart-nav-link" aria-label="Your cart" title="View Cart">
-            <i class="fas fa-shopping-cart" style="font-size:0.95rem;"></i>
-            <span id="cartNavBadge" class="cart-nav-badge {{ app(\App\Services\Cart::class)->count() > 0 ? 'visible' : '' }}">
-                {{ app(\App\Services\Cart::class)->count() ?: '' }}
-            </span>
-        </a>
+        <div class="navbar-actions">
+            <button class="hamburger" type="button" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <a href="{{ route('checkout') }}" class="cart-nav-link" aria-label="Your cart" title="View Cart">
+                <i class="fas fa-shopping-cart" style="font-size:0.95rem;"></i>
+                <span id="cartNavBadge" class="cart-nav-badge {{ app(\App\Services\Cart::class)->count() > 0 ? 'visible' : '' }}">
+                    {{ app(\App\Services\Cart::class)->count() ?: '' }}
+                </span>
+            </a>
+        </div>
 
         @auth
             <form id="navbar-logout-form" method="POST" action="{{ route('logout') }}" style="display:none">@csrf</form>
