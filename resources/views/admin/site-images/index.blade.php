@@ -18,7 +18,7 @@
         <!-- Current image preview -->
         <div style="background:#f5f0ea; border-radius:12px; height:160px; display:flex; align-items:center; justify-content:center; margin-bottom:1rem; overflow:hidden;">
             @if($img->image)
-                <img src="{{ $gImg->image }}" alt="{{ $img->label }}"
+                <img src="{{ $img->image }}" alt="{{ $img->label }}"
                      style="max-height:160px; max-width:100%; object-fit:contain; border-radius:8px;">
             @else
                 <div style="text-align:center; color:#bbb;">
@@ -48,8 +48,7 @@
         <!-- Remove button -->
         <form method="POST" action="{{ route('admin.site-images.destroy', $img->id) }}" style="margin-top:0.6rem;" class="js-crud-delete" data-confirm="Remove this image?" data-success="Image removed successfully.">
             @csrf @method('DELETE')
-            <button type="submit" class="btn btn-sm" style="background:transparent; border:1.5px solid #ddd; color:#aaa; width:100%;"
-                    >
+            <button type="submit" class="btn btn-sm" style="background:transparent; border:1.5px solid #ddd; color:#aaa; width:100%;">
                 <i class="fas fa-trash"></i> Remove Image
             </button>
         </form>
@@ -86,8 +85,7 @@
         </div>
         <form method="POST" action="{{ route('admin.site-images.gallery.destroy', $gImg->id) }}" class="js-crud-delete" data-confirm="Remove this gallery image?" data-success="Gallery image removed.">
             @csrf @method('DELETE')
-            <button type="submit" class="btn btn-sm" style="background:transparent; border:1.5px solid #ddd; color:#aaa; width:100%;"
-                    >
+            <button type="submit" class="btn btn-sm" style="background:transparent; border:1.5px solid #ddd; color:#aaa; width:100%;">
                 <i class="fas fa-trash"></i> Remove
             </button>
         </form>
@@ -99,9 +97,9 @@
     </div>
     @endforelse
 </div>
+
 @push('scripts')
 <script>
-// Auto-show save button when a file is selected (fallback for any input missed)
 document.querySelectorAll('input[type=file]').forEach(function(input) {
     input.addEventListener('change', function() {
         var btn = this.closest('form').querySelector('button[type=submit]');
