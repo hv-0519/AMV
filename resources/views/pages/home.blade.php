@@ -375,18 +375,14 @@
             </div>
         </div>
         <div class="hero-image-area">
-            @php
-                $showcaseItems    = \App\Models\BestSellerShowcase::active()->get();
-                $carouselInterval = (int) \App\Models\SiteSetting::get('carousel_interval', 4);
-            @endphp
-
-            @if($showcaseItems->count())
+            @if(isset($showcases) && count($showcases) > 0)
                 {{-- Auto-scrolling hero card --}}
                 <div class="hero-food-card">
-                    <div class="hero-badge top-right">⭐ <span id="hero-rating-text">{{ number_format($showcaseItems->first()->rating, 1) }}</span> Rating</div>
+                    <div class="hero-badge top-right">⭐ <span id="hero-rating-text">{{ number_format($showcases->first()->rating, 1) }}</span> Rating</div>
                     <div class="hero-badge bottom-left">🔥 Best Seller</div>
 
-                    @foreach($showcaseItems as $i => $showcase)
+                    @if(isset($showcases) && count($showcases) > 0)
+                    @foreach($showcases as $i => $showcase)
                     <div class="hero-showcase-slide" id="hss-{{ $i }}" style="display:{{ $i === 0 ? 'block' : 'none' }};" data-rating="{{ number_format($showcase->rating, 1) }}">
                         @if($showcase->image)
                             <img src="{{ $showcase->image }}"
@@ -400,6 +396,7 @@
                         <p style="color:#aaa; font-size:0.85rem;">{{ $showcase->tag ?? 'Fan Favourite' }}</p>
                     </div>
                     @endforeach
+                    @endif
                 </div>
             @else
                 {{-- Fallback static card --}}
@@ -474,6 +471,7 @@
             @php
             $icons = ['Misal'=>'🍲','Vadapav'=>'🥙','Poha'=>'🌾','Beverages'=>'🥛','Thali'=>'🍱','Snacks'=>'🌮','Desserts'=>'🍮','Combos'=>'🎁'];
             @endphp
+            @if(isset($featured_items) && count($featured_items) > 0)
             @foreach($featured_items as $item)
             <div class="menu-card">
                 <div class="menu-card-img">
@@ -494,6 +492,7 @@
                 </div>
             </div>
             @endforeach
+            @endif
         </div>
     </div>
 </section>

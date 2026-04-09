@@ -1,4 +1,13 @@
 @extends('layouts.app')
+@php
+    if (!isset($cartItems) || !is_iterable($cartItems)) {
+        $cartItems = collect();
+    }
+
+    if (!isset($cart_items) || !is_iterable($cart_items)) {
+        $cart_items = $cartItems;
+    }
+@endphp
 @section('title', 'Checkout')
 
 @push('styles')
@@ -298,7 +307,7 @@
                                 <label class="field-label" for="delivery_address">Delivery Address</label>
                                 <textarea id="delivery_address" name="delivery_address"
                                           class="field-input" rows="3"
-                                          placeholder="Enter your full delivery address...">{{ old('delivery_address') }}</textarea>
+                                          placeholder="Enter your full delivery address...">{{ old('delivery_address') ?? '' }}</textarea>
                                 @error('delivery_address')
                                     <p style="color:var(--deep-red); font-size:0.78rem; margin-top:0.25rem;">{{ $message }}</p>
                                 @enderror
@@ -349,7 +358,7 @@
                     <div class="co-card-header">📝 Special Instructions <span style="font-weight:400; color:#aaa; font-size:0.8rem;">(optional)</span></div>
                     <div class="co-card-body">
                         <textarea name="notes" class="field-input" rows="3"
-                                  placeholder="Any special requests? Less spice, extra chutney...">{{ old('notes') }}</textarea>
+                                  placeholder="Any special requests? Less spice, extra chutney...">{{ old('notes') ?? '' }}</textarea>
                     </div>
                 </div>
             </div>
@@ -362,17 +371,17 @@
                         @foreach($cart_items as $item)
                         <div class="summary-item-row">
                             <div class="summary-item-img">
-                                @if($item['image'])
-                                    <img src="{{ $item['image'] }}" alt="{{ $item['name'] }}">
+                                @if(!empty($item['image']))
+                                    <img src="{{ strval($item['image']) }}" alt="{{ strval($item['name']) }}">
                                 @else
-                                    {{ $icons[$item['category']] ?? '🍽️' }}
+                                    {{ $icons[strval($item['category'] ?? '')] ?? '🍽️' }}
                                 @endif
                             </div>
                             <div class="summary-item-info">
-                                <div class="summary-item-name">{{ $item['name'] }}</div>
-                                <div class="summary-item-qty">× {{ $item['quantity'] }}</div>
+                                <div class="summary-item-name">{{ strval($item['name'] ?? '') }}</div>
+                                <div class="summary-item-qty">× {{ strval($item['quantity'] ?? 0) }}</div>
                             </div>
-                            <div class="summary-item-price">₹{{ number_format($item['subtotal'], 2) }}</div>
+                            <div class="summary-item-price">₹{{ number_format((float) ($item['subtotal'] ?? 0), 2) }}</div>
                         </div>
                         @endforeach
 

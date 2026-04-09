@@ -9,6 +9,7 @@ use App\Services\Cart;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class CheckoutController extends Controller
 {
@@ -25,17 +26,46 @@ class CheckoutController extends Controller
      */
     public function index(Cart $cart)
     {
-        if ($cart->count() === 0) {
+        $cart = session('cart', session('AMV_cart', []));
+        if (empty($cart)) {
+            return redirect()->route('menu')->with('info', 'Your cart is empty.');
+        }
+
+        try {
+            $cartItems = collect($cart)->map(function ($item): array {
+                $cartItem = is_array($item) ? $item : [];
+
+                return [
+                    'id' => (int) ($cartItem['id'] ?? 0),
+                    'name' => strval($cartItem['name'] ?? ''),
+                    'category' => strval($cartItem['category'] ?? ''),
+                    'price' => (float) ($cartItem['price'] ?? 0),
+                    'image' => is_scalar($cartItem['image'] ?? null) ? strval($cartItem['image']) : '',
+                    'quantity' => (int) ($cartItem['quantity'] ?? 0),
+                    'subtotal' => (float) ($cartItem['subtotal'] ?? 0),
+                ];
+            })->values();
+
+            if ($cartItems->isEmpty()) {
+                return redirect()->route('menu')->with('info', 'Your cart is empty.');
+            }
+
+            $subtotal = (float) $cartItems->sum('subtotal');
+            $tax = round($subtotal * 0.05, 2);
+            $total = round($subtotal + $tax, 2);
+        } catch (\Exception $e) {
+            Log::error('Page error: '.$e->getMessage());
+
             return redirect()->route('menu')
-                ->with('error', 'Your cart is empty. Add some items first!')
-                ->with('flash_modal', 'empty-cart');
+                ->with('error', 'We could not load your checkout right now. Please try again.');
         }
 
         return view('pages.checkout', [
-            'cart_items' => $cart->items(),
-            'subtotal' => $cart->subtotal(),
-            'tax' => $cart->tax(),
-            'total' => $cart->total(),
+            'cart_items' => $cartItems,
+            'cartItems' => $cartItems,
+            'subtotal' => $subtotal,
+            'tax' => $tax,
+            'total' => $total,
         ]);
     }
 

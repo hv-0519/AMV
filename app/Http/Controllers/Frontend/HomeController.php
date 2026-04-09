@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\MenuItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
 {
@@ -13,47 +14,43 @@ class HomeController extends Controller
         try {
             $featured_items = MenuItem::available()->featured()->take(8)->get();
             $bestsellers = MenuItem::available()->bestsellers()->take(4)->get();
-
-            if (class_exists(\App\Models\BestSellerShowcase::class)) {
-                $showcases = \App\Models\BestSellerShowcase::where('is_active', true)
-                    ->orderBy('sort_order')
-                    ->get();
-            } else {
-                $showcases = collect();
-            }
-
-            if (
-                class_exists(\App\Models\BestSellerShowcase::class)
-                && method_exists(\App\Models\BestSellerShowcase::class, 'getInterval')
-            ) {
-                $carouselInterval = \App\Models\BestSellerShowcase::getInterval() ?? 4;
-            } else {
-                $carouselInterval = 4;
-            }
+            $showcases = \App\Models\BestSellerShowcase::where('is_active', true)
+                ->orderBy('sort_order')->get();
+            $carouselInterval = \App\Models\BestSellerShowcase::query()
+                ->value('interval') ?? 4;
         } catch (\Exception $e) {
+            Log::error('Page error: '.$e->getMessage());
             $featured_items = collect();
             $bestsellers = collect();
             $showcases = collect();
             $carouselInterval = 4;
         }
 
-        return view('pages.home', compact('featured_items', 'bestsellers', 'showcases', 'carouselInterval'));
+        return view('pages.home', compact(
+            'featured_items', 'bestsellers', 'showcases', 'carouselInterval'
+        ));
     }
 
     public function menu(Request $request)
     {
-        $query = MenuItem::available();
+        try {
+            $query = MenuItem::available();
 
-        if ($request->filled('category')) {
-            $query->where('category', $request->category);
+            if ($request->filled('category')) {
+                $query->where('category', $request->category);
+            }
+
+            if ($request->filled('search')) {
+                $query->where('name', 'like', '%'.$request->search.'%');
+            }
+
+            $menu_items = $query->get()->groupBy('category');
+            $categories = MenuItem::available()->distinct()->pluck('category');
+        } catch (\Exception $e) {
+            Log::error('Page error: '.$e->getMessage());
+            $menu_items = collect();
+            $categories = collect();
         }
-
-        if ($request->filled('search')) {
-            $query->where('name', 'like', '%'.$request->search.'%');
-        }
-
-        $menu_items = $query->get()->groupBy('category');
-        $categories = MenuItem::available()->distinct()->pluck('category');
 
         return view('pages.menu', compact('menu_items', 'categories'));
     }
@@ -133,7 +130,12 @@ class HomeController extends Controller
 
     public function gallery()
     {
-        $galleryImages = \App\Models\GalleryImage::orderBy('sort_order')->orderBy('id', 'desc')->get();
+        try {
+            $galleryImages = \App\Models\GalleryImage::orderBy('sort_order')->orderBy('id', 'desc')->get();
+        } catch (\Exception $e) {
+            Log::error('Page error: '.$e->getMessage());
+            $galleryImages = collect();
+        }
 
         return view('pages.gallery', compact('galleryImages'));
     }
