@@ -10,10 +10,34 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $featured_items = MenuItem::available()->featured()->take(8)->get();
-        $bestsellers = MenuItem::available()->bestsellers()->take(4)->get();
+        try {
+            $featured_items = MenuItem::available()->featured()->take(8)->get();
+            $bestsellers = MenuItem::available()->bestsellers()->take(4)->get();
 
-        return view('pages.home', compact('featured_items', 'bestsellers'));
+            if (class_exists(\App\Models\BestSellerShowcase::class)) {
+                $showcases = \App\Models\BestSellerShowcase::where('is_active', true)
+                    ->orderBy('sort_order')
+                    ->get();
+            } else {
+                $showcases = collect();
+            }
+
+            if (
+                class_exists(\App\Models\BestSellerShowcase::class)
+                && method_exists(\App\Models\BestSellerShowcase::class, 'getInterval')
+            ) {
+                $carouselInterval = \App\Models\BestSellerShowcase::getInterval() ?? 4;
+            } else {
+                $carouselInterval = 4;
+            }
+        } catch (\Exception $e) {
+            $featured_items = collect();
+            $bestsellers = collect();
+            $showcases = collect();
+            $carouselInterval = 4;
+        }
+
+        return view('pages.home', compact('featured_items', 'bestsellers', 'showcases', 'carouselInterval'));
     }
 
     public function menu(Request $request)
