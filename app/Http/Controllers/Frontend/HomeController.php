@@ -16,8 +16,7 @@ class HomeController extends Controller
             $bestsellers = MenuItem::available()->bestsellers()->take(4)->get();
             $showcases = \App\Models\BestSellerShowcase::where('is_active', true)
                 ->orderBy('sort_order')->get();
-            $carouselInterval = \App\Models\BestSellerShowcase::query()
-                ->value('interval') ?? 4;
+            $carouselInterval = 4;
         } catch (\Exception $e) {
             Log::error('Page error: '.$e->getMessage());
             $featured_items = collect();
