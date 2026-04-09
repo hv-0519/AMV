@@ -206,15 +206,16 @@
 /* ── Card networks ─────────────────────────────────────────────────────────── */
 .card-networks { display: flex; gap: 8px; margin-bottom: 14px; }
 .net-badge {
-    padding: 3px 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 10px;
     border: 1.5px solid #ddd;
     border-radius: 6px;
-    font-size: 0.68rem;
-    font-weight: 700;
 }
-.net-badge.visa  { color: #1a1f71; border-color: #1a1f71; }
-.net-badge.mc    { color: #eb001b; border-color: #eb001b; }
-.net-badge.rupay { color: #008000; border-color: #008000; }
+.net-badge svg {
+    display: block;
+}
 
 /* ── Pay button ────────────────────────────────────────────────────────────── */
 .btn-pay {
@@ -394,9 +395,36 @@
             <div class="tab-panel" id="tab-card">
 
                 <div class="card-networks">
-                    <span class="net-badge visa">VISA</span>
-                    <span class="net-badge mc">MC</span>
-                    <span class="net-badge rupay">RuPay</span>
+                    <span class="net-badge" aria-label="Visa">
+                        <svg height="22px" viewBox="0 0 64 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+                            <path fill="#1A1F71" d="M24.11 16.63h-3.08l1.93-11.25h3.08l-1.93 11.25Zm11.17-10.98a7.6 7.6 0 0 0-2.76-.48c-3.04 0-5.18 1.53-5.2 3.72-.02 1.62 1.54 2.52 2.72 3.06 1.22.56 1.63.92 1.63 1.42-.01.77-.97 1.12-1.87 1.12-1.25 0-1.91-.17-2.94-.6l-.4-.18-.44 2.54c.73.32 2.08.59 3.47.6 3.23 0 5.34-1.51 5.36-3.85.01-1.28-.81-2.26-2.59-3.06-1.08-.52-1.74-.86-1.74-1.38.01-.46.55-.95 1.75-.95.99-.02 1.71.2 2.27.43l.27.12.47-2.47Zm7.94-.27h-2.38c-.74 0-1.29.2-1.61.93l-4.56 10.32h3.22s.53-1.39.65-1.7h3.93c.09.4.37 1.7.37 1.7h2.84l-2.46-11.25Zm-3.1 7.13c.25-.63 1.2-3.11 1.2-3.11-.02.04.25-.64.4-1.05l.2.95s.58 2.67.7 3.21h-2.5Zm-20.57-7.13-3.01 7.67-.32-1.56c-.56-1.82-2.31-3.8-4.26-4.78l2.75 9.89h3.24L22.77 5.38h-3.22Z"/>
+                            <path fill="#F7A600" d="M13.77 5.38H8.86L8.8 5.61c3.82.93 6.35 3.17 7.4 5.88l-1.07-5.32c-.18-.71-.72-.76-1.36-.79Z"/>
+                        </svg>
+                    </span>
+                    <span class="net-badge" aria-label="Mastercard">
+                        <svg height="22px" viewBox="0 0 48 32" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+                            <circle cx="18" cy="16" r="10" fill="#EB001B"/>
+                            <circle cx="30" cy="16" r="10" fill="#F79E1B"/>
+                            <path fill="#FF5F00" d="M24 8.2A12.3 12.3 0 0 0 24 23.8A12.3 12.3 0 0 0 24 8.2Z"/>
+                        </svg>
+                    </span>
+                    <span class="net-badge" aria-label="RuPay">
+                        <svg height="22px" viewBox="0 0 96 32" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+                            <defs>
+                                <linearGradient id="rupay-green" x1="0%" y1="50%" x2="100%" y2="50%">
+                                    <stop offset="0%" stop-color="#2BB673"/>
+                                    <stop offset="100%" stop-color="#008C44"/>
+                                </linearGradient>
+                                <linearGradient id="rupay-blue" x1="0%" y1="50%" x2="100%" y2="50%">
+                                    <stop offset="0%" stop-color="#00AEEF"/>
+                                    <stop offset="100%" stop-color="#1D4F91"/>
+                                </linearGradient>
+                            </defs>
+                            <path fill="url(#rupay-green)" d="M14.2 8.1h7.1c3.95 0 6.6 2.04 6.6 5.43c0 2.6-1.48 4.38-3.9 5.08L28 24.1h-5.4l-3.3-4.75h-.85v4.75h-4.25V8.1Zm6.68 7.95c1.59 0 2.63-.85 2.63-2.28c0-1.4-1.01-2.18-2.63-2.18h-2.43v4.46h2.43Z"/>
+                            <path fill="url(#rupay-blue)" d="M31.08 8.1h4.3v9.1c0 2.18 1.14 3.46 3.08 3.46c1.92 0 3.06-1.28 3.06-3.46V8.1h4.3v9.36c0 4.67-2.72 7.08-7.4 7.08c-4.65 0-7.34-2.4-7.34-7.08V8.1Zm17.52 0h7.06c4.22 0 6.98 2.22 6.98 5.95c0 3.78-2.8 6.1-7.04 6.1h-2.7v3.95H48.6V8.1Zm6.45 8.4c1.97 0 3.1-.92 3.1-2.43c0-1.55-1.1-2.4-3.1-2.4H52.9v4.83h2.15Z"/>
+                            <path fill="#F58220" d="M69.2 8.1h12.6l-2.45 3.72h-6.52l-.5 1.65h6.08l-2.3 3.48h-4.83l-.55 1.8h7.45l-2.42 3.72H64.22L69.2 8.1Zm13.56 0h4.31l3.5 6.55L95.3 8.1H96l-6.95 10.12l3.48 5.88H88.2l-3.62-6.04L80.5 24.1h-4.4l6.96-9.93L79.7 8.1Z"/>
+                        </svg>
+                    </span>
                 </div>
 
                 <form id="cardForm"
