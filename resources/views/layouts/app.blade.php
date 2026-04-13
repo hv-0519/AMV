@@ -90,6 +90,24 @@
             transition: all 0.3s;
         }
         .navbar-nav a:hover, .navbar-nav a.active { background: var(--saffron); color: #fff; }
+        .navbar-nav a.frontend-dashboard-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: #fff;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-radius: 6px;
+            border-left: 0;
+            background: transparent;
+        }
+        .navbar-nav a.frontend-dashboard-link:hover,
+        .navbar-nav a.frontend-dashboard-link.active {
+            background: var(--saffron);
+            color: #fff;
+        }
         .btn-nav-order {
             background: var(--saffron) !important;
             color: #fff !important;
@@ -446,7 +464,7 @@
             @endif
             @auth
                 @if(auth()->user()->role === 'admin')
-                    <li><a href="{{ route('admin.dashboard') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="{{ route('admin.dashboard') }}" class="frontend-dashboard-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
                 @elseif(auth()->user()->role === 'staff')
                     <li><a href="{{ route('admin.orders.index') }}" style="color:var(--turmeric);"><i class="fas fa-tools"></i> Staff Panel</a></li>
                 @endif

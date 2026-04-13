@@ -101,17 +101,17 @@
             @endforeach
         </div>
 
-        <div class="stock-table-wrap">
-            <table>
+        <div class="stock-table-wrap table-responsive">
+            <table class="mobile-essential-table">
                 <thead>
                     <tr>
-                        <th>#</th>
+                        <th class="hide-mobile">#</th>
                         <th>Item Name</th>
                         <th>Category</th>
-                        <th>Quantity</th>
-                        <th>Min. Level</th>
-                        <th>Unit Cost</th>
-                        <th>Status</th>
+                        <th class="hide-mobile">Quantity</th>
+                        <th class="hide-mobile">Min. Level</th>
+                        <th class="hide-mobile">Unit Cost</th>
+                        <th class="hide-mobile">Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -122,20 +122,20 @@
                         : ($stock->quantity <= $stock->min_quantity ? 'low' : 'ok');
                     @endphp
                     <tr>
-                        <td>{{ $stock->id }}</td>
+                        <td class="hide-mobile">{{ $stock->id }}</td>
                         <td>
                             <strong>{{ $stock->name }}</strong>
-                            @if($stock->supplier)<br><small style="color:#aaa;">Supplier: {{ $stock->supplier }}</small>@endif
+                            @if($stock->supplier)<br><small class="hide-mobile" style="color:#aaa;">Supplier: {{ $stock->supplier }}</small>@endif
                         </td>
                         <td><span class="badge badge-info" style="font-size:0.72rem;">{{ $stock->category }}</span></td>
-                        <td>
+                        <td class="hide-mobile">
                             <strong style="{{ $status === 'out' ? 'color:var(--deep-red)' : ($status === 'low' ? 'color:#F57F17' : 'color:#2E7D32') }}">
                                 {{ $stock->quantity }} {{ $stock->unit }}
                             </strong>
                         </td>
-                        <td style="color:#888;">{{ $stock->min_quantity }} {{ $stock->unit }}</td>
-                        <td>₹{{ number_format($stock->unit_cost, 2) }}</td>
-                        <td>
+                        <td class="hide-mobile" style="color:#888;">{{ $stock->min_quantity }} {{ $stock->unit }}</td>
+                        <td class="hide-mobile">₹{{ number_format($stock->unit_cost, 2) }}</td>
+                        <td class="hide-mobile">
                             @if($status === 'out')
                                 <span class="badge badge-danger">Out of Stock</span>
                             @elseif($status === 'low')
@@ -146,13 +146,31 @@
                         </td>
                         <td>
                             <div class="stock-action-group">
-                                <a href="{{ route('admin.stocks.edit', $stock->id) }}" class="btn btn-outline btn-sm js-crud-modal" data-modal-title="Edit Stock Item" title="Edit">
+                                <button type="button" class="btn btn-outline btn-sm" onclick="openModal(@js([
+                                    'title' => $stock->name,
+                                    'details' => [
+                                        'ID' => (string) $stock->id,
+                                        'Name' => $stock->name,
+                                        'Category' => $stock->category,
+                                        'Quantity' => $stock->quantity . ' ' . $stock->unit,
+                                        'Minimum Level' => $stock->min_quantity . ' ' . $stock->unit,
+                                        'Unit Cost' => '₹' . number_format($stock->unit_cost, 2),
+                                        'Status' => $status === 'out' ? 'Out of Stock' : ($status === 'low' ? 'Low Stock' : 'In Stock'),
+                                        'Supplier' => $stock->supplier ?: '—',
+                                    ],
+                                    'editUrl' => route('admin.stocks.edit', $stock->id),
+                                    'restockUrl' => route('admin.stocks.restock', $stock->id),
+                                    'deleteUrl' => route('admin.stocks.destroy', $stock->id),
+                                    'deleteConfirm' => 'Delete this stock item permanently?',
+                                    'deleteSuccess' => 'Stock item deleted.',
+                                ]))"><i class="fas fa-eye"></i> View</button>
+                                <a href="{{ route('admin.stocks.edit', $stock->id) }}" class="btn btn-outline btn-sm js-crud-modal hide-mobile" data-modal-title="Edit Stock Item" title="Edit">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a href="{{ route('admin.stocks.restock', $stock->id) }}" class="btn btn-success btn-sm js-crud-modal" data-modal-title="Restock Item" title="Restock">
+                                <a href="{{ route('admin.stocks.restock', $stock->id) }}" class="btn btn-success btn-sm js-crud-modal hide-mobile" data-modal-title="Restock Item" title="Restock">
                                     <i class="fas fa-plus"></i>
                                 </a>
-                                <form action="{{ route('admin.stocks.destroy', $stock->id) }}" method="POST" class="js-crud-delete" data-confirm="Delete this stock item permanently?" data-success="Stock item deleted.">
+                                <form action="{{ route('admin.stocks.destroy', $stock->id) }}" method="POST" class="js-crud-delete hide-mobile" data-confirm="Delete this stock item permanently?" data-success="Stock item deleted.">
                                     @csrf @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm" title="Delete">
                                         <i class="fas fa-trash"></i>
@@ -243,4 +261,62 @@
         </div>
     </div>
 </div>
+
+<div id="rowModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:9999; overflow-y:auto;">
+    <div class="row-modal-panel" style="background:#fff; margin:20px; border-radius:16px; padding:24px; position:relative;">
+        <button type="button" onclick="closeModal()" aria-label="Close details" style="position:absolute; top:12px; right:12px; width:36px; height:36px; border:1px solid #eaded2; border-radius:8px; background:#fff; cursor:pointer;">✕</button>
+        <div id="modalContent"></div>
+        <div id="modalActions" class="row-modal-actions"></div>
+    </div>
+</div>
+
+@push('scripts')
+<script>
+function escapeRowModalHtml(value) {
+    const element = document.createElement('div');
+    element.textContent = value ?? '';
+    return element.innerHTML;
+}
+
+function openModal(data) {
+    const modal = document.getElementById('rowModal');
+    const content = document.getElementById('modalContent');
+    const actions = document.getElementById('modalActions');
+
+    content.innerHTML = `
+        <h3 style="margin:0 2.5rem 1rem 0; color:var(--dark);">${escapeRowModalHtml(data.title || 'Details')}</h3>
+        <div class="row-modal-detail">
+            ${Object.entries(data.details || {}).map(([label, value]) => `
+                <div class="row-modal-detail-row">
+                    <div class="row-modal-label">${escapeRowModalHtml(label)}</div>
+                    <div class="row-modal-value">${escapeRowModalHtml(value)}</div>
+                </div>
+            `).join('')}
+        </div>
+    `;
+    actions.innerHTML = `
+        <a href="${escapeRowModalHtml(data.editUrl)}" class="btn btn-outline js-crud-modal" data-modal-title="Edit Stock Item" onclick="closeModal()"><i class="fas fa-edit"></i> Edit</a>
+        <a href="${escapeRowModalHtml(data.restockUrl)}" class="btn btn-success js-crud-modal" data-modal-title="Restock Item" onclick="closeModal()"><i class="fas fa-plus"></i> Restock</a>
+        <form action="${escapeRowModalHtml(data.deleteUrl)}" method="POST" class="js-crud-delete" data-confirm="${escapeRowModalHtml(data.deleteConfirm)}" data-success="${escapeRowModalHtml(data.deleteSuccess)}" onsubmit="closeModal()">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Delete</button>
+        </form>
+    `;
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+    document.getElementById('rowModal').style.display = 'none';
+    document.body.style.overflow = '';
+}
+
+document.getElementById('rowModal')?.addEventListener('click', (event) => {
+    if (event.target.id === 'rowModal') {
+        closeModal();
+    }
+});
+</script>
+@endpush
 @endsection

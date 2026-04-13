@@ -54,6 +54,7 @@
             <h3>📦 Recent Orders</h3>
             <a href="{{ route('admin.orders.index') }}" class="btn btn-outline btn-sm">View All</a>
         </div>
+        <div class="table-responsive">
         <table>
             <thead>
                 <tr>
@@ -90,6 +91,7 @@
                 @endforelse
             </tbody>
         </table>
+        </div>
     </div>
 
     <!-- Quick Stats Panel -->

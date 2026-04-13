@@ -40,6 +40,7 @@
             <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-search"></i></button>
         </form>
     </div>
+    <div class="table-responsive">
     <table>
         <thead>
             <tr>
@@ -82,6 +83,7 @@
             @endforelse
         </tbody>
     </table>
+    </div>
     <div style="margin-top:1rem;">{{ $users->links() }}</div>
 </div>
 @endsection

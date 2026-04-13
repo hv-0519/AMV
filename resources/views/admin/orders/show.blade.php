@@ -280,6 +280,7 @@
             </div>
             <div class="order-show-body">
 
+            <div class="table-responsive">
             <table class="order-items-table">
                 <thead>
                     <tr>
@@ -324,6 +325,7 @@
                     </tr>
                 </tfoot>
             </table>
+            </div>
             </div>
         </div>
 

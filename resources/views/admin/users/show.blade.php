@@ -47,6 +47,7 @@
                 <strong style="color:var(--saffron);">Total Spent: ₹{{ number_format($total_spent, 2) }}</strong>
             </div>
             @if($user->orders->count())
+            <div class="table-responsive">
             <table>
                 <thead>
                     <tr>
@@ -72,6 +73,7 @@
                     @endforeach
                 </tbody>
             </table>
+            </div>
             @else
             <p style="text-align:center; color:#aaa; padding:2rem;">No orders yet.</p>
             @endif

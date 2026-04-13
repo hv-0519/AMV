@@ -62,13 +62,22 @@
         .sidebar {
             width: 260px;
             min-height: 100vh;
+            height: 100dvh;
             background: var(--sidebar-bg);
             position: fixed;
             left: 0;
             top: 0;
+            display: flex;
+            flex-direction: column;
             overflow-y: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
             z-index: 100;
             transition: transform 0.3s;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            display: none;
         }
 
         .sidebar-brand {
@@ -112,6 +121,10 @@
 
         .sidebar-menu {
             padding: 1rem 0;
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            min-height: calc(100dvh - 93px);
         }
 
         .menu-section {
@@ -148,6 +161,23 @@
             font-size: 0.95rem;
         }
 
+        .sidebar-footer {
+            position: sticky;
+            bottom: 0;
+            background: var(--sidebar-bg);
+            padding: 12px 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: auto;
+            z-index: 10;
+        }
+
+        .sidebar-footer a {
+            border-left: 0;
+            border-radius: 8px;
+            justify-content: flex-start;
+            padding: 0.75rem 0.85rem;
+        }
+
         /* MAIN CONTENT */
         .main-content {
             margin-left: 260px;
@@ -156,6 +186,8 @@
             display: flex;
             flex-direction: column;
             min-width: 0;
+            max-width: 100vw;
+            overflow-x: hidden;
         }
 
         .topbar {
@@ -301,6 +333,12 @@
             overflow-x: auto;
         }
 
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            width: 100%;
+        }
+
         .data-card-header {
             display: flex;
             justify-content: space-between;
@@ -367,11 +405,13 @@
             border-radius: 8px;
             font-size: 0.85rem;
             font-weight: 600;
+            min-height: 44px;
             cursor: pointer;
             border: none;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 0.4rem;
             transition: all 0.3s;
         }
@@ -406,6 +446,47 @@
         .btn-sm {
             padding: 0.3rem 0.8rem;
             font-size: 0.78rem;
+        }
+
+        .row-modal-detail {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .row-modal-detail-row {
+            display: grid;
+            grid-template-columns: 140px minmax(0, 1fr);
+            gap: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid #f0ebe3;
+        }
+
+        .row-modal-detail-row:last-child {
+            border-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .row-modal-label {
+            color: #8a6f5a;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .row-modal-value {
+            color: var(--dark);
+            font-size: 0.92rem;
+            line-height: 1.6;
+            min-width: 0;
+            overflow-wrap: anywhere;
+        }
+
+        .row-modal-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.65rem;
+            margin-top: 1.2rem;
         }
 
         .btn-outline {
@@ -792,6 +873,8 @@
 
             .main-content {
                 margin-left: 0;
+                max-width: 100vw;
+                overflow-x: hidden;
             }
 
             .form-grid {
@@ -829,6 +912,12 @@
 
             .page-content {
                 padding: 1rem;
+                max-width: 100vw;
+                overflow-x: hidden;
+            }
+
+            .stat-card {
+                padding: 12px;
             }
 
             .stats-grid {
@@ -848,6 +937,40 @@
 
             .data-card table {
                 min-width: 640px;
+            }
+
+            .mobile-essential-table {
+                min-width: 0 !important;
+            }
+
+            .hide-mobile {
+                display: none;
+            }
+
+            .row-modal-panel {
+                min-height: 100dvh;
+                margin: 0 !important;
+                border-radius: 0 !important;
+            }
+
+            .row-modal-detail-row {
+                grid-template-columns: 1fr;
+                gap: 0.25rem;
+            }
+
+            body,
+            .topbar,
+            .sidebar,
+            .page-content,
+            .page-content small,
+            .page-content th,
+            .page-content td,
+            .page-content .badge,
+            .page-content .btn,
+            .page-content .form-control,
+            .sidebar-brand-text small,
+            .menu-section {
+                font-size: 13px !important;
             }
         }
 
@@ -929,10 +1052,12 @@
             <a href="{{ url('/') }}">
                 <i class="fas fa-globe"></i> View Website
             </a>
-            <a href="{{ route('logout') }}" id="adminLogoutTrigger">
-                <i class="fas fa-sign-out-alt"></i> Logout
-            </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none">@csrf</form>
+            <div class="sidebar-footer">
+                <a href="{{ route('logout') }}" id="adminLogoutTrigger">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none">@csrf</form>
+            </div>
         </nav>
     </aside>
 
