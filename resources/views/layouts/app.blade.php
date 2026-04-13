@@ -420,6 +420,14 @@
             }
             .navbar-nav.is-open { transform: translateY(0); opacity: 1; visibility: visible; pointer-events: auto; }
             .navbar-nav a { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 0.8rem 0.95rem; border-radius: 12px; background: rgba(255,255,255,0.04); }
+            .navbar-nav a.frontend-dashboard-link {
+                justify-content: flex-start;
+                gap: 0.6rem;
+                width: 100%;
+                padding: 0.8rem 0.95rem;
+                border-radius: 12px;
+                background: rgba(255,255,255,0.04);
+            }
             .navbar-nav .btn-nav-order { justify-content: center; margin-top: 0.35rem; width: 100%; padding: 0.8rem 1rem !important; }
             .hamburger { display: inline-flex; }
             footer { padding: 2.5rem 1rem 1.25rem; }

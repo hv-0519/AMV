@@ -944,7 +944,7 @@
             }
 
             .hide-mobile {
-                display: none;
+                display: none !important;
             }
 
             .row-modal-panel {

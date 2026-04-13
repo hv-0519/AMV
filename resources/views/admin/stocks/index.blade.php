@@ -8,9 +8,16 @@
         display: grid;
         grid-template-columns: minmax(0, 3fr) minmax(280px, 1fr);
         gap: 1.5rem;
+        min-width: 0;
+        width: 100%;
+    }
+    .stock-layout > * {
+        min-width: 0;
     }
     .stock-table-wrap {
         overflow-x: auto;
+        max-width: 100%;
+        width: 100%;
     }
     .stock-table-wrap table {
         min-width: 920px;
@@ -77,6 +84,58 @@
     @media (max-width: 1200px) {
         .stock-layout {
             grid-template-columns: 1fr;
+        }
+    }
+    @media (max-width: 768px) {
+        .stock-layout {
+            display: block;
+        }
+        .stock-layout .data-card {
+            max-width: 100%;
+            overflow-x: hidden;
+            padding: 1rem;
+        }
+        .stock-table-wrap table {
+            min-width: 0;
+            table-layout: fixed;
+        }
+        .stock-table-wrap th:nth-child(2),
+        .stock-table-wrap td:nth-child(2) {
+            width: 44%;
+        }
+        .stock-table-wrap th:nth-child(3),
+        .stock-table-wrap td:nth-child(3) {
+            width: 31%;
+        }
+        .stock-table-wrap th:nth-child(8),
+        .stock-table-wrap td:nth-child(8) {
+            width: 25%;
+            text-align: right;
+        }
+        .stock-table-wrap .badge {
+            max-width: 100%;
+            white-space: normal;
+            line-height: 1.25;
+            text-align: center;
+        }
+        .stock-action-group {
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+        }
+        .stock-action-group .btn {
+            width: 74px;
+            padding-left: 0.6rem;
+            padding-right: 0.6rem;
+        }
+    }
+    @media (max-width: 480px) {
+        .stock-layout .data-card {
+            padding: 0.85rem;
+        }
+        .stock-table-wrap th,
+        .stock-table-wrap td {
+            padding: 0.75rem 0.55rem;
         }
     }
 </style>
