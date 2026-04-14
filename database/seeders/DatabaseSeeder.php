@@ -3,9 +3,12 @@
 namespace Database\Seeders;
 
 use App\Models\MenuItem;
+use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\Stock;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
@@ -71,6 +74,8 @@ class DatabaseSeeder extends Seeder
             );
         }
 
+        $this->seedDashboardOrders();
+
         // =============================================
         // SEED STOCK ITEMS
         // =============================================
@@ -103,5 +108,141 @@ class DatabaseSeeder extends Seeder
 
         $this->command->info('✅ AMV Database seeded successfully!');
         $this->command->info('👤 Admin Login: admin@AMV.com | Password: admin@123');
+    }
+
+    private function seedDashboardOrders(): void
+    {
+        $customers = [
+            ['name' => 'Riya Patel', 'email' => 'riya.patel@example.com', 'phone' => '+91 9820011001'],
+            ['name' => 'Harsh Shah', 'email' => 'harsh.shah@example.com', 'phone' => '+91 9820011002'],
+            ['name' => 'Neha Mehta', 'email' => 'neha.mehta@example.com', 'phone' => '+91 9820011003'],
+            ['name' => 'Aarav Desai', 'email' => 'aarav.desai@example.com', 'phone' => '+91 9820011004'],
+            ['name' => 'Kavya Trivedi', 'email' => 'kavya.trivedi@example.com', 'phone' => '+91 9820011005'],
+        ];
+
+        foreach ($customers as $customer) {
+            User::firstOrCreate(
+                ['email' => $customer['email']],
+                [
+                    'name' => $customer['name'],
+                    'phone' => $customer['phone'],
+                    'password' => Hash::make('password'),
+                    'role' => 'customer',
+                ]
+            );
+        }
+
+        $menuItems = MenuItem::query()
+            ->whereIn('name', [
+                'Amdavadi Misal Pav',
+                'AMV Spl Misal Thali',
+                'Amdavadi Vadapav',
+                'Cheese Blast Vadapav',
+                'Regular Poha',
+                'AMV Special Poha',
+                'Mango Lassi',
+                'Masala Chaas',
+                'Bhaji Pav',
+                'Tava Pulav',
+            ])
+            ->get()
+            ->keyBy('name');
+
+        $orders = [
+            ['day' => 6, 'status' => 'completed', 'type' => 'dine-in', 'customer' => 'riya.patel@example.com', 'items' => ['Amdavadi Misal Pav' => 4, 'Mango Lassi' => 3, 'Masala Chaas' => 2], 'payment' => 'upi'],
+            ['day' => 6, 'status' => 'completed', 'type' => 'pickup', 'customer' => 'harsh.shah@example.com', 'items' => ['Amdavadi Vadapav' => 8, 'Cheese Blast Vadapav' => 4], 'payment' => 'card'],
+            ['day' => 5, 'status' => 'completed', 'type' => 'delivery', 'customer' => 'neha.mehta@example.com', 'items' => ['AMV Spl Misal Thali' => 3, 'Mango Lassi' => 3], 'payment' => 'online'],
+            ['day' => 5, 'status' => 'completed', 'type' => 'dine-in', 'customer' => 'aarav.desai@example.com', 'items' => ['Regular Poha' => 5, 'Masala Chaas' => 5, 'Amdavadi Vadapav' => 3], 'payment' => 'cash'],
+            ['day' => 4, 'status' => 'completed', 'type' => 'pickup', 'customer' => 'kavya.trivedi@example.com', 'items' => ['Cheese Blast Vadapav' => 7, 'Amdavadi Misal Pav' => 5, 'Mango Lassi' => 4], 'payment' => 'upi'],
+            ['day' => 4, 'status' => 'completed', 'type' => 'delivery', 'customer' => 'riya.patel@example.com', 'items' => ['Bhaji Pav' => 6, 'Tava Pulav' => 4, 'Masala Chaas' => 6], 'payment' => 'online'],
+            ['day' => 3, 'status' => 'completed', 'type' => 'dine-in', 'customer' => 'harsh.shah@example.com', 'items' => ['Amdavadi Misal Pav' => 10, 'AMV Special Poha' => 5, 'Mango Lassi' => 6], 'payment' => 'card'],
+            ['day' => 3, 'status' => 'completed', 'type' => 'pickup', 'customer' => 'neha.mehta@example.com', 'items' => ['Amdavadi Vadapav' => 12, 'Cheese Blast Vadapav' => 6], 'payment' => 'upi'],
+            ['day' => 2, 'status' => 'completed', 'type' => 'delivery', 'customer' => 'aarav.desai@example.com', 'items' => ['AMV Spl Misal Thali' => 5, 'Mango Lassi' => 5, 'Masala Chaas' => 4], 'payment' => 'online'],
+            ['day' => 2, 'status' => 'completed', 'type' => 'dine-in', 'customer' => 'kavya.trivedi@example.com', 'items' => ['Regular Poha' => 8, 'Amdavadi Vadapav' => 7, 'Bhaji Pav' => 3], 'payment' => 'cash'],
+            ['day' => 1, 'status' => 'completed', 'type' => 'pickup', 'customer' => 'riya.patel@example.com', 'items' => ['Amdavadi Misal Pav' => 7, 'Cheese Blast Vadapav' => 8, 'Mango Lassi' => 4], 'payment' => 'upi'],
+            ['day' => 1, 'status' => 'completed', 'type' => 'delivery', 'customer' => 'harsh.shah@example.com', 'items' => ['Tava Pulav' => 5, 'AMV Spl Misal Thali' => 4, 'Masala Chaas' => 6], 'payment' => 'card'],
+            ['day' => 0, 'status' => 'completed', 'type' => 'dine-in', 'customer' => 'neha.mehta@example.com', 'items' => ['Amdavadi Misal Pav' => 12, 'Amdavadi Vadapav' => 9, 'Mango Lassi' => 8], 'payment' => 'upi'],
+            ['day' => 0, 'status' => 'completed', 'type' => 'pickup', 'customer' => 'aarav.desai@example.com', 'items' => ['Cheese Blast Vadapav' => 10, 'AMV Special Poha' => 6, 'Masala Chaas' => 6], 'payment' => 'online'],
+            ['day' => 0, 'status' => 'pending', 'type' => 'delivery', 'customer' => 'kavya.trivedi@example.com', 'items' => ['Amdavadi Misal Pav' => 3, 'Mango Lassi' => 2], 'payment' => 'cash'],
+            ['day' => 0, 'status' => 'pending', 'type' => 'pickup', 'customer' => 'riya.patel@example.com', 'items' => ['Regular Poha' => 4, 'Masala Chaas' => 4], 'payment' => 'upi'],
+            ['day' => 0, 'status' => 'processing', 'type' => 'dine-in', 'customer' => 'harsh.shah@example.com', 'items' => ['AMV Spl Misal Thali' => 2, 'Mango Lassi' => 2], 'payment' => 'card'],
+            ['day' => 0, 'status' => 'processing', 'type' => 'delivery', 'customer' => 'neha.mehta@example.com', 'items' => ['Tava Pulav' => 3, 'Amdavadi Vadapav' => 4], 'payment' => 'online'],
+            ['day' => 0, 'status' => 'ready', 'type' => 'pickup', 'customer' => 'aarav.desai@example.com', 'items' => ['Cheese Blast Vadapav' => 5, 'Mango Lassi' => 3], 'payment' => 'upi'],
+            ['day' => 1, 'status' => 'ready', 'type' => 'dine-in', 'customer' => 'kavya.trivedi@example.com', 'items' => ['Bhaji Pav' => 4, 'Masala Chaas' => 4], 'payment' => 'cash'],
+            ['day' => 2, 'status' => 'cancelled', 'type' => 'delivery', 'customer' => 'riya.patel@example.com', 'items' => ['AMV Spl Misal Thali' => 2], 'payment' => 'online'],
+            ['day' => 3, 'status' => 'cancelled', 'type' => 'pickup', 'customer' => 'harsh.shah@example.com', 'items' => ['Amdavadi Vadapav' => 5], 'payment' => 'card'],
+        ];
+
+        foreach ($orders as $index => $orderData) {
+            $this->seedDashboardOrder($index + 1, $orderData, $menuItems);
+        }
+    }
+
+    /**
+     * @param  array{day:int,status:string,type:string,customer:string,items:array<string,int>,payment:string}  $orderData
+     * @param  Collection<string, MenuItem>  $menuItems
+     */
+    private function seedDashboardOrder(int $number, array $orderData, Collection $menuItems): void
+    {
+        $createdAt = now()
+            ->subDays($orderData['day'])
+            ->setTime(11 + ($number % 10), ($number * 7) % 60);
+
+        $subtotal = 0;
+        foreach ($orderData['items'] as $name => $quantity) {
+            $menuItem = $menuItems->get($name);
+
+            if (! $menuItem) {
+                continue;
+            }
+
+            $subtotal += (float) $menuItem->price * $quantity;
+        }
+
+        $taxAmount = round($subtotal * 0.05, 2);
+        $totalAmount = $subtotal + $taxAmount;
+        $user = User::where('email', $orderData['customer'])->first();
+
+        $order = Order::updateOrCreate(
+            ['guest_email' => sprintf('dashboard-demo-%02d@amv.test', $number)],
+            [
+                'user_id' => $user?->id,
+                'guest_name' => $user?->name,
+                'guest_phone' => $user?->phone,
+                'order_type' => $orderData['type'],
+                'status' => $orderData['status'],
+                'total_amount' => $totalAmount,
+                'tax_amount' => $taxAmount,
+                'delivery_address' => $orderData['type'] === 'delivery' ? 'AMV Demo Society, Ahmedabad' : null,
+                'notes' => 'Dashboard demo order',
+                'payment_method' => $orderData['payment'],
+                'payment_status' => $orderData['status'] === 'cancelled' ? 'refunded' : 'paid',
+                'transaction_id' => sprintf('AMV-DEMO-%04d', $number),
+            ]
+        );
+
+        $order->forceFill([
+            'created_at' => $createdAt,
+            'updated_at' => $createdAt,
+        ])->save();
+
+        $order->orderItems()->delete();
+
+        foreach ($orderData['items'] as $name => $quantity) {
+            $menuItem = $menuItems->get($name);
+
+            if (! $menuItem) {
+                continue;
+            }
+
+            OrderItem::create([
+                'order_id' => $order->id,
+                'menu_item_id' => $menuItem->id,
+                'quantity' => $quantity,
+                'unit_price' => $menuItem->price,
+                'subtotal' => (float) $menuItem->price * $quantity,
+                'notes' => null,
+            ]);
+        }
     }
 }

@@ -118,4 +118,208 @@
         </div>
     </div>
 </div>
+
+<style>
+    @media (max-width: 768px) {
+        .charts-grid {
+            grid-template-columns: 1fr !important;
+        }
+    }
+</style>
+
+<!-- Charts Section -->
+<div style="margin-top:2rem;">
+    <h3 style="font-size:1.1rem; font-weight:700; color:#3d1a00; margin-bottom:1.5rem;">
+        📊 Analytics Overview
+    </h3>
+
+    <!-- Row 1: Revenue + Orders by Status -->
+    <div class="charts-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-bottom:1.5rem;">
+
+        <!-- Revenue Chart -->
+        <div class="data-card">
+            <div class="data-card-header">
+                <h3>💰 Revenue — Last 7 Days</h3>
+            </div>
+            <canvas id="revenueChart" height="200"></canvas>
+        </div>
+
+        <!-- Orders by Status -->
+        <div class="data-card">
+            <div class="data-card-header">
+                <h3>📋 Orders by Status</h3>
+            </div>
+            <canvas id="statusChart" height="200"></canvas>
+        </div>
+    </div>
+
+    <!-- Row 2: Top Items + Orders by Type -->
+    <div class="charts-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem;">
+
+        <!-- Top Selling Items -->
+        <div class="data-card">
+            <div class="data-card-header">
+                <h3>🔥 Top Selling Items</h3>
+            </div>
+            <canvas id="topItemsChart" height="200"></canvas>
+        </div>
+
+        <!-- Orders by Type -->
+        <div class="data-card">
+            <div class="data-card-header">
+                <h3>🚚 Orders by Type</h3>
+            </div>
+            <canvas id="orderTypeChart" height="200"></canvas>
+        </div>
+    </div>
+</div>
 @endsection
+
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const saffron = '#c45c00';
+    const brown = '#3d1a00';
+
+    const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+    new Chart(revenueCtx, {
+        type: 'bar',
+        data: {
+            labels: @json(array_column($revenueChart, 'date')),
+            datasets: [{
+                label: 'Revenue (₹)',
+                data: @json(array_column($revenueChart, 'revenue')),
+                backgroundColor: 'rgba(196, 92, 0, 0.7)',
+                borderColor: saffron,
+                borderWidth: 2,
+                borderRadius: 6,
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => '₹' + ctx.parsed.y.toLocaleString()
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        callback: val => '₹' + val.toLocaleString()
+                    }
+                }
+            }
+        }
+    });
+
+    const statusCtx = document.getElementById('statusChart').getContext('2d');
+    new Chart(statusCtx, {
+        type: 'pie',
+        data: {
+            labels: ['Pending', 'Processing', 'Ready', 'Completed', 'Cancelled'],
+            datasets: [{
+                data: [
+                    {{ $ordersByStatus['pending'] }},
+                    {{ $ordersByStatus['processing'] }},
+                    {{ $ordersByStatus['ready'] }},
+                    {{ $ordersByStatus['completed'] }},
+                    {{ $ordersByStatus['cancelled'] }}
+                ],
+                backgroundColor: [
+                    'rgba(255, 193, 7, 0.8)',
+                    'rgba(33, 150, 243, 0.8)',
+                    'rgba(76, 175, 80, 0.8)',
+                    'rgba(46, 125, 50, 0.8)',
+                    'rgba(198, 40, 40, 0.8)'
+                ],
+                borderWidth: 2,
+                borderColor: '#fff'
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        font: {
+                            size: 11
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    const topItemsCtx = document.getElementById('topItemsChart').getContext('2d');
+    new Chart(topItemsCtx, {
+        type: 'bar',
+        data: {
+            labels: @json($topItems->pluck('name')),
+            datasets: [{
+                label: 'Units Sold',
+                data: @json($topItems->pluck('total_sold')),
+                backgroundColor: 'rgba(61, 26, 0, 0.75)',
+                borderColor: brown,
+                borderWidth: 2,
+                borderRadius: 6,
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                x: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    const orderTypeCtx = document.getElementById('orderTypeChart').getContext('2d');
+    new Chart(orderTypeCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Dine-In', 'Pickup', 'Delivery'],
+            datasets: [{
+                data: [
+                    {{ $ordersByType['dine-in'] }},
+                    {{ $ordersByType['pickup'] }},
+                    {{ $ordersByType['delivery'] }}
+                ],
+                backgroundColor: [
+                    'rgba(196, 92, 0, 0.8)',
+                    'rgba(46, 125, 50, 0.8)',
+                    'rgba(21, 101, 192, 0.8)'
+                ],
+                borderWidth: 2,
+                borderColor: '#fff'
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        font: {
+                            size: 11
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>
+@endpush
